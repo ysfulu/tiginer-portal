@@ -1,0 +1,10 @@
+node_modules/
+.env
+*.log
+data/
+releases/tiginer-v*/
+releases/tiginer-nms-setup/
+releases/*.zip
+releases/*.zip.old
+releases/*.tar.gz
+public/*.backup.*

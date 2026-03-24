@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel | Tiginer</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="admin-layout">
+      <div class="container">
+        <!-- Login -->
+        <section id="loginBox">
+          <div style="text-align:center;padding:120px 0 40px;">
+            <div class="logo" style="justify-content:center;font-size:28px;margin-bottom:32px;">
+              <span class="logo-icon" style="font-size:36px;">&#9678;</span> Tiginer Admin
+            </div>
+          </div>
+          <div class="form-card" style="max-width:400px;">
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="username">Kullanici Adi</label>
+                <input type="text" id="username" required autocomplete="username" />
+              </div>
+              <div class="form-group">
+                <label for="password">Sifre</label>
+                <input type="password" id="password" required autocomplete="current-password" />
+              </div>
+              <button type="submit" class="btn btn-block btn-lg">Giris Yap</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Panel -->
+        <section id="panelBox" class="hidden">
+          <div class="admin-header">
+            <div class="logo">
+              <span class="logo-icon">&#9678;</span> Tiginer Admin
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <a href="/" class="btn btn-sm btn-outline">Siteye Don</a>
+              <button id="logoutBtn" class="btn btn-sm btn-outline">Cikis</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="stat-grid" id="statsGrid">
+            <div class="stat-card">
+              <div class="stat-value" id="statTotal">-</div>
+              <div class="stat-label">Toplam Musteri</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="statActive" style="color:#4ade80">-</div>
+              <div class="stat-label">Aktif Lisans</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="statSuspended" style="color:#fbbf24">-</div>
+              <div class="stat-label">Askiya Alinan</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="statDemos" style="color:#60a5fa">-</div>
+              <div class="stat-label">Bekleyen Demo</div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="customers">Musteriler ve Lisanslar</button>
+            <button class="tab-btn" data-tab="licenses">Lisans Yonetimi</button>
+            <button class="tab-btn" data-tab="demos">Demo Talepleri</button>
+          </div>
+
+          <!-- Customers Tab -->
+          <div class="tab-panel active" id="tab-customers">
+            <div class="toolbar">
+              <input type="text" id="cusSearch" placeholder="Firma, e-posta veya lisans ara..." />
+              <select id="cusFilter">
+                <option value="">Tum Durumlar</option>
+                <option value="active">Aktif</option>
+                <option value="suspended">Askida</option>
+                <option value="expired">Suresi Dolmus</option>
+              </select>
+              <button class="btn btn-sm" id="addCustomerBtn">+ Musteri Ekle</button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Firma</th>
+                  <th>Yetkili</th>
+                  <th>E-posta</th>
+                  <th>Paket</th>
+                  <th>Durum</th>
+                  <th>Lisans Anahtari</th>
+                  <th>Bitis Tarihi</th>
+                  <th style="width:160px">Islem</th>
+                </tr>
+              </thead>
+              <tbody id="cusBody"></tbody>
+            </table>
+            <p id="cusEmpty" class="hidden" style="color:#64748b;text-align:center;padding:32px;">Henuz musteri eklenmemis.</p>
+          </div>
+
+          <!-- Licenses Tab (License Server) -->
+          <div class="tab-panel" id="tab-licenses">
+            <div class="toolbar">
+              <input type="text" id="licSearch" placeholder="Firma, e-posta veya lisans ara..." />
+              <select id="licFilter">
+                <option value="">Tum Durumlar</option>
+                <option value="active">Aktif</option>
+                <option value="suspended">Askida</option>
+                <option value="expired">Suresi Dolmus</option>
+              </select>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Musteri</th>
+                  <th>Lisans Anahtari</th>
+                  <th>Plan</th>
+                  <th>Moduller</th>
+                  <th>Durum</th>
+                  <th>Maks Cihaz</th>
+                  <th>Gecerlilik</th>
+                  <th>Aktivasyon</th>
+                  <th style="width:120px">Islem</th>
+                </tr>
+              </thead>
+              <tbody id="licBody"></tbody>
+            </table>
+            <p id="licEmpty" class="hidden" style="color:#64748b;text-align:center;padding:32px;">Lisans sunucusuna baglanilamadi veya lisans bulunamadi.</p>
+          </div>
+
+          <!-- Demos Tab -->
+          <div class="tab-panel" id="tab-demos">
+            <div class="toolbar">
+              <select id="demoFilter">
+                <option value="">Tum Durumlar</option>
+                <option value="pending">Bekliyor</option>
+                <option value="contacted">Iletisime Gecildi</option>
+                <option value="converted">Donusturuldu</option>
+                <option value="rejected">Reddedildi</option>
+              </select>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Firma</th>
+                  <th>Yetkili</th>
+                  <th>E-posta</th>
+                  <th>Telefon</th>
+                  <th>Cihaz</th>
+                  <th>Durum</th>
+                  <th>Tarih</th>
+                  <th style="width:180px">Islem</th>
+                </tr>
+              </thead>
+              <tbody id="demoBody"></tbody>
+            </table>
+            <p id="demoEmpty" class="hidden" style="color:#64748b;text-align:center;padding:32px;">Henuz demo talebi yok.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Add/Edit Customer Modal -->
+    <div id="customerModal" class="modal-overlay hidden">
+      <div class="modal">
+        <h3 id="modalTitle">Musteri Ekle</h3>
+        <form id="customerForm">
+          <input type="hidden" id="editId" />
+          <div class="form-inline">
+            <div class="form-group">
+              <label>Firma Adi *</label>
+              <input type="text" id="mCompany" required maxlength="200" />
+            </div>
+            <div class="form-group">
+              <label>Yetkili Adi</label>
+              <input type="text" id="mContact" maxlength="200" />
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-group">
+              <label>E-posta *</label>
+              <input type="email" id="mEmail" required maxlength="200" />
+            </div>
+            <div class="form-group">
+              <label>Paket</label>
+              <select id="mPlan">
+                <option value="BASIC">BASIC</option>
+                <option value="PRO">PRO</option>
+                <option value="ENT">ENTERPRISE</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-group">
+              <label>Bitis Tarihi</label>
+              <input type="date" id="mExpires" />
+            </div>
+            <div class="form-group">
+              <label>Cihaz Limiti</label>
+              <input type="number" id="mDeviceLimit" min="0" value="0" />
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" id="cancelModal">Iptal</button>
+            <button type="submit" class="btn">Kaydet</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Demo Detail Modal -->
+    <div id="demoModal" class="modal-overlay hidden">
+      <div class="modal">
+        <h3>Demo Talebi Detay</h3>
+        <div id="demoDetail"></div>
+        <div class="form-group" style="margin-top:16px;">
+          <label>Notlar</label>
+          <textarea id="demoNotes" maxlength="1000"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="cancelDemoModal">Kapat</button>
+          <button type="button" class="btn" id="saveDemoNotes">Notu Kaydet</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- License Edit Modal -->
+    <div id="licenseModal" class="modal-overlay hidden">
+      <div class="modal" style="max-width:520px;">
+        <h3>Lisans Duzenle</h3>
+        <form id="licenseForm">
+          <input type="hidden" id="licEditId" />
+          <div class="form-inline">
+            <div class="form-group">
+              <label>Musteri Adi</label>
+              <input type="text" id="licCustomerName" readonly style="opacity:.6" />
+            </div>
+            <div class="form-group">
+              <label>E-posta</label>
+              <input type="text" id="licCustomerEmail" readonly style="opacity:.6" />
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-group">
+              <label>Plan</label>
+              <select id="licPlan">
+                <option value="starter">STARTER</option>
+                <option value="professional">PROFESSIONAL</option>
+                <option value="enterprise">ENTERPRISE</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Durum</label>
+              <select id="licStatus">
+                <option value="active">Aktif</option>
+                <option value="suspended">Askida</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-group">
+              <label>Maks Cihaz</label>
+              <input type="number" id="licMaxDevices" min="1" />
+            </div>
+            <div class="form-group">
+              <label>Maks Kullanici</label>
+              <input type="number" id="licMaxUsers" min="1" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Moduller</label>
+            <div id="licModules" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
+                <input type="checkbox" value="security_compliance" /> Security &amp; Compliance
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
+                <input type="checkbox" value="config_audit" /> Config Audit
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
+                <input type="checkbox" value="config_backup" /> Config Backup
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
+                <input type="checkbox" value="automation" /> Automation
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
+                <input type="checkbox" value="netflow" /> NetFlow
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
+                <input type="checkbox" value="reports" /> Reports
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Gecerlilik Tarihi</label>
+            <input type="date" id="licValidUntil" />
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" id="cancelLicenseModal">Iptal</button>
+            <button type="submit" class="btn">Kaydet</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="/assets/admin.js"></script>
+  </body>
+</html>

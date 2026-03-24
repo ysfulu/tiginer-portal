@@ -1,0 +1,122 @@
+# ============================================================
+# Tiginer NMS — Production Docker Compose
+# Bu dosya musteri kurulumu icindir.
+# ⚠️ Kaynak kod icermez — imaj private registry'den cekilir.
+# ============================================================
+
+services:
+  # ── PostgreSQL 16 ───────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: tiginer-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-tiginer}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Postgres sifresi gerekli}
+      POSTGRES_DB: ${POSTGRES_DB:-tiginer}
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-tiginer}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis 7 ─────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: tiginer-redis
+    restart: unless-stopped
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── InfluxDB 2.7 ────────────────────────────────────
+  influxdb:
+    image: influxdb:2.7-alpine
+    container_name: tiginer-influxdb
+    restart: unless-stopped
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD:?InfluxDB sifresi gerekli}
+      DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_ORG:-tiginer}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_BUCKET:-network_metrics}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_TOKEN:?InfluxDB token gerekli}
+    ports:
+      - '${INFLUXDB_PORT:-8086}:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+    healthcheck:
+      test: ['CMD', 'influx', 'ping']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ── Tiginer NMS Uygulamasi ──────────────────────────
+  # ⚠️ Pre-built imaj kullanilir — kaynak koda erisim YOK
+  app:
+    image: ghcr.io/tiginer/nms:${TIGINER_VERSION:-latest}
+    container_name: tiginer-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      influxdb:
+        condition: service_healthy
+    ports:
+      - '${APP_PORT:-3002}:3002'
+      - '514:514/udp'
+      - '2055:2055/udp'
+      - '6343:6343/udp'
+    environment:
+      NODE_ENV: production
+      PORT: 3002
+      DATABASE_URL: postgresql://${POSTGRES_USER:-tiginer}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-tiginer}
+      REDIS_URL: redis://:${REDIS_PASSWORD:-}@redis:6379
+      INFLUXDB_URL: http://influxdb:8086
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN}
+      INFLUXDB_ORG: ${INFLUXDB_ORG:-tiginer}
+      INFLUXDB_BUCKET: ${INFLUXDB_BUCKET:-network_metrics}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?NextAuth secret gerekli}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3002}
+      INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:?Internal API secret gerekli}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Encryption key gerekli}
+      LICENSE_KEY: ${LICENSE_KEY:-}
+      LICENSE_SERVER_URL: ${LICENSE_SERVER_URL:-https://tiginer.com}
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    volumes:
+      - app_uploads:/app/apps/web/public/uploads
+      - app_logs:/app/apps/web/logs
+      - app_data:/app/apps/web/data
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3002/api/health']
+      interval: 30s
+      timeout: 10s
+      start_period: 40s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+
+volumes:
+  postgres_data:
+  redis_data:
+  influxdb_data:
+  app_uploads:
+  app_logs:
+  app_data:

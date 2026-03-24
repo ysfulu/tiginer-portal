@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Talep Et | Tiginer</title>
+    <meta name="description" content="Tiginer kurumsal ağ izleme platformu için ücretsiz demo talep edin." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tiginer.com/demo" />
+    <meta property="og:title" content="Demo Talep Et | Tiginer" />
+    <meta property="og:description" content="Formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçecektir." />
+    <meta property="og:url" content="https://tiginer.com/demo" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation">
+      <div class="container nav-inner">
+        <a href="/" class="logo" aria-label="Tiginer Home">
+          <svg class="logo-svg" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="14" r="12" stroke="url(#lg)" stroke-width="2.5" fill="none"/>
+            <circle cx="14" cy="14" r="4" fill="url(#lg)"/>
+            <circle cx="14" cy="5" r="2" fill="#60a5fa"/><circle cx="21.5" cy="18.5" r="2" fill="#818cf8"/><circle cx="6.5" cy="18.5" r="2" fill="#34d399"/>
+            <line x1="14" y1="10" x2="14" y2="7" stroke="#60a5fa" stroke-width="1.5"/><line x1="17.5" y1="16" x2="20" y2="17.5" stroke="#818cf8" stroke-width="1.5"/><line x1="10.5" y1="16" x2="8" y2="17.5" stroke="#34d399" stroke-width="1.5"/>
+            <defs><linearGradient id="lg" x1="0" y1="0" x2="28" y2="28"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+          </svg>
+          <span>Tiginer</span>
+        </a>
+        <div class="nav-links">
+          <a href="/#ozellikler" data-i18n="nav_features">Özellikler</a>
+          <a href="/#paketler" data-i18n="nav_packages">Paketler</a>
+          <a href="/demo" class="btn btn-sm" data-i18n="nav_demo">Demo Talep Et</a>
+          <a href="/download" class="btn btn-sm btn-outline" data-i18n="nav_download">İndir</a>
+          <div class="lang-switch">
+            <button class="lang-btn active" data-lang="tr">TR</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+        </div>
+        <button class="nav-toggle" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <section class="section" style="padding-top:80px">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="demo_title">Ücretsiz Demo Talep Edin</h2>
+          <p data-i18n="demo_sub">Formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçecektir.</p>
+        </div>
+
+        <div class="form-card">
+          <div id="successMsg" class="alert alert-success hidden" data-i18n="demo_success">
+            Demo talebiniz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.
+          </div>
+          <div id="errorMsg" class="alert alert-error hidden"></div>
+
+          <form id="demoForm">
+            <div class="form-inline">
+              <div class="form-group">
+                <label for="contactName"><span data-i18n="demo_name">Ad Soyad</span> *</label>
+                <input type="text" id="contactName" required maxlength="200" />
+              </div>
+              <div class="form-group">
+                <label for="companyName"><span data-i18n="demo_company">Firma Adı</span> *</label>
+                <input type="text" id="companyName" required maxlength="200" />
+              </div>
+            </div>
+
+            <div class="form-inline">
+              <div class="form-group">
+                <label for="email"><span data-i18n="demo_email">E-posta</span> *</label>
+                <input type="email" id="email" required maxlength="200" />
+              </div>
+              <div class="form-group">
+                <label for="phone" data-i18n="demo_phone">Telefon</label>
+                <input type="tel" id="phone" maxlength="30" placeholder="+90 5XX XXX XX XX" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="deviceCount" data-i18n="demo_device_count">Tahmini Cihaz Sayısı</label>
+              <select id="deviceCount">
+                <option value="0" data-i18n="demo_select">Seçiniz</option>
+                <option value="25">1 – 50</option>
+                <option value="100">50 – 200</option>
+                <option value="300">200 – 500</option>
+                <option value="750">500 – 1000</option>
+                <option value="1500">1000+</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message" data-i18n="demo_message">Mesajınız</label>
+              <textarea id="message" maxlength="1000" data-i18n-placeholder="demo_message_placeholder" placeholder="İhtiyaçlarınızı kısaca açıklayabilirsiniz..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-glow btn-block" id="submitBtn" data-i18n="demo_submit">Demo Talep Et</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container footer-bottom">
+        <span>&copy; 2025 Tiginer. <span data-i18n="footer_rights">Tüm hakları saklıdır.</span></span>
+      </div>
+    </footer>
+
+    <script src="/assets/i18n.js"></script>
+    <script>
+      document.querySelector('.nav-toggle').addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.toggle('open');
+      });
+
+      const form = document.getElementById('demoForm');
+      const successMsg = document.getElementById('successMsg');
+      const errorMsg = document.getElementById('errorMsg');
+      const submitBtn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        successMsg.classList.add('hidden');
+        errorMsg.classList.add('hidden');
+        submitBtn.disabled = true;
+        const lang = window.tiginerI18n.getLang();
+        const t = TIGINER_I18N[lang];
+        submitBtn.textContent = t.demo_sending;
+
+        try {
+          const res = await fetch('/api/demo-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contactName: document.getElementById('contactName').value.trim(),
+              companyName: document.getElementById('companyName').value.trim(),
+              email: document.getElementById('email').value.trim(),
+              phone: document.getElementById('phone').value.trim(),
+              deviceCount: Number(document.getElementById('deviceCount').value),
+              message: document.getElementById('message').value.trim(),
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Bir hata olustu');
+          successMsg.classList.remove('hidden');
+          form.reset();
+        } catch (err) {
+          errorMsg.textContent = err.message;
+          errorMsg.classList.remove('hidden');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = t.demo_submit;
+        }
+      });
+    </script>
+  </body>
+</html>
