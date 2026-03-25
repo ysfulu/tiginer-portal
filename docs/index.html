@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiginer | Kurumsal Ağ İzleme ve Yönetim Platformu</title>
+    <meta name="description" content="Tiginer ile ağ cihazlarınızı izleyin, alarmları yönetin, otomasyon ve uyumluluk denetimlerini tek platformdan gerçekleştirin. SNMP v3, NetFlow, topoloji haritası ve daha fazlası." />
+    <meta name="keywords" content="ağ izleme, network monitoring, SNMP, NMS, ağ yönetimi, network management, Tiginer, alarm yönetimi, topoloji haritası" />
+    <meta name="author" content="Tiginer" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tiginer.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tiginer — Kurumsal Ağ İzleme Platformu" />
+    <meta property="og:description" content="Cihaz envanteri, canlı izleme, alarm yönetimi, yapılandırma yedekleme ve otomasyon — hepsi tek platformda." />
+    <meta property="og:url" content="https://tiginer.com/" />
+    <meta property="og:site_name" content="Tiginer" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tiginer — Enterprise Network Monitoring Platform" />
+    <meta name="twitter:description" content="Device inventory, real-time monitoring, alarm management, configuration backup and automation — all in one platform." />
+
+    <!-- Preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Tiginer",
+      "applicationCategory": "NetworkApplication",
+      "operatingSystem": "Linux, Windows Server",
+      "description": "Enterprise network monitoring and management platform with SNMP, NetFlow, topology mapping and automation.",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "offerCount": "3"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Tiginer",
+        "url": "https://tiginer.com"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a href="/" class="logo" aria-label="Tiginer Home">
+          <svg class="logo-svg" width="32" height="32" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="14" r="12" stroke="url(#logoGrad)" stroke-width="2.5" fill="none"/>
+            <circle cx="14" cy="14" r="4" fill="url(#logoGrad)"/>
+            <circle cx="14" cy="5" r="2" fill="#60a5fa"/>
+            <circle cx="21.5" cy="18.5" r="2" fill="#818cf8"/>
+            <circle cx="6.5" cy="18.5" r="2" fill="#34d399"/>
+            <line x1="14" y1="10" x2="14" y2="7" stroke="#60a5fa" stroke-width="1.5"/>
+            <line x1="17.5" y1="16" x2="20" y2="17.5" stroke="#818cf8" stroke-width="1.5"/>
+            <line x1="10.5" y1="16" x2="8" y2="17.5" stroke="#34d399" stroke-width="1.5"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Tiginer</span>
+          <span class="logo-badge">PRO</span>
+        </a>
+        <div class="nav-links">
+          <a href="#ozellikler" data-i18n="nav_features">Özellikler</a>
+          <a href="#cozumler" data-i18n="nav_solutions">Çözümler</a>
+          <a href="#paketler" data-i18n="nav_packages">Paketler</a>
+          <a href="download.html" data-i18n="nav_download">İndir</a>
+          <a href="demo.html" class="btn btn-sm btn-glow" data-i18n="nav_demo">Demo Talep Et</a>
+          <div class="lang-switch" aria-label="Language selector">
+            <button class="lang-btn active" data-lang="tr" aria-label="Türkçe">TR</button>
+            <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+          </div>
+        </div>
+        <button class="nav-toggle" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-glow-2" aria-hidden="true"></div>
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <!-- Floating particles -->
+      <div class="hero-particles" aria-hidden="true">
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+        <div class="particle p5"></div>
+      </div>
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span data-i18n="hero_badge">v2.0 — Yeni Nesil Ağ Yönetimi</span>
+        </div>
+        <h1>
+          <span data-i18n="hero_title_1">Ağ Altyapınızı</span><br/>
+          <span class="text-gradient" data-i18n="hero_title_2">Uçtan Uca</span>
+          <span data-i18n="hero_title_3"> Kontrol Edin</span>
+        </h1>
+        <p class="hero-sub" data-i18n="hero_sub">
+          Keşif, izleme, alarm, yapılandırma yedekleme, uyumluluk denetimi ve otomasyon — 
+          kurumsal ağ yönetiminin tüm bileşenleri tek bir platformda.
+        </p>
+        <div class="hero-actions">
+          <a href="demo.html" class="btn btn-lg btn-glow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span data-i18n="hero_cta_demo">Canlı Demo İzle</span>
+          </a>
+          <a href="download.html" class="btn btn-lg btn-outline">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-i18n="hero_cta_download">Hemen Kur</span>
+          </a>
+        </div>
+
+        <!-- Dashboard mockup -->
+        <div class="hero-mockup">
+          <div class="mockup-browser">
+            <div class="mockup-bar">
+              <div class="mockup-dots"><span></span><span></span><span></span></div>
+              <div class="mockup-url">localhost:3002/tr/dashboard</div>
+            </div>
+            <div class="mockup-screen">
+              <div class="mock-sidebar">
+                <div class="mock-logo-area"></div>
+                <div class="mock-nav-item active"></div>
+                <div class="mock-nav-item"></div>
+                <div class="mock-nav-item"></div>
+                <div class="mock-nav-item"></div>
+                <div class="mock-nav-item"></div>
+              </div>
+              <div class="mock-main">
+                <div class="mock-topbar"></div>
+                <div class="mock-kpi-row">
+                  <div class="mock-kpi green">
+                    <div class="mock-kpi-val">247</div>
+                    <div class="mock-kpi-lbl" data-i18n="mock_devices">Aktif Cihaz</div>
+                  </div>
+                  <div class="mock-kpi blue">
+                    <div class="mock-kpi-val">99.8%</div>
+                    <div class="mock-kpi-lbl" data-i18n="mock_uptime">Uptime</div>
+                  </div>
+                  <div class="mock-kpi orange">
+                    <div class="mock-kpi-val">3</div>
+                    <div class="mock-kpi-lbl" data-i18n="mock_alarms">Aktif Alarm</div>
+                  </div>
+                  <div class="mock-kpi purple">
+                    <div class="mock-kpi-val">1.2 Gbps</div>
+                    <div class="mock-kpi-lbl" data-i18n="mock_traffic">Toplam Trafik</div>
+                  </div>
+                </div>
+                <div class="mock-charts">
+                  <div class="mock-chart-lg">
+                    <div class="mock-chart-title" data-i18n="mock_bandwidth">Bant Genişliği</div>
+                    <svg class="mock-line-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+                          <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M0,80 C30,70 60,40 100,50 C140,60 170,20 200,30 C230,40 260,15 300,25 C340,35 370,10 400,20 L400,100 L0,100 Z" fill="url(#chartFill)"/>
+                      <path d="M0,80 C30,70 60,40 100,50 C140,60 170,20 200,30 C230,40 260,15 300,25 C340,35 370,10 400,20" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <div class="mock-chart-sm">
+                    <div class="mock-chart-title" data-i18n="mock_cpu">CPU Kullanımı</div>
+                    <div class="mock-donut">
+                      <svg viewBox="0 0 80 80">
+                        <circle cx="40" cy="40" r="32" stroke="#1e293b" stroke-width="6" fill="none"/>
+                        <circle cx="40" cy="40" r="32" stroke="#34d399" stroke-width="6" fill="none" stroke-dasharray="145 56" stroke-linecap="round" transform="rotate(-90 40 40)"/>
+                        <text x="40" y="44" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="700">72%</text>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Trusted By / Social Proof -->
+    <section class="trust-bar">
+      <div class="container">
+        <p class="trust-label" data-i18n="trust_label">Kurumsal müşterilerimizin güvendiği platform</p>
+        <div class="trust-stats">
+          <div class="trust-item">
+            <strong>500+</strong>
+            <span data-i18n="trust_devices">Yönetilen Cihaz</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <strong>%99.9</strong>
+            <span data-i18n="trust_uptime">Uptime Garantisi</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <strong>7/24</strong>
+            <span data-i18n="trust_monitoring">Kesintisiz İzleme</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <strong>SNMP v3</strong>
+            <span data-i18n="trust_protocol">Güvenli Protokol</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <strong>&lt; 5dk</strong>
+            <span data-i18n="trust_setup">Kurulum Süresi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="ozellikler" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge" data-i18n="feat_badge">Özellikler</div>
+          <h2 data-i18n="features_title">Ağ Yönetiminde İhtiyacınız Olan Her Şey</h2>
+          <p data-i18n="features_sub">Tek platform, sınırsız kontrol. SNMP keşiften uyumluluk denetimine kadar.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3 data-i18n="feat_discover">Otomatik Keşif</h3>
+            <p data-i18n="feat_discover_desc">SNMP v1/v2c/v3 ve ping taraması ile ağdaki tüm cihazları otomatik keşfedin, envantere ekleyin.</p>
+            <div class="feature-tags"><span>SNMP</span><span>ICMP</span><span>ARP</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-green">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3 data-i18n="feat_monitor">Gerçek Zamanlı İzleme</h3>
+            <p data-i18n="feat_monitor_desc">CPU, bellek, bant genişliği, arayüz trafiği — tüm metrikleri canlı dashboard'larda izleyin.</p>
+            <div class="feature-tags"><span>WebSocket</span><span>Dashboard</span><span>Grafik</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-orange">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <h3 data-i18n="feat_alarm">Akıllı Alarm Sistemi</h3>
+            <p data-i18n="feat_alarm_desc">Eşik değerleri, eskalasyon kuralları, e-posta/webhook/syslog bildirim kanalları.</p>
+            <div class="feature-tags"><span>E-posta</span><span>Webhook</span><span>Syslog</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-cyan">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></svg>
+            </div>
+            <h3 data-i18n="feat_topology">Topoloji Haritası</h3>
+            <p data-i18n="feat_topology_desc">Ağ topolojinizi otomatik çizin, katman bazlı görünüm ve canlı durum takibi.</p>
+            <div class="feature-tags"><span>L2/L3</span><span>Otomatik</span><span>Canlı</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-purple">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            </div>
+            <h3 data-i18n="feat_backup">Yapılandırma Yedekleme</h3>
+            <p data-i18n="feat_backup_desc">Cihaz konfigürasyonlarını zamanlı yedekleyin, diff karşılaştırmasıyla değişiklikleri izleyin.</p>
+            <div class="feature-tags"><span>SSH</span><span>Diff</span><span>Zamanlı</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-emerald">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <h3 data-i18n="feat_compliance">Uyumluluk Denetimi</h3>
+            <p data-i18n="feat_compliance_desc">Güvenlik politikalarına uyumu SCAP ile denetleyin, uyumsuzlukları raporlayın.</p>
+            <div class="feature-tags"><span>SCAP</span><span>CIS</span><span>Rapor</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-pink">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 data-i18n="feat_automation">Otomasyon</h3>
+            <p data-i18n="feat_automation_desc">Toplu komut yürütme, zamanlanmış görevler, Ansible ve şablon tabanlı yapılandırma.</p>
+            <div class="feature-tags"><span>Ansible</span><span>Template</span><span>Cron</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h3 data-i18n="feat_netflow">NetFlow Analizi</h3>
+            <p data-i18n="feat_netflow_desc">Trafik akış analizi, uygulama bazlı bant genişliği kullanımı ve anomali tespiti.</p>
+            <div class="feature-tags"><span>NetFlow</span><span>sFlow</span><span>Top-N</span></div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-amber">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h3 data-i18n="feat_reports">Raporlama</h3>
+            <p data-i18n="feat_reports_desc">Performans, kapasite ve uyumluluk raporlarını otomatik oluşturun, zamanlı gönderin.</p>
+            <div class="feature-tags"><span>PDF</span><span>Zamanlı</span><span>E-posta</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions / Why Tiginer -->
+    <section id="cozumler" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge" data-i18n="why_badge">Neden Tiginer?</div>
+          <h2 data-i18n="why_title">Farkımız Detaylarda Gizli</h2>
+          <p data-i18n="why_sub">Her detayı düşünerek tasarlandı, operasyonel verimliliğiniz için optimize edildi.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-number">01</div>
+            <h3 data-i18n="why_1_title">5 Dakikada Kurulum</h3>
+            <p data-i18n="why_1_desc">Docker tabanlı dağıtım ile sunucunuzda dakikalar içinde çalışır. Karmaşık bağımlılık yok.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">02</div>
+            <h3 data-i18n="why_2_title">On-Premise &amp; Güvenli</h3>
+            <p data-i18n="why_2_desc">Verileriniz kendi sunucunuzda kalır. Bulut bağımlılığı yok, tam kontrol sizde.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">03</div>
+            <h3 data-i18n="why_3_title">Türkçe &amp; Çok Dilli</h3>
+            <p data-i18n="why_3_desc">Türkçe dahil 10 dil desteği. Yerel ekibiniz kendi dilinde rahatça kullanır.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">04</div>
+            <h3 data-i18n="why_4_title">Modüler Mimari</h3>
+            <p data-i18n="why_4_desc">İhtiyacınız olan modülleri aktif edin. Lisansınız büyüdükçe özellikler de büyüsün.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">05</div>
+            <h3 data-i18n="why_5_title">Gerçek Zamanlı</h3>
+            <p data-i18n="why_5_desc">WebSocket tabanlı canlı güncelleme. Sayfa yenilemeden anlık metrik ve alarm akışı.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">06</div>
+            <h3 data-i18n="why_6_title">REST API &amp; Entegrasyon</h3>
+            <p data-i18n="why_6_desc">Tam REST API, webhook'lar, Syslog, JIRA ve ServiceDesk entegrasyonları.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Band -->
+    <section class="tech-band">
+      <div class="container">
+        <div class="tech-items">
+          <div class="tech-item"><span>SNMP v1/v2c/v3</span></div>
+          <div class="tech-item"><span>NetFlow / sFlow</span></div>
+          <div class="tech-item"><span>SSH / Telnet</span></div>
+          <div class="tech-item"><span>SCAP / CIS</span></div>
+          <div class="tech-item"><span>Ansible</span></div>
+          <div class="tech-item"><span>Docker</span></div>
+          <div class="tech-item"><span>REST API</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="paketler" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge" data-i18n="pricing_badge">Fiyatlandırma</div>
+          <h2 data-i18n="pricing_title">Ağınızın Büyüklüğüne Göre Seçin</h2>
+          <p data-i18n="pricing_sub">Her ölçekte esnek lisans modeli. İhtiyacınız arttıkça yükseltin.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="pricing-card">
+            <div class="pricing-header">
+              <div class="pricing-badge" data-i18n="plan_starter">Başlangıç</div>
+              <h3>Starter</h3>
+              <p class="pricing-desc" data-i18n="plan_basic_desc">Küçük ağlar için temel izleme ve yönetim</p>
+            </div>
+            <div class="pricing-limit"><strong>50</strong><span data-i18n="pricing_device_limit">cihaza kadar</span></div>
+            <ul class="pricing-features">
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_b1">Otomatik cihaz keşfi</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_b2">Canlı izleme ve dashboard</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_b3">Alarm bildirimleri</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_b4">Topoloji haritası</span></li>
+              <li class="disabled"><span class="cross">&#10007;</span> <span data-i18n="plan_b5">Yapılandırma yedekleme</span></li>
+              <li class="disabled"><span class="cross">&#10007;</span> <span data-i18n="plan_b6">Otomasyon</span></li>
+              <li class="disabled"><span class="cross">&#10007;</span> <span data-i18n="plan_b7">Uyumluluk denetimi</span></li>
+            </ul>
+            <a href="demo.html" class="btn btn-outline btn-block" data-i18n="nav_demo">Demo Talep Et</a>
+          </article>
+
+          <article class="pricing-card popular">
+            <div class="pricing-popular-tag" data-i18n="plan_popular">En Popüler</div>
+            <div class="pricing-header">
+              <div class="pricing-badge" data-i18n="plan_recommended">Önerilen</div>
+              <h3>Professional</h3>
+              <p class="pricing-desc" data-i18n="plan_pro_desc">Büyüyen ağlar için tam özellik seti</p>
+            </div>
+            <div class="pricing-limit"><strong>250</strong><span data-i18n="pricing_device_limit">cihaza kadar</span></div>
+            <ul class="pricing-features">
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_p1">Tüm Starter özellikleri</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_p3">Yapılandırma yedekleme</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_p4">Config denetimi &amp; diff</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_p5">Otomasyon &amp; şablonlar</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_p6">Gelişmiş raporlar</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_p_api">REST API erişimi</span></li>
+              <li class="disabled"><span class="cross">&#10007;</span> <span data-i18n="plan_p7">NetFlow &amp; SCAP</span></li>
+            </ul>
+            <a href="demo.html" class="btn btn-block btn-glow" data-i18n="nav_demo">Demo Talep Et</a>
+          </article>
+
+          <article class="pricing-card enterprise">
+            <div class="pricing-header">
+              <div class="pricing-badge" data-i18n="plan_full">Tam Kapasite</div>
+              <h3>Enterprise</h3>
+              <p class="pricing-desc" data-i18n="plan_enterprise_desc">Kurumsal ağlar için eksiksiz çözüm</p>
+            </div>
+            <div class="pricing-limit"><strong>&infin;</strong><span data-i18n="pricing_unlimited">Sınırsız cihaz</span></div>
+            <ul class="pricing-features">
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_e2">Tüm Professional özellikleri</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_e3">Tam uyumluluk denetimi (SCAP)</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_e4">NetFlow / sFlow analizi</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_e_ansible">Ansible entegrasyonu</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_e6">Öncelikli destek</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_e7">Özel entegrasyon &amp; webhook</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="plan_e_sla">SLA garantisi</span></li>
+            </ul>
+            <a href="demo.html" class="btn btn-outline btn-block" data-i18n="cta_contact_sales">Satış Ekibine Ulaşın</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="container text-center" style="position:relative;z-index:1">
+        <h2>
+          <span data-i18n="cta_title_1">Ağ Operasyonlarınızı</span><br/>
+          <span class="text-gradient" data-i18n="cta_title_2">Dönüştürmeye</span>
+          <span data-i18n="cta_title_3"> Hazır mısınız?</span>
+        </h2>
+        <p data-i18n="cta_sub">Ücretsiz demo ile Tiginer'ı keşfedin. Kurulum ve teknik destek ekibimiz yanınızda.</p>
+        <div class="hero-actions" style="justify-content:center;margin-top:36px">
+          <a href="demo.html" class="btn btn-lg btn-glow" data-i18n="hero_cta_demo">Canlı Demo İzle</a>
+          <a href="mailto:info@tiginer.com" class="btn btn-lg btn-outline" data-i18n="cta_contact">Bize Ulaşın</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="logo">
+            <svg class="logo-svg" width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <circle cx="14" cy="14" r="12" stroke="url(#logoGrad2)" stroke-width="2.5" fill="none"/>
+              <circle cx="14" cy="14" r="4" fill="url(#logoGrad2)"/>
+              <circle cx="14" cy="5" r="2" fill="#60a5fa"/>
+              <circle cx="21.5" cy="18.5" r="2" fill="#818cf8"/>
+              <circle cx="6.5" cy="18.5" r="2" fill="#34d399"/>
+              <defs><linearGradient id="logoGrad2" x1="0" y1="0" x2="28" y2="28"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+            </svg>
+            <span>Tiginer</span>
+          </span>
+          <p data-i18n="footer_desc">Kurumsal Ağ İzleme ve Yönetim Platformu</p>
+          <div class="footer-version">v2.0.0</div>
+        </div>
+        <div class="footer-links">
+          <div>
+            <strong data-i18n="footer_platform">Platform</strong>
+            <a href="#ozellikler" data-i18n="footer_features">Özellikler</a>
+            <a href="#cozumler" data-i18n="footer_solutions">Çözümler</a>
+            <a href="#paketler" data-i18n="footer_packages">Paketler</a>
+          </div>
+          <div>
+            <strong data-i18n="footer_resources">Kaynaklar</strong>
+            <a href="download.html" data-i18n="footer_download">İndirme</a>
+            <a href="demo.html" data-i18n="footer_demo">Demo Talep</a>
+            <a href="mailto:destek@tiginer.com" data-i18n="footer_support">Teknik Destek</a>
+          </div>
+          <div>
+            <strong data-i18n="footer_contact">İletişim</strong>
+            <a href="mailto:info@tiginer.com">info@tiginer.com</a>
+            <a href="mailto:satis@tiginer.com">satis@tiginer.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; 2025 Tiginer. <span data-i18n="footer_rights">Tüm hakları saklıdır.</span></span>
+        <span class="footer-legal">
+          <a href="#" data-i18n="footer_privacy">Gizlilik Politikası</a>
+          <a href="#" data-i18n="footer_terms">Kullanım Koşulları</a>
+        </span>
+      </div>
+    </footer>
+
+    <script src="i18n.js"></script>
+    <script>
+      // Mobile nav toggle
+      document.querySelector('.nav-toggle').addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.toggle('open');
+      });
+
+      // Intersection Observer for scroll animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.feature-card, .pricing-card, .why-card, .trust-item, .section-header, .hero-mockup').forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+      });
+
+      // Smooth navbar on scroll
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+      }, { passive: true });
+
+      // Dashboard mockup entrance animation
+      const mockObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            mockObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      const mockup = document.querySelector('.hero-mockup');
+      if (mockup) mockObserver.observe(mockup);
+    </script>
+  </body>
+</html>
