@@ -515,9 +515,27 @@
     <script src="i18n.js"></script>
     <script>
       // Mobile nav toggle
-      document.querySelector('.nav-toggle').addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.toggle('open');
+      const navToggle = document.querySelector('.nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+      // Close mobile nav on link click
+      navLinks.querySelectorAll('a:not(.btn)').forEach(a => {
+        a.addEventListener('click', () => navLinks.classList.remove('open'));
       });
+
+      // Smooth navbar on scroll
+      const navbar = document.querySelector('.navbar');
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
 
       // Intersection Observer for scroll animations
       const observer = new IntersectionObserver((entries) => {
@@ -526,18 +544,21 @@
             entry.target.classList.add('visible');
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
       document.querySelectorAll('.feature-card, .pricing-card, .why-card, .trust-item, .section-header, .hero-mockup').forEach(el => {
         el.classList.add('animate-on-scroll');
         observer.observe(el);
       });
 
-      // Smooth navbar on scroll
-      const navbar = document.querySelector('.navbar');
-      window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-      }, { passive: true });
+      // Mouse-tracking glow on feature cards
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+          card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
+        });
+      });
 
       // Dashboard mockup entrance animation
       const mockObserver = new IntersectionObserver((entries) => {
@@ -547,9 +568,51 @@
             mockObserver.disconnect();
           }
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0.2 });
       const mockup = document.querySelector('.hero-mockup');
       if (mockup) mockObserver.observe(mockup);
+
+      // Animate trust bar numbers on scroll
+      const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.trust-item strong').forEach(el => {
+              const text = el.textContent;
+              const num = parseInt(text.replace(/[^0-9]/g, ''));
+              if (!num || el.dataset.counted) return;
+              el.dataset.counted = '1';
+              const suffix = text.replace(/[0-9]/g, '');
+              const duration = 1200;
+              const start = performance.now();
+              const animate = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(num * eased) + suffix;
+                if (progress < 1) requestAnimationFrame(animate);
+              };
+              el.textContent = '0' + suffix;
+              requestAnimationFrame(animate);
+            });
+            countObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.5 });
+      const trustBar = document.querySelector('.trust-bar');
+      if (trustBar) countObserver.observe(trustBar);
+
+      // Active nav link highlighting on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navAnchors.forEach(a => a.classList.remove('active'));
+            const active = document.querySelector('.nav-links a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+      sections.forEach(s => sectionObserver.observe(s));
     </script>
   </body>
 </html>
