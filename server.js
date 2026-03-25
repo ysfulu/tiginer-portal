@@ -34,6 +34,7 @@ app.use(
 );
 
 app.use('/assets', express.static(path.join(__dirname, 'public'), { maxAge: '1d' }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1d' }));
 
 /* ── Helpers ─────────────────────────────────────────── */
 function readJSON(file) {
