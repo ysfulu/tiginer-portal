@@ -1,0 +1,24 @@
+﻿{
+    "product":  "tiginer-client",
+    "generatedAt":  "2026-03-25T00:00:00Z",
+    "releases":  [
+                     {
+                         "version":  "1.0.0",
+                         "platform":  "windows-x64",
+                         "downloadUrl":  "https://updates.tiginer.com/releases/binaries/windows-x64/tiginer-client-1.0.0.zip",
+                         "sha256":  "81816b31f624d62e4726c51e9579328536ecb30cd1bf6f08176b06fb0f3bad45",
+                         "releaseNotes":  "Initial production release.",
+                         "minTier":  "BASIC",
+                         "changelogUrl":  "https://tiginer.com/changelog"
+                     },
+                     {
+                         "version":  "1.0.0",
+                         "platform":  "linux-x64",
+                         "downloadUrl":  "https://updates.tiginer.com/releases/binaries/linux-x64/tiginer-client-1.0.0.tar.gz",
+                         "sha256":  "7127d719056879340e911c1dfa97f51d6b1a4d63e821fc51957abed43d431f1e",
+                         "releaseNotes":  "Initial production release.",
+                         "minTier":  "BASIC",
+                         "changelogUrl":  "https://tiginer.com/changelog"
+                     }
+                 ]
+}
