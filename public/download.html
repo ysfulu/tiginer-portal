@@ -56,42 +56,35 @@
 
     <section class="section" style="padding-top:0">
       <div class="container">
+        <!-- ONE-LINER INSTALL -->
+        <div style="background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(59,130,246,.08));border:1px solid rgba(52,211,153,.25);border-radius:16px;padding:36px;margin-bottom:32px;backdrop-filter:blur(8px);">
+          <h2 style="text-align:center;color:#f1f5f9;margin-bottom:8px;">Tek Komutla Kurulum</h2>
+          <p style="text-align:center;color:#94a3b8;margin-bottom:24px;">
+            Linux sunucuda <strong>tek satır</strong> çalıştırın. Docker yoksa otomatik kurulur,
+            veritabanı başlatılır, admin hesabı oluşturulur.
+          </p>
+          <div style="background:#0b1120;border:1px solid rgba(71,85,105,.4);border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:14px;overflow-x:auto;">
+            <code id="installCmd" style="color:#34d399;font-size:15px;white-space:nowrap;flex:1;font-family:'Menlo','Consolas',monospace;">sudo bash -c "$(curl -fsSL https://tiginer.com/install.sh)"</code>
+            <button onclick="copyInstall()" class="btn btn-sm" style="flex-shrink:0;">Kopyala</button>
+          </div>
+          <p style="text-align:center;color:#64748b;font-size:13px;margin-top:16px;">
+            Kurulumdan sonra servisleri yönetmek için:
+            <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer status</code>
+            ·
+            <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer logs</code>
+            ·
+            <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer update</code>
+          </p>
+        </div>
+
         <div class="dl-cards">
-          <!-- Windows -->
-          <div class="dl-card">
-            <div style="font-size:48px;margin-bottom:12px;">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <h3 data-i18n="dl_win_title">Windows (x64)</h3>
-            <p><span data-i18n="dl_win_desc">Windows Server 2019+, Windows 10/11 uyumlu. Docker Desktop gerektirir.</span></p>
-            <a href="https://updates.tiginer.com/releases/binaries/windows-x64/tiginer-client-1.0.0.zip" class="btn btn-glow btn-block" id="downloadWin">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span data-i18n="dl_win_btn">Windows İndir (.zip)</span>
-            </a>
-            <p class="form-hint" style="margin-top:8px;text-align:center;">tiginer-client-1.0.0.zip — <span id="winSize">~45 MB</span></p>
-          </div>
-
-          <!-- Linux -->
-          <div class="dl-card">
-            <div style="font-size:48px;margin-bottom:12px;">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-            </div>
-            <h3 data-i18n="dl_linux_title">Linux (x64)</h3>
-            <p><span data-i18n="dl_linux_desc">Ubuntu 22+, Debian 12+, CentOS 9+, RHEL 9+ uyumlu. Docker Engine gerektirir.</span></p>
-            <a href="https://updates.tiginer.com/releases/binaries/linux-x64/tiginer-client-1.0.0.tar.gz" class="btn btn-glow btn-block" id="downloadLinux" style="background:linear-gradient(135deg,#059669,#10b981);">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span data-i18n="dl_linux_btn">Linux İndir (.tar.gz)</span>
-            </a>
-            <p class="form-hint" style="margin-top:8px;text-align:center;">tiginer-client-1.0.0.tar.gz — <span id="linuxSize">~43 MB</span></p>
-          </div>
-
           <!-- Docs -->
           <div class="dl-card">
             <div style="font-size:48px;margin-bottom:12px;">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             </div>
             <h3 data-i18n="dl_docs_title">Kurulum Rehberi</h3>
-            <p data-i18n="dl_docs_desc">Adım adım kurulum, registry girişi, SSL yapılandırması, yedekleme ve güncelleme talimatları.</p>
+            <p data-i18n="dl_docs_desc">Adım adım kurulum, SSL yapılandırması, yedekleme ve güncelleme talimatları.</p>
             <a href="/api/download/docs" class="btn btn-outline btn-block" download="Tiginer-Kurulum-Rehberi.md">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
               <span data-i18n="dl_docs_btn">Kurulum Dokümanı İndir</span>
@@ -100,13 +93,13 @@
         </div>
 
         <div class="dl-steps">
-          <h3 data-i18n="dl_steps_title">Hızlı Kurulum — 5 Adım</h3>
+          <h3>Kurulum Sonrası</h3>
           <ol>
-            <li><span data-i18n="dl_step1">Paketi indirin ve sunucunuzda bir klasöre çıkartın.</span><br/><code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">unzip tiginer-nms-setup.zip -d /opt/tiginer</code></li>
-            <li><span data-i18n="dl_step2">Ortam değişkenlerini ayarlayın: .env dosyasındaki şifreleri doldurun.</span><br/><code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">cp .env.example .env</code></li>
-            <li><span data-i18n="dl_step3">Registry giriş yapın: size verilen token'ı girin.</span><br/><code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">docker login ghcr.io</code></li>
-            <li><span data-i18n="dl_step4">Kurulum scriptini çalıştırın.</span><br/>Linux: <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">./install.sh</code> &nbsp; Windows: <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">install.cmd</code></li>
-            <li><span data-i18n="dl_step5_1">Tarayıcıdan</span> <strong>http://sunucu-ip:3002</strong> <span data-i18n="dl_step5_2">gidin, lisans anahtarınızı Ayarlar > Lisans'a girin.</span></li>
+            <li>Kurulum sırasında girdiğiniz lisans anahtarı portal'da otomatik doğrulanır.</li>
+            <li>Script size bir admin e-posta ve şifresi gösterir — ekran çıktısını kaydedin.</li>
+            <li>Tarayıcıdan <strong>http://sunucu-ip:3002</strong> adresine gidin ve giriş yapın.</li>
+            <li>Servisi yönetmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">tiginer</code> komutunu kullanın (<code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer info</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer logs</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer stop</code>).</li>
+            <li>Yeni sürüme geçmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">sudo tiginer update</code> yeterli.</li>
           </ol>
         </div>
 
@@ -183,19 +176,38 @@
         document.querySelector('.nav-links').classList.toggle('open');
       });
 
-      // Highlight recommended OS card
-      (function() {
-        const ua = navigator.userAgent.toLowerCase();
-        const isWin = ua.includes('win');
-        const cards = document.querySelectorAll('.dl-card');
-        const target = isWin ? cards[0] : cards[1];
-        if (target) {
-          const badge = document.createElement('span');
-          badge.style.cssText = 'display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;';
-          badge.textContent = isWin ? 'Önerilen — Windows' : 'Önerilen — Linux';
-          target.insertBefore(badge, target.firstChild);
-          target.style.borderColor = 'rgba(59,130,246,.4)';
-        }
+      // Kurulum komutunu panoya kopyala
+      function copyInstall() {
+        const cmd = document.getElementById('installCmd').innerText;
+        navigator.clipboard.writeText(cmd).then(() => {
+          const btn = event.target;
+          const prev = btn.innerText;
+          btn.innerText = 'Kopyalandı ✓';
+          setTimeout(() => { btn.innerText = prev; }, 1500);
+        }).catch(() => {});
+      }
+
+      // Hero badge'e en güncel sürümü yaz
+      (async function() {
+        try {
+          const r = await fetch('/api/update/manifest', { cache: 'no-store' });
+          if (!r.ok) return;
+          const data = await r.json();
+          const releases = Array.isArray(data.releases) ? data.releases : [];
+          const linux = releases.filter(x => x.platform === 'linux-x64');
+          if (!linux.length) return;
+          linux.sort((a, b) => {
+            const sa = String(a.version).split('.').map(n => +n || 0);
+            const sb = String(b.version).split('.').map(n => +n || 0);
+            for (let i = 0; i < Math.max(sa.length, sb.length); i++) {
+              const x = sa[i] || 0, y = sb[i] || 0;
+              if (x !== y) return y - x;
+            }
+            return 0;
+          });
+          const heroBadge = document.querySelector('.hero-badge');
+          if (heroBadge) heroBadge.textContent = 'Son Sürüm: v' + linux[0].version;
+        } catch {}
       })();
     </script>
   </body>
