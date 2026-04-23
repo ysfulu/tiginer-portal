@@ -366,6 +366,219 @@ app.get('/api/license/verify', (req, res) => {
   });
 });
 
+/* ══════════════════════════════════════════════════════════════
+   UPDATE SYSTEM — Release manifest + license-gated update check
+   ══════════════════════════════════════════════════════════════ */
+
+const updateDir = path.join(__dirname, 'update');
+const releasesManifest = path.join(updateDir, 'releases.json');
+
+// Plan hiyerarşisi — yüksek tier daha düşük tier'ı kapsar
+const TIER_ORDER = { BASIC: 1, PRO: 2, ENT: 3 };
+
+function readManifest() {
+  try {
+    let raw = fs.readFileSync(releasesManifest, 'utf8');
+    // UTF-8 BOM varsa temizle (PowerShell'in ürettiği dosyalar için)
+    if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
+    return JSON.parse(raw);
+  } catch {
+    return { product: 'tiginer-client', releases: [] };
+  }
+}
+
+function compareSemver(a, b) {
+  const pa = String(a).split('.').map(n => parseInt(n, 10) || 0);
+  const pb = String(b).split('.').map(n => parseInt(n, 10) || 0);
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const x = pa[i] || 0, y = pb[i] || 0;
+    if (x !== y) return x - y;
+  }
+  return 0;
+}
+
+function latestForPlatform(manifest, platform) {
+  const list = (manifest.releases || []).filter(r => r.platform === platform);
+  if (list.length === 0) return null;
+  return list.sort((a, b) => compareSemver(b.version, a.version))[0];
+}
+
+function tierAllows(customerPlan, minTier) {
+  const cust = TIER_ORDER[String(customerPlan || 'BASIC').toUpperCase()] || 0;
+  const min = TIER_ORDER[String(minTier || 'BASIC').toUpperCase()] || 0;
+  return cust >= min;
+}
+
+/* ── Public: manifest (download.html kullanır) ─────────── */
+app.get('/api/update/manifest', (_req, res) => {
+  const manifest = readManifest();
+  // Sadece public alanları dön — sha256, URL, versiyon
+  const safe = {
+    product: manifest.product,
+    generatedAt: manifest.generatedAt,
+    releases: (manifest.releases || []).map(r => ({
+      version: r.version,
+      platform: r.platform,
+      downloadUrl: r.downloadUrl,
+      sha256: r.sha256,
+      sizeBytes: r.sizeBytes || null,
+      releaseNotes: r.releaseNotes,
+      minTier: r.minTier,
+      publishedAt: r.publishedAt,
+      changelogUrl: r.changelogUrl,
+    })),
+  };
+  res.set('Cache-Control', 'public, max-age=60');
+  res.json(safe);
+});
+
+/* ── Public: latest version info (hafif) ───────────────── */
+app.get('/api/update/latest', (req, res) => {
+  const platform = String(req.query.platform || 'linux-x64');
+  const manifest = readManifest();
+  const latest = latestForPlatform(manifest, platform);
+  if (!latest) return res.status(404).json({ error: 'No release for platform' });
+  res.set('Cache-Control', 'public, max-age=60');
+  res.json({
+    version: latest.version,
+    platform: latest.platform,
+    downloadUrl: latest.downloadUrl,
+    sha256: latest.sha256,
+    sizeBytes: latest.sizeBytes || null,
+    releaseNotes: latest.releaseNotes,
+    minTier: latest.minTier,
+    publishedAt: latest.publishedAt,
+  });
+});
+
+/* ── NMS Client: lisans doğrulamalı güncelleme kontrolü ── */
+// NMS her 24 saatte bir bu endpoint'e gelir.
+// Body: { licenseKey, currentVersion, platform, instanceId? }
+app.post('/api/update/check', (req, res) => {
+  const { licenseKey, currentVersion, platform, instanceId } = req.body || {};
+
+  if (!licenseKey || !currentVersion || !platform) {
+    return res.status(400).json({
+      error: 'licenseKey, currentVersion, platform zorunlu',
+    });
+  }
+
+  // 1) Lisans doğrula
+  const customer = readCustomers().find(c => c.licenseKey === licenseKey);
+  if (!customer) {
+    return res.status(403).json({ error: 'invalid_license' });
+  }
+  if (customer.status !== 'active') {
+    return res.status(403).json({ error: 'license_' + customer.status });
+  }
+  if (customer.expiresAt && new Date(customer.expiresAt) < new Date()) {
+    return res.status(403).json({ error: 'license_expired' });
+  }
+
+  // 2) Manifest'ten en son versiyonu bul
+  const manifest = readManifest();
+  const latest = latestForPlatform(manifest, platform);
+  if (!latest) {
+    return res.json({ updateAvailable: false, reason: 'no_release' });
+  }
+
+  // 3) Plan tier kontrolü
+  if (!tierAllows(customer.plan, latest.minTier)) {
+    return res.json({
+      updateAvailable: false,
+      reason: 'tier_insufficient',
+      requiredPlan: latest.minTier,
+      currentPlan: customer.plan,
+    });
+  }
+
+  // 4) Versiyon karşılaştır
+  const cmp = compareSemver(latest.version, currentVersion);
+  if (cmp <= 0) {
+    return res.json({
+      updateAvailable: false,
+      currentVersion,
+      latestVersion: latest.version,
+    });
+  }
+
+  // 5) Güncelleme mevcut
+  return res.json({
+    updateAvailable: true,
+    currentVersion,
+    latestVersion: latest.version,
+    downloadUrl: latest.downloadUrl,
+    sha256: latest.sha256,
+    sizeBytes: latest.sizeBytes || null,
+    releaseNotes: latest.releaseNotes,
+    publishedAt: latest.publishedAt,
+    changelogUrl: latest.changelogUrl,
+    mandatory: latest.mandatory === true,
+  });
+});
+
+/* ── Admin: manifest yönetimi ──────────────────────────── */
+app.get('/api/admin/releases', authRequired, (_req, res) => {
+  res.json(readManifest());
+});
+
+app.post('/api/admin/releases', authRequired, (req, res) => {
+  const { version, platform, downloadUrl, sha256, sizeBytes, releaseNotes, minTier, changelogUrl, mandatory } = req.body || {};
+  if (!version || !platform || !downloadUrl || !sha256) {
+    return res.status(400).json({ error: 'version, platform, downloadUrl, sha256 zorunlu' });
+  }
+  if (!/^[0-9a-f]{64}$/i.test(sha256)) {
+    return res.status(400).json({ error: 'sha256 geçersiz (64 hex karakter)' });
+  }
+  if (!['linux-x64', 'windows-x64', 'darwin-x64', 'darwin-arm64'].includes(platform)) {
+    return res.status(400).json({ error: 'geçersiz platform' });
+  }
+  if (!fs.existsSync(updateDir)) fs.mkdirSync(updateDir, { recursive: true });
+
+  const manifest = readManifest();
+  manifest.product = manifest.product || 'tiginer-client';
+  manifest.generatedAt = nowIso();
+  manifest.releases = manifest.releases || [];
+
+  // Aynı version+platform varsa üzerine yaz, yoksa ekle
+  const idx = manifest.releases.findIndex(r => r.version === version && r.platform === platform);
+  const record = {
+    version: String(version),
+    platform,
+    downloadUrl: String(downloadUrl),
+    sha256: String(sha256).toLowerCase(),
+    sizeBytes: Number(sizeBytes) || null,
+    releaseNotes: String(releaseNotes || '').slice(0, 2000),
+    minTier: (minTier || 'BASIC').toUpperCase(),
+    mandatory: mandatory === true,
+    publishedAt: nowIso(),
+    changelogUrl: changelogUrl || 'https://tiginer.com/changelog',
+  };
+  if (idx >= 0) manifest.releases[idx] = record;
+  else manifest.releases.push(record);
+
+  fs.writeFileSync(releasesManifest, JSON.stringify(manifest, null, 2), 'utf8');
+  res.status(201).json(record);
+});
+
+app.delete('/api/admin/releases', authRequired, (req, res) => {
+  const { version, platform } = req.query;
+  if (!version || !platform) {
+    return res.status(400).json({ error: 'version ve platform zorunlu' });
+  }
+  const manifest = readManifest();
+  const before = (manifest.releases || []).length;
+  manifest.releases = (manifest.releases || []).filter(
+    r => !(r.version === version && r.platform === platform)
+  );
+  if (manifest.releases.length === before) {
+    return res.status(404).json({ error: 'Sürüm bulunamadı' });
+  }
+  manifest.generatedAt = nowIso();
+  fs.writeFileSync(releasesManifest, JSON.stringify(manifest, null, 2), 'utf8');
+  res.json({ ok: true });
+});
+
 /* ── Start ───────────────────────────────────────────── */
 app.listen(port, () => {
   console.log(`Tiginer portal ready at http://localhost:${port}`);

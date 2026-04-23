@@ -8,3 +8,4 @@ releases/*.zip
 releases/*.zip.old
 releases/*.tar.gz
 public/*.backup.*
+.secrets/

@@ -1017,9 +1017,9 @@ app.onError((err, c) => {
    run_worker_first=["/api/*"] so non-API requests fall through)
    ────────────────────────────────────────────────────────── */
 app.all('*', async (c) => {
-  // Worker receives /api/* first; static assets are served automatically.
+  // Worker receives /api/* and /v1/* first; static assets are served automatically.
   // For any unmatched API path, return 404 JSON.
-  if (c.req.path.startsWith('/api/')) {
+  if (c.req.path.startsWith('/api/') || c.req.path.startsWith('/v1/')) {
     return c.json({ error: 'Not found' }, 404);
   }
   // Fall through to ASSETS binding

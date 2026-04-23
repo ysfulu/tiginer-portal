@@ -56,6 +56,7 @@ document.querySelectorAll('.tab-btn').forEach((btn) => {
     document.querySelectorAll('.tab-panel').forEach((p) => p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'releases') loadReleases();
   });
 });
 
@@ -527,3 +528,107 @@ function esc(str) {
 
 /* ── Start ─────────────────────────────────────────── */
 bootstrap().catch(console.error);
+
+/* ══════════════════════════════════════════════════════════════
+   RELEASE MANAGEMENT TAB
+   ══════════════════════════════════════════════════════════════ */
+
+const relBody = document.getElementById('relBody');
+const relEmpty = document.getElementById('relEmpty');
+const addReleaseBtn = document.getElementById('addReleaseBtn');
+const releaseModal = document.getElementById('releaseModal');
+const releaseForm = document.getElementById('releaseForm');
+const releaseCancel = document.getElementById('releaseCancel');
+
+function formatRelSize(n) {
+  if (!n) return '-';
+  const mb = n / 1024 / 1024;
+  if (mb >= 1024) return (mb / 1024).toFixed(1) + ' GB';
+  return mb.toFixed(1) + ' MB';
+}
+
+async function loadReleases() {
+  try {
+    const data = await api('/api/admin/releases');
+    const releases = (data.releases || []).slice().sort((a, b) => {
+      const c = String(b.version).localeCompare(String(a.version), undefined, { numeric: true });
+      return c !== 0 ? c : String(a.platform).localeCompare(String(b.platform));
+    });
+
+    if (releases.length === 0) {
+      relBody.innerHTML = '';
+      relEmpty.classList.remove('hidden');
+      return;
+    }
+    relEmpty.classList.add('hidden');
+    relBody.innerHTML = releases.map(r => `
+      <tr>
+        <td><strong>v${esc(r.version)}</strong></td>
+        <td><code style="font-size:12px;">${esc(r.platform)}</code></td>
+        <td><span class="badge badge-gray">${esc(r.minTier || 'BASIC')}</span></td>
+        <td>${formatRelSize(r.sizeBytes)}</td>
+        <td>${r.publishedAt ? new Date(r.publishedAt).toLocaleDateString('tr-TR') : '-'}</td>
+        <td>${r.mandatory ? '<span class="badge badge-red">Zorunlu</span>' : '-'}</td>
+        <td><code style="font-size:11px;" title="${esc(r.sha256 || '')}">${r.sha256 ? esc(r.sha256.slice(0, 12)) + '…' : '-'}</code></td>
+        <td>
+          <button class="btn-link" onclick="copyUrl('${esc(r.downloadUrl || '')}')" title="URL kopyala">URL</button>
+          <button class="btn-link btn-danger" onclick="deleteRelease('${esc(r.version)}','${esc(r.platform)}')">Sil</button>
+        </td>
+      </tr>
+    `).join('');
+  } catch (err) {
+    relBody.innerHTML = '';
+    relEmpty.textContent = 'Sürümler yüklenemedi: ' + err.message;
+    relEmpty.classList.remove('hidden');
+  }
+}
+
+window.copyUrl = function(url) {
+  navigator.clipboard.writeText(url).then(() => alert('Kopyalandı: ' + url));
+};
+
+window.deleteRelease = async function(version, platform) {
+  if (!confirm(`v${version} ${platform} silinsin mi?`)) return;
+  try {
+    await api(`/api/admin/releases?version=${encodeURIComponent(version)}&platform=${encodeURIComponent(platform)}`, {
+      method: 'DELETE',
+    });
+    await loadReleases();
+  } catch (err) {
+    alert('Silinemedi: ' + err.message);
+  }
+};
+
+if (addReleaseBtn) {
+  addReleaseBtn.addEventListener('click', () => {
+    releaseForm.reset();
+    releaseModal.classList.remove('hidden');
+  });
+}
+
+if (releaseCancel) {
+  releaseCancel.addEventListener('click', () => releaseModal.classList.add('hidden'));
+}
+
+if (releaseForm) {
+  releaseForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      version: document.getElementById('relVersion').value.trim(),
+      platform: document.getElementById('relPlatform').value,
+      downloadUrl: document.getElementById('relUrl').value.trim(),
+      sha256: document.getElementById('relSha').value.trim().toLowerCase(),
+      sizeBytes: parseInt(document.getElementById('relSize').value, 10) || null,
+      minTier: document.getElementById('relTier').value,
+      releaseNotes: document.getElementById('relNotes').value.trim(),
+      mandatory: document.getElementById('relMandatory').checked,
+    };
+    try {
+      await api('/api/admin/releases', { method: 'POST', body: JSON.stringify(payload) });
+      releaseModal.classList.add('hidden');
+      await loadReleases();
+    } catch (err) {
+      alert('Kaydedilemedi: ' + err.message);
+    }
+  });
+}

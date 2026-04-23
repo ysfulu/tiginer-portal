@@ -69,6 +69,7 @@
             <button class="tab-btn active" data-tab="customers">Musteriler ve Lisanslar</button>
             <button class="tab-btn" data-tab="licenses">Lisans Yonetimi</button>
             <button class="tab-btn" data-tab="demos">Demo Talepleri</button>
+            <button class="tab-btn" data-tab="releases">Surum Yonetimi</button>
           </div>
 
           <!-- Customers Tab -->
@@ -159,7 +160,90 @@
             </table>
             <p id="demoEmpty" class="hidden" style="color:#64748b;text-align:center;padding:32px;">Henuz demo talebi yok.</p>
           </div>
+
+          <!-- Releases Tab -->
+          <div class="tab-panel" id="tab-releases">
+            <div class="toolbar" style="justify-content:space-between;">
+              <div>
+                <strong style="color:#f1f5f9;font-size:15px;">Yayinlanan Surumler</strong>
+                <p style="color:#64748b;font-size:13px;margin-top:4px;">R2'ye yuklenip manifest'e eklenen surumler. download.html ve NMS'ler otomatik buradan okur.</p>
+              </div>
+              <button class="btn btn-sm" id="addReleaseBtn">+ Yeni Surum Ekle</button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Versiyon</th>
+                  <th>Platform</th>
+                  <th>Min. Plan</th>
+                  <th>Boyut</th>
+                  <th>Yayin Tarihi</th>
+                  <th>Zorunlu</th>
+                  <th>SHA-256</th>
+                  <th style="width:100px">Islem</th>
+                </tr>
+              </thead>
+              <tbody id="relBody"></tbody>
+            </table>
+            <p id="relEmpty" class="hidden" style="color:#64748b;text-align:center;padding:32px;">Henuz yayinlanmis surum yok. Komut satirindan release-publish.sh kullanabilirsiniz.</p>
+          </div>
         </section>
+      </div>
+    </div>
+
+    <!-- Release Modal -->
+    <div id="releaseModal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <h3 id="releaseModalTitle" style="margin-bottom:16px;">Yeni Surum Ekle</h3>
+        <form id="releaseForm">
+          <div class="form-group">
+            <label>Versiyon (semver, x.y.z)</label>
+            <input type="text" id="relVersion" required pattern="\d+\.\d+\.\d+" placeholder="1.0.1" />
+          </div>
+          <div class="form-group">
+            <label>Platform</label>
+            <select id="relPlatform" required>
+              <option value="linux-x64">linux-x64</option>
+              <option value="windows-x64">windows-x64</option>
+              <option value="darwin-x64">darwin-x64</option>
+              <option value="darwin-arm64">darwin-arm64</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Indirme URL (R2 public URL)</label>
+            <input type="url" id="relUrl" required placeholder="https://updates.tiginer.com/releases/binaries/linux-x64/tiginer-client-1.0.1.tar.gz" />
+          </div>
+          <div class="form-group">
+            <label>SHA-256 (64 hex)</label>
+            <input type="text" id="relSha" required pattern="[0-9a-fA-F]{64}" placeholder="64 karakterlik hex degeri" />
+          </div>
+          <div class="form-group">
+            <label>Boyut (byte, opsiyonel)</label>
+            <input type="number" id="relSize" min="0" placeholder="45088768" />
+          </div>
+          <div class="form-group">
+            <label>Minimum Plan</label>
+            <select id="relTier">
+              <option value="BASIC">BASIC</option>
+              <option value="PRO">PRO</option>
+              <option value="ENT">ENT</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Surum Notlari</label>
+            <textarea id="relNotes" maxlength="2000" rows="4" placeholder="Hata duzeltmeleri ve yeni ozellikler..."></textarea>
+          </div>
+          <div class="form-group">
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="relMandatory" />
+              <span>Zorunlu guncelleme (tum musterilere anlik uyari gonderilir)</span>
+            </label>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:20px;">
+            <button type="submit" class="btn btn-block">Kaydet</button>
+            <button type="button" class="btn btn-outline btn-block" id="releaseCancel">Iptal</button>
+          </div>
+        </form>
       </div>
     </div>
 
