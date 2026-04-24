@@ -14,7 +14,8 @@
       "/api/*",
       "/v1/*",
       "/install.sh",
-      "/install.ps1"
+      "/install.ps1",
+      "/update.sh"
     ]
   },
 

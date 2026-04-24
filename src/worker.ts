@@ -409,6 +409,71 @@ exec ./install.sh "\$@"
 });
 
 /* ──────────────────────────────────────────────────────────
+   Public: One-line update script for existing installations
+   Usage:
+     curl -fsSL https://tiginer.com/update.sh | sudo bash
+     curl -fsSL https://tiginer.com/update.sh | sudo VERSION=1.1.13 bash
+   ────────────────────────────────────────────────────────── */
+app.get('/update.sh', async (c) => {
+  const script = `#!/usr/bin/env bash
+# Tiginer NMS — Tek komutluk güncelleme scripti
+set -euo pipefail
+
+if [ "\${EUID:-\$(id -u)}" -ne 0 ]; then
+  echo "Bu script root yetkisi ister. 'sudo' ile çalıştırın." >&2
+  exit 1
+fi
+
+# Kurulum dizinini otomatik bul
+CANDIDATES=(/opt/tiginer-nms /opt/tiginer /srv/tiginer-nms /srv/tiginer)
+INSTALL_DIR=""
+for d in "\${CANDIDATES[@]}"; do
+  if [ -f "\$d/docker-compose.yml" ] && [ -f "\$d/.env" ]; then
+    INSTALL_DIR="\$d"
+    break
+  fi
+done
+
+if [ -z "\$INSTALL_DIR" ]; then
+  echo "Tiginer NMS kurulumu bulunamadı (aranan: \${CANDIDATES[*]})" >&2
+  echo "Özel dizin için: INSTALL_DIR=/yol curl ... | sudo bash" >&2
+  exit 1
+fi
+
+# Ortam değişkeninden override
+INSTALL_DIR="\${TIGINER_INSTALL_DIR:-\$INSTALL_DIR}"
+TARGET_VERSION="\${VERSION:-latest}"
+
+echo "→ Kurulum dizini : \$INSTALL_DIR"
+echo "→ Hedef sürüm    : \$TARGET_VERSION"
+echo ""
+
+cd "\$INSTALL_DIR"
+
+# APP_VERSION'u güncelle
+if grep -q '^APP_VERSION=' .env; then
+  sed -i "s/^APP_VERSION=.*/APP_VERSION=\${TARGET_VERSION}/" .env
+else
+  echo "APP_VERSION=\${TARGET_VERSION}" >> .env
+fi
+
+echo "→ Yeni imaj çekiliyor..."
+docker compose pull
+
+echo "→ Servisler yeniden başlatılıyor..."
+docker compose up -d
+
+echo ""
+echo "✓ Güncelleme tamamlandı."
+docker compose ps
+`;
+  return c.body(script, 200, {
+    'Content-Type': 'text/x-shellscript; charset=utf-8',
+    'Cache-Control': 'public, max-age=300',
+  });
+});
+
+/* ──────────────────────────────────────────────────────────
    Public: Windows one-line bootstrap installer (PowerShell)
    Usage (PowerShell as Administrator):
      iex ((iwr 'https://tiginer.com/install.ps1').Content)
