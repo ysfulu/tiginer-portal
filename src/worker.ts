@@ -450,6 +450,25 @@ echo ""
 
 cd "\$INSTALL_DIR"
 
+# ── Güvenlik ağı: DB yedeği ────────────────────────
+# Update öncesi otomatik DB snapshot — hata olursa geri dönülebilir
+BACKUP_DIR="\$INSTALL_DIR/backups"
+mkdir -p "\$BACKUP_DIR"
+TS=\$(date +%Y%m%d-%H%M%S)
+BACKUP_FILE="\$BACKUP_DIR/db-\$TS.sql.gz"
+
+if docker compose ps postgres 2>/dev/null | grep -q Up; then
+  echo "→ DB yedeği alınıyor: \$BACKUP_FILE"
+  if docker compose exec -T postgres pg_dump -U tiginer tiginer_nms 2>/dev/null | gzip > "\$BACKUP_FILE"; then
+    # Sadece son 5 yedeği tut
+    ls -1t "\$BACKUP_DIR"/db-*.sql.gz 2>/dev/null | tail -n +6 | xargs -r rm -f
+    echo "  ✓ Yedek alındı (\$(du -h "\$BACKUP_FILE" | cut -f1))"
+  else
+    echo "  ⚠ Yedek alınamadı, yine de devam ediliyor..."
+    rm -f "\$BACKUP_FILE"
+  fi
+fi
+
 # APP_VERSION'u güncelle
 if grep -q '^APP_VERSION=' .env; then
   sed -i "s/^APP_VERSION=.*/APP_VERSION=\${TARGET_VERSION}/" .env
@@ -465,26 +484,38 @@ docker compose up -d
 
 # Container sağlıklı hale gelene kadar bekle
 echo "→ Servislerin hazır olması bekleniyor..."
-for i in 1 2 3 4 5 6 7 8 9 10; do
+for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
   if docker compose exec -T app sh -c 'exit 0' >/dev/null 2>&1; then
     break
   fi
   sleep 3
 done
 
-# DB şema göçlerini uygula (yeni sürüm yeni kolonlar eklediyse)
-echo "→ Veritabanı göçleri uygulanıyor..."
-if docker compose exec -T app npx prisma migrate deploy --schema=/app/packages/database/prisma/schema.prisma 2>&1 | tail -20; then
-  echo "  (migrate deploy tamamlandı)"
-else
-  echo "  Uyarı: migrate deploy başarısız — log'ları kontrol edin: docker compose logs app"
-fi
+# Not: v1.1.14+ image'ları başlangıçta kendisi migrate deploy yapıyor.
+# Eski image'lar için güvenlik ağı olarak burada da çağırıyoruz.
+echo "→ Veritabanı göçleri uygulanıyor (güvenlik ağı)..."
+docker compose exec -T app sh -c 'if [ -x /app/node_modules/.bin/prisma ]; then /app/node_modules/.bin/prisma migrate deploy --schema=/app/packages/database/prisma/schema.prisma; else echo "prisma CLI yok (yeni image zaten başlangıçta yapıyor)"; fi' 2>&1 | tail -10 || true
 
-echo "→ App restart..."
-docker compose restart app worker
+# Sağlık kontrolü
+echo "→ Sağlık kontrolü..."
+HEALTH_OK=0
+for i in 1 2 3 4 5 6 7 8 9 10; do
+  if docker compose exec -T app wget -qO- http://localhost:3002/api/health >/dev/null 2>&1 || \
+     docker compose exec -T app curl -sf http://localhost:3002/api/health >/dev/null 2>&1; then
+    HEALTH_OK=1
+    break
+  fi
+  sleep 3
+done
 
 echo ""
-echo "✓ Güncelleme tamamlandı."
+if [ "\$HEALTH_OK" = "1" ]; then
+  echo "✓ Güncelleme başarılı — uygulama sağlıklı çalışıyor."
+else
+  echo "⚠ UYARI: Uygulama sağlık endpoint'ine yanıt vermiyor."
+  echo "  Log'lar: docker compose logs app --tail=80"
+  echo "  Geri dönmek için: zcat \$BACKUP_FILE | docker compose exec -T postgres psql -U tiginer tiginer_nms"
+fi
 docker compose ps
 `;
   return c.body(script, 200, {
