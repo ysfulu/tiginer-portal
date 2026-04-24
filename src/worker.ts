@@ -463,6 +463,26 @@ docker compose pull
 echo "→ Servisler yeniden başlatılıyor..."
 docker compose up -d
 
+# Container sağlıklı hale gelene kadar bekle
+echo "→ Servislerin hazır olması bekleniyor..."
+for i in 1 2 3 4 5 6 7 8 9 10; do
+  if docker compose exec -T app sh -c 'exit 0' >/dev/null 2>&1; then
+    break
+  fi
+  sleep 3
+done
+
+# DB şema göçlerini uygula (yeni sürüm yeni kolonlar eklediyse)
+echo "→ Veritabanı göçleri uygulanıyor..."
+if docker compose exec -T app npx prisma migrate deploy --schema=/app/packages/database/prisma/schema.prisma 2>&1 | tail -20; then
+  echo "  (migrate deploy tamamlandı)"
+else
+  echo "  Uyarı: migrate deploy başarısız — log'ları kontrol edin: docker compose logs app"
+fi
+
+echo "→ App restart..."
+docker compose restart app worker
+
 echo ""
 echo "✓ Güncelleme tamamlandı."
 docker compose ps
