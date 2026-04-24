@@ -409,6 +409,95 @@ exec ./install.sh "\$@"
 });
 
 /* ──────────────────────────────────────────────────────────
+   Public: Windows one-line bootstrap installer (PowerShell)
+   Usage (PowerShell as Administrator):
+     iex ((iwr 'https://tiginer.com/install.ps1').Content)
+     $env:LICENSE_KEY='TGN-...'; iex ((iwr 'https://tiginer.com/install.ps1').Content)
+   ────────────────────────────────────────────────────────── */
+app.get('/install.ps1', async (c) => {
+  const script = `# Tiginer NMS — Windows One-line Bootstrap Installer
+$ErrorActionPreference = 'Stop'
+
+function Log  ($m) { Write-Host "[OK] $m" -ForegroundColor Green }
+function Warn ($m) { Write-Host "[!]  $m" -ForegroundColor Yellow }
+function Err  ($m) { Write-Host "[X]  $m" -ForegroundColor Red }
+
+# Yönetici kontrolü
+$current = [Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
+if (-not $current.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Err "Bu script Yönetici olarak çalıştırılmalıdır."
+    Write-Host "  PowerShell'i 'Yönetici olarak çalıştır' ile açıp tekrar deneyin."
+    exit 1
+}
+
+Write-Host ""
+Write-Host "╔═══════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "║   Tiginer NMS — Windows Hızlı Kurulum         ║" -ForegroundColor Cyan
+Write-Host "╚═══════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
+
+# Docker kontrolü
+try { docker info *> $null } catch {
+    Err "Docker bulunamadı veya çalışmıyor."
+    Write-Host "  Docker Desktop for Windows yükleyin: https://www.docker.com/products/docker-desktop"
+    exit 1
+}
+Log "Docker çalışıyor"
+
+# Son sürümü al
+Log "Son sürüm bilgisi alınıyor..."
+$manifest = Invoke-RestMethod -Uri 'https://tiginer.com/api/update/latest?platform=windows-x64' -TimeoutSec 15 -ErrorAction SilentlyContinue
+if (-not $manifest -or -not $manifest.version) {
+    # windows-x64 yoksa linux-x64'e düş (aynı paket — sadece dağıtım kanalı için tutuluyor)
+    $manifest = Invoke-RestMethod -Uri 'https://tiginer.com/api/update/latest?platform=linux-x64' -TimeoutSec 15
+}
+$version = $manifest.version
+$url     = $manifest.downloadUrl
+$sha     = $manifest.sha256
+if (-not $version) { Err "Sürüm bilgisi alınamadı!"; exit 1 }
+Log "En son sürüm: v$version"
+
+# Geçici dizin
+$tmp = Join-Path $env:TEMP "tiginer-nms-$version"
+if (Test-Path $tmp) { Remove-Item $tmp -Recurse -Force }
+New-Item -ItemType Directory -Path $tmp | Out-Null
+Set-Location $tmp
+
+# Paketi indir
+Log "Paket indiriliyor..."
+$pkg = Join-Path $tmp 'pkg.zip'
+Invoke-WebRequest -Uri $url -OutFile $pkg -UseBasicParsing
+
+# SHA doğrula
+Log "İmza doğrulanıyor..."
+$actual = (Get-FileHash $pkg -Algorithm SHA256).Hash.ToLower()
+if ($actual -ne $sha.ToLower()) {
+    Err "SHA-256 uyuşmadı! Beklenen: $sha / Alınan: $actual"
+    exit 1
+}
+Log "İmza doğru"
+
+# Aç
+Expand-Archive -Path $pkg -DestinationPath $tmp -Force
+$pkgDir = Get-ChildItem -Directory $tmp | Where-Object { $_.Name -like 'tiginer-nms-*' } | Select-Object -First 1
+if (-not $pkgDir) { Err "Paket içeriği bulunamadı!"; exit 1 }
+Set-Location $pkgDir.FullName
+
+# install.ps1'ı çalıştır
+if (-not (Test-Path '.\\install.ps1')) {
+    Err "Pakette install.ps1 bulunamadı (eski sürüm olabilir)."
+    Write-Host "  Bu sürümde sadece Linux kurulumu mevcut. v1.1.11+ ile tekrar deneyin."
+    exit 1
+}
+& powershell -ExecutionPolicy Bypass -File .\\install.ps1 @args
+`;
+  return c.body(script, 200, {
+    'Content-Type': 'text/plain; charset=utf-8',
+    'Cache-Control': 'public, max-age=300',
+  });
+});
+
+/* ──────────────────────────────────────────────────────────
    Public: demo request
    ────────────────────────────────────────────────────────── */
 app.post('/api/demo-request', async (c) => {

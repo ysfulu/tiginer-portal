@@ -60,13 +60,44 @@
         <div style="background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(59,130,246,.08));border:1px solid rgba(52,211,153,.25);border-radius:16px;padding:36px;margin-bottom:32px;backdrop-filter:blur(8px);">
           <h2 style="text-align:center;color:#f1f5f9;margin-bottom:8px;">Tek Komutla Kurulum</h2>
           <p style="text-align:center;color:#94a3b8;margin-bottom:24px;">
-            Linux sunucuda <strong>tek satır</strong> çalıştırın. Docker yoksa otomatik kurulur,
+            Sunucuda <strong>tek satır</strong> çalıştırın. Docker yoksa otomatik kurulur,
             veritabanı başlatılır, admin hesabı oluşturulur.
           </p>
-          <div style="background:#0b1120;border:1px solid rgba(71,85,105,.4);border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:14px;overflow-x:auto;">
-            <code id="installCmd" style="color:#34d399;font-size:15px;white-space:nowrap;flex:1;font-family:'Menlo','Consolas',monospace;">sudo bash -c "$(curl -fsSL https://tiginer.com/install.sh)"</code>
-            <button onclick="copyInstall()" class="btn btn-sm" style="flex-shrink:0;">Kopyala</button>
+
+          <!-- OS Tabs -->
+          <div style="display:flex;justify-content:center;gap:8px;margin-bottom:16px;">
+            <button id="tabLinux" onclick="showOs('linux')" class="os-tab os-tab-active" style="background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.4);color:#34d399;padding:8px 20px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.05-.214.064-.39.05-.524v-.083a1.135 1.135 0 00-.121-.4c-.1-.2-.222-.3-.382-.335-.16-.06-.32-.045-.5.001-.18.073-.32.16-.45.319l-.002.002a.34.34 0 01-.052.067l-.001.001a1.04 1.04 0 00-.146.193c-.041.065-.072.135-.108.198a.45.45 0 00-.05.075c-.022.05-.022.1-.045.135a.16.16 0 00-.012.046v.21l.005.155a8.5 8.5 0 00.05.605c.014.06.024.123.038.184.013.06.024.123.041.184a3.6 3.6 0 00.06.214l.027.078v.001c-.04.025-.118.05-.169.094a1.45 1.45 0 00-.12.116l-.003.001-.002.003c-.04.05-.082.1-.122.135-.04.029-.065.065-.103.094.04.029.082.052.121.094.04.045.082.073.115.135.04.045.082.094.122.135.04.045.077.094.115.135.04.045.082.073.122.094.04.045.077.073.115.094.04.024.082.045.122.066-.039.094-.157.181-.235.265-.082.066-.16.135-.235.198-.078.066-.156.135-.235.198a.456.456 0 00-.078.04c-.04.024-.078.066-.115.094a.475.475 0 00-.078.067 1.96 1.96 0 00-.156.198c-.04.045-.078.094-.115.135l-.003.001a1.31 1.31 0 00-.078.092 1.07 1.07 0 00-.098.135 1.39 1.39 0 00-.078.135 6.28 6.28 0 00-.235.401 5.59 5.59 0 00-.292.469c-.078.135-.156.265-.214.401-.078.135-.156.265-.214.401-.078.135-.115.265-.156.401-.04.135-.097.265-.115.401-.04.135-.078.265-.097.4-.04.135-.078.265-.097.4l-.003.001a3.04 3.04 0 00-.076.4 3.04 3.04 0 00-.057.4c-.04.135-.078.265-.097.4-.04.135-.078.265-.097.4-.022.135-.063.265-.097.4-.04.135-.057.265-.097.4-.04.135-.064.265-.097.4-.022.135-.064.265-.097.4-.04.135-.057.265-.097.4-.04.135-.057.265-.097.4-.04.135-.064.265-.097.4-.04.135-.057.265-.097.4-.04.135-.057.265-.097.4l1.166-.003c.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4z"/></svg>
+              Linux
+            </button>
+            <button id="tabWindows" onclick="showOs('windows')" class="os-tab" style="background:rgba(51,65,85,.3);border:1px solid rgba(71,85,105,.4);color:#94a3b8;padding:8px 20px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+              Windows
+            </button>
           </div>
+
+          <!-- Linux Command -->
+          <div id="osLinux">
+            <div style="background:#0b1120;border:1px solid rgba(71,85,105,.4);border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:14px;overflow-x:auto;">
+              <code id="installCmdLinux" style="color:#34d399;font-size:15px;white-space:nowrap;flex:1;font-family:'Menlo','Consolas',monospace;">sudo bash -c "$(curl -fsSL https://tiginer.com/install.sh)"</code>
+              <button onclick="copyInstall('installCmdLinux', this)" class="btn btn-sm" style="flex-shrink:0;">Kopyala</button>
+            </div>
+            <p style="text-align:center;color:#64748b;font-size:13px;margin-top:14px;">
+              Ubuntu 22.04+ · Debian 12+ · RHEL 9+ · Docker otomatik kurulur
+            </p>
+          </div>
+
+          <!-- Windows Command -->
+          <div id="osWindows" style="display:none;">
+            <div style="background:#0b1120;border:1px solid rgba(71,85,105,.4);border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:14px;overflow-x:auto;">
+              <code id="installCmdWindows" style="color:#34d399;font-size:14px;white-space:nowrap;flex:1;font-family:'Menlo','Consolas',monospace;">iex ((iwr 'https://tiginer.com/install.ps1').Content)</code>
+              <button onclick="copyInstall('installCmdWindows', this)" class="btn btn-sm" style="flex-shrink:0;">Kopyala</button>
+            </div>
+            <p style="text-align:center;color:#64748b;font-size:13px;margin-top:14px;">
+              Windows Server 2019+ · PowerShell'i <strong>Yönetici olarak</strong> açın · <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener" style="color:#60a5fa;">Docker Desktop</a> önceden kurulu olmalı
+            </p>
+          </div>
+
           <p style="text-align:center;color:#64748b;font-size:13px;margin-top:16px;">
             Kurulumdan sonra servisleri yönetmek için:
             <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer status</code>
@@ -98,8 +129,8 @@
             <li>Kurulum sırasında girdiğiniz lisans anahtarı portal'da otomatik doğrulanır.</li>
             <li>Script size bir admin e-posta ve şifresi gösterir — ekran çıktısını kaydedin.</li>
             <li>Tarayıcıdan <strong>http://sunucu-ip:3002</strong> adresine gidin ve giriş yapın.</li>
-            <li>Servisi yönetmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">tiginer</code> komutunu kullanın (<code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer info</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer logs</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer stop</code>).</li>
-            <li>Yeni sürüme geçmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">sudo tiginer update</code> yeterli.</li>
+            <li>Servisi yönetmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">tiginer</code> komutunu kullanın — Linux'ta bash, Windows'ta PowerShell üzerinden aynı komutlar çalışır (<code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer info</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer logs</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer stop</code>).</li>
+            <li>Yeni sürüme geçmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">sudo tiginer update</code> (Linux) veya <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">tiginer update</code> (Windows, yönetici PS) yeterli.</li>
           </ol>
         </div>
 
@@ -177,14 +208,40 @@
       });
 
       // Kurulum komutunu panoya kopyala
-      function copyInstall() {
-        const cmd = document.getElementById('installCmd').innerText;
+      function copyInstall(elementId, btn) {
+        const cmd = document.getElementById(elementId || 'installCmdLinux').innerText;
         navigator.clipboard.writeText(cmd).then(() => {
-          const btn = event.target;
-          const prev = btn.innerText;
-          btn.innerText = 'Kopyalandı ✓';
-          setTimeout(() => { btn.innerText = prev; }, 1500);
+          const target = btn || event.target;
+          const prev = target.innerText;
+          target.innerText = 'Kopyalandı ✓';
+          setTimeout(() => { target.innerText = prev; }, 1500);
         }).catch(() => {});
+      }
+
+      // OS sekmesi değiştir
+      function showOs(os) {
+        const linux = document.getElementById('osLinux');
+        const win   = document.getElementById('osWindows');
+        const tabL  = document.getElementById('tabLinux');
+        const tabW  = document.getElementById('tabWindows');
+        const activeStyle   = { bg: 'rgba(52,211,153,.15)', border: 'rgba(52,211,153,.4)', color: '#34d399' };
+        const inactiveStyle = { bg: 'rgba(51,65,85,.3)',     border: 'rgba(71,85,105,.4)', color: '#94a3b8' };
+        const apply = (btn, s) => {
+          btn.style.background = s.bg;
+          btn.style.borderColor = s.border;
+          btn.style.color = s.color;
+        };
+        if (os === 'windows') {
+          linux.style.display = 'none';
+          win.style.display = 'block';
+          apply(tabW, activeStyle);
+          apply(tabL, inactiveStyle);
+        } else {
+          linux.style.display = 'block';
+          win.style.display = 'none';
+          apply(tabL, activeStyle);
+          apply(tabW, inactiveStyle);
+        }
       }
 
       // Hero badge'e en güncel sürümü yaz
