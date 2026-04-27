@@ -83,6 +83,7 @@
           <a href="#cozumler" data-i18n="nav_solutions">Çözümler</a>
           <a href="#paketler" data-i18n="nav_packages">Paketler</a>
           <a href="/download" data-i18n="nav_download">İndir</a>
+          <a href="#sistem" data-i18n="nav_requirements">Sistem</a>
           <a href="/demo" class="btn btn-sm btn-glow" data-i18n="nav_demo">Demo Talep Et</a>
           <div class="lang-switch" aria-label="Language selector">
             <button class="lang-btn active" data-lang="tr" aria-label="Türkçe">TR</button>
@@ -452,6 +453,92 @@
       </div>
     </section>
 
+    <!-- Sistem Gereksinimleri -->
+    <section id="sistem" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge" data-i18n="sys_badge">Sistem Gereksinimleri</div>
+          <h2 data-i18n="sys_title">Donanım & Ortam</h2>
+          <p data-i18n="sys_sub">Tiginer NMS, ağınızın büyüklüğüne göre ölçeklenir. Her paket için önerilen yapılandırmalar:</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="pricing-card">
+            <div class="pricing-header">
+              <div class="pricing-badge" data-i18n="plan_starter">Başlangıç</div>
+              <h3>Starter</h3>
+              <p class="pricing-desc" data-i18n="sys_starter_desc">≤ 50 cihaz · küçük ofis / şube</p>
+            </div>
+            <ul class="pricing-features">
+              <li><span class="check">&#10003;</span> <strong>2</strong> <span data-i18n="sys_vcpu">vCPU</span></li>
+              <li><span class="check">&#10003;</span> <strong>4 GB</strong> <span data-i18n="sys_ram">RAM</span></li>
+              <li><span class="check">&#10003;</span> <strong>40 GB</strong> <span data-i18n="sys_disk_ssd">SSD disk</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_os_linux">Ubuntu 22.04+ / Debian 12 / RHEL 9</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_docker">Docker Engine 24+ (otomatik kurulur)</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_net_basic">İnternet erişimi (kurulum + lisans + güncelleme)</span></li>
+            </ul>
+          </article>
+
+          <article class="pricing-card popular">
+            <div class="pricing-popular-tag" data-i18n="plan_recommended">Önerilen</div>
+            <div class="pricing-header">
+              <div class="pricing-badge" data-i18n="plan_recommended">Önerilen</div>
+              <h3>Professional</h3>
+              <p class="pricing-desc" data-i18n="sys_pro_desc">50–250 cihaz · tipik kurumsal ağ</p>
+            </div>
+            <ul class="pricing-features">
+              <li><span class="check">&#10003;</span> <strong>4</strong> <span data-i18n="sys_vcpu">vCPU</span></li>
+              <li><span class="check">&#10003;</span> <strong>8 GB</strong> <span data-i18n="sys_ram">RAM</span></li>
+              <li><span class="check">&#10003;</span> <strong>100 GB</strong> <span data-i18n="sys_disk_ssd">SSD disk</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_os_linux">Ubuntu 22.04+ / Debian 12 / RHEL 9</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_virtualization">Proxmox / VMware / Hyper-V uyumlu</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_ports">Açık portlar: 3002 (Web UI), 161/162 SNMP, 514 Syslog, 2055 NetFlow</span></li>
+            </ul>
+          </article>
+
+          <article class="pricing-card enterprise">
+            <div class="pricing-header">
+              <div class="pricing-badge" data-i18n="plan_full">Tam Kapasite</div>
+              <h3>Enterprise</h3>
+              <p class="pricing-desc" data-i18n="sys_ent_desc">250–1000+ cihaz · servis sağlayıcı / büyük kurum</p>
+            </div>
+            <ul class="pricing-features">
+              <li><span class="check">&#10003;</span> <strong>8+</strong> <span data-i18n="sys_vcpu">vCPU</span></li>
+              <li><span class="check">&#10003;</span> <strong>16–32 GB</strong> <span data-i18n="sys_ram">RAM</span></li>
+              <li><span class="check">&#10003;</span> <strong>250–500 GB</strong> <span data-i18n="sys_disk_nvme">NVMe SSD</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_ha">Yüksek erişilebilirlik (HA) destekli</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_dedicated_db">Ayrılmış DB sunucusu önerilir</span></li>
+              <li><span class="check">&#10003;</span> <span data-i18n="sys_ldap">LDAP/AD entegrasyonu &amp; SSO</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="sys-notes" style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1100px;margin-left:auto;margin-right:auto;">
+          <div class="sys-note-card">
+            <div class="sys-note-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h4 data-i18n="sys_note_install_title">Hızlı Kurulum</h4>
+            <p data-i18n="sys_note_install_desc">Tek komut ile ~10 dakikada kurulum tamamlanır (~1.5 GB indirme).</p>
+          </div>
+          <div class="sys-note-card">
+            <div class="sys-note-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h4 data-i18n="sys_note_vm_title">Sanal Makine Dostu</h4>
+            <p data-i18n="sys_note_vm_desc">Proxmox, VMware ESXi, Hyper-V ve KVM üzerinde tam destek. Snapshot &amp; canlı taşıma.</p>
+          </div>
+          <div class="sys-note-card">
+            <div class="sys-note-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h4 data-i18n="sys_note_offline_title">Offline / Air-gap</h4>
+            <p data-i18n="sys_note_offline_desc">İnternet erişimi olmayan kurumsal ağlar için lokal mirror desteği mevcuttur.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA -->
     <section class="section cta-section">
       <div class="cta-glow" aria-hidden="true"></div>
@@ -493,6 +580,7 @@
             <a href="#ozellikler" data-i18n="footer_features">Özellikler</a>
             <a href="#cozumler" data-i18n="footer_solutions">Çözümler</a>
             <a href="#paketler" data-i18n="footer_packages">Paketler</a>
+            <a href="#sistem" data-i18n="nav_requirements">Sistem</a>
           </div>
           <div>
             <strong data-i18n="footer_resources">Kaynaklar</strong>
