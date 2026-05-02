@@ -360,8 +360,16 @@ const authRequired = async (c: any, next: () => Promise<void>) => {
 /* ──────────────────────────────────────────────────────────
    Middleware (global)
    ────────────────────────────────────────────────────────── */
+/* ── CORS: only the portal's own origins. Admin endpoints carry session
+      cookies, so wildcard origin would expose them to CSRF. */
+const ALLOWED_ORIGINS = new Set([
+  'https://tiginer.com',
+  'https://www.tiginer.com',
+  'https://updates.tiginer.com',
+  'https://tiginer-portal.ysfweb1.workers.dev',
+]);
 app.use('*', cors({
-  origin: (origin) => origin || '*',
+  origin: (origin) => (origin && ALLOWED_ORIGINS.has(origin) ? origin : ''),
   credentials: true,
 }));
 
@@ -687,9 +695,71 @@ app.post('/api/demo-request', async (c) => {
 /* ──────────────────────────────────────────────────────────
    Admin: auth
    ────────────────────────────────────────────────────────── */
+/* Constant-time string comparison (Workers runtime has subtle but no
+   crypto.timingSafeEqual; do it manually). */
+function timingSafeEq(a: string, b: string): boolean {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+/* Brute-force lockout via KV. After 5 failures from one IP within 5 min the
+   IP is blocked for 15 min. Counter auto-expires. */
+const LOGIN_MAX_ATTEMPTS = 5;
+const LOGIN_WINDOW_SEC = 300;
+const LOGIN_LOCKOUT_SEC = 900;
+
+async function loginRateCheck(env: Env, ip: string): Promise<{ blocked: boolean; remaining: number }> {
+  const key = `login:fail:${ip}`;
+  const raw = await env.PORTAL_KV.get(key);
+  const count = raw ? Number(raw) : 0;
+  if (count >= LOGIN_MAX_ATTEMPTS) return { blocked: true, remaining: 0 };
+  return { blocked: false, remaining: LOGIN_MAX_ATTEMPTS - count };
+}
+
+async function loginRecordFailure(env: Env, ip: string): Promise<void> {
+  const key = `login:fail:${ip}`;
+  const raw = await env.PORTAL_KV.get(key);
+  const count = raw ? Number(raw) + 1 : 1;
+  const ttl = count >= LOGIN_MAX_ATTEMPTS ? LOGIN_LOCKOUT_SEC : LOGIN_WINDOW_SEC;
+  await env.PORTAL_KV.put(key, String(count), { expirationTtl: ttl });
+}
+
+async function loginClearFailures(env: Env, ip: string): Promise<void> {
+  await env.PORTAL_KV.delete(`login:fail:${ip}`);
+}
+
 app.post('/api/admin/login', async (c) => {
-  const { username, password } = await parseJson<{ username: string; password: string }>(c.req.raw);
-  if (username === c.env.ADMIN_USER && password === c.env.ADMIN_PASS) {
+  const ip = c.req.header('cf-connecting-ip') || c.req.header('x-forwarded-for') || 'unknown';
+  const gate = await loginRateCheck(c.env, ip);
+  if (gate.blocked) {
+    return c.json({ error: 'Cok fazla hatali deneme. 15 dakika sonra tekrar deneyin.' }, 429);
+  }
+
+  let body: { username?: string; password?: string };
+  try {
+    body = await parseJson<{ username: string; password: string }>(c.req.raw);
+  } catch {
+    await loginRecordFailure(c.env, ip);
+    return c.json({ error: 'Gecersiz istek' }, 400);
+  }
+  const username = String(body.username || '');
+  const password = String(body.password || '');
+
+  // Reject default/insecure passwords outright — forces operator to set a real one.
+  const adminUser = c.env.ADMIN_USER || '';
+  const adminPass = c.env.ADMIN_PASS || '';
+  const insecureDefaults = ['', 'change-me', 'change-me-in-production', 'admin', 'password'];
+  if (!adminUser || insecureDefaults.includes(adminPass)) {
+    return c.json({ error: 'Sunucu yapilandirmasi eksik (ADMIN_USER/ADMIN_PASS).' }, 503);
+  }
+
+  const userOk = timingSafeEq(username, adminUser);
+  const passOk = timingSafeEq(password, adminPass);
+  if (userOk && passOk) {
+    await loginClearFailures(c.env, ip);
     const token = await createSession(c.env);
     setCookie(c, SESSION_COOKIE, token, {
       httpOnly: true,
@@ -700,6 +770,7 @@ app.post('/api/admin/login', async (c) => {
     });
     return c.json({ ok: true });
   }
+  await loginRecordFailure(c.env, ip);
   return c.json({ error: 'Gecersiz kullanici adi veya sifre' }, 401);
 });
 
