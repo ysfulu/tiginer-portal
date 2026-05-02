@@ -178,7 +178,7 @@ app.get('/api/admin/customers', authRequired, (req, res) => {
 });
 
 app.post('/api/admin/customers', authRequired, (req, res) => {
-  const { companyName, contactEmail, contactName, plan = 'BASIC', expiresAt = '', deviceLimit = 0 } = req.body || {};
+  const { companyName, contactEmail, contactName, contactPhone, address, notes, plan = 'BASIC', expiresAt = '', deviceLimit = 0 } = req.body || {};
   if (!companyName || !contactEmail) {
     return res.status(400).json({ error: 'companyName ve contactEmail zorunludur' });
   }
@@ -189,6 +189,9 @@ app.post('/api/admin/customers', authRequired, (req, res) => {
     companyName: String(companyName).slice(0, 200),
     contactEmail: String(contactEmail).slice(0, 200),
     contactName: String(contactName || '').slice(0, 200),
+    contactPhone: String(contactPhone || '').slice(0, 50),
+    address: String(address || '').slice(0, 500),
+    notes: String(notes || '').slice(0, 2000),
     plan,
     status: 'active',
     deviceLimit: Number(deviceLimit) || 0,
@@ -203,7 +206,7 @@ app.post('/api/admin/customers', authRequired, (req, res) => {
 
 app.patch('/api/admin/customers/:id', authRequired, (req, res) => {
   const { id } = req.params;
-  const { plan, status, expiresAt, contactName, contactEmail, deviceLimit } = req.body || {};
+  const { plan, status, expiresAt, companyName, contactName, contactEmail, contactPhone, address, notes, deviceLimit } = req.body || {};
   const customers = readCustomers();
   const idx = customers.findIndex(c => c.id === id);
   if (idx < 0) return res.status(404).json({ error: 'Musteri bulunamadi' });
@@ -211,8 +214,12 @@ app.patch('/api/admin/customers/:id', authRequired, (req, res) => {
   if (plan) customers[idx].plan = plan;
   if (status) customers[idx].status = status;
   if (typeof expiresAt === 'string') customers[idx].expiresAt = expiresAt;
+  if (companyName) customers[idx].companyName = String(companyName).slice(0, 200);
   if (contactName) customers[idx].contactName = contactName;
   if (contactEmail) customers[idx].contactEmail = contactEmail;
+  if (typeof contactPhone === 'string') customers[idx].contactPhone = contactPhone.slice(0, 50);
+  if (typeof address === 'string') customers[idx].address = address.slice(0, 500);
+  if (typeof notes === 'string') customers[idx].notes = notes.slice(0, 2000);
   if (typeof deviceLimit === 'number') customers[idx].deviceLimit = deviceLimit;
   customers[idx].updatedAt = nowIso();
   writeCustomers(customers);

@@ -110,6 +110,9 @@ interface Customer {
   companyName: string;
   contactEmail: string;
   contactName: string;
+  contactPhone?: string;
+  address?: string;
+  notes?: string;
   plan: 'BASIC' | 'PRO' | 'ENT';
   status: 'active' | 'suspended' | 'expired';
   deviceLimit: number;
@@ -759,6 +762,9 @@ app.post('/api/admin/customers', authRequired, async (c) => {
     companyName: String(companyName).slice(0, 200),
     contactEmail: String(contactEmail).slice(0, 200),
     contactName: String(contactName || '').slice(0, 200),
+    contactPhone: String((body as any).contactPhone || '').slice(0, 50),
+    address: String((body as any).address || '').slice(0, 500),
+    notes: String((body as any).notes || '').slice(0, 2000),
     plan: (plan as any) || 'BASIC',
     status: 'active',
     deviceLimit: Number(deviceLimit) || 0,
@@ -785,6 +791,9 @@ app.patch('/api/admin/customers/:id', authRequired, async (c) => {
     ...(patch.companyName ? { companyName: String(patch.companyName).slice(0, 200) } : {}),
     ...(patch.contactName ? { contactName: patch.contactName } : {}),
     ...(patch.contactEmail ? { contactEmail: patch.contactEmail } : {}),
+    ...(typeof (patch as any).contactPhone === 'string' ? { contactPhone: String((patch as any).contactPhone).slice(0, 50) } : {}),
+    ...(typeof (patch as any).address === 'string' ? { address: String((patch as any).address).slice(0, 500) } : {}),
+    ...(typeof (patch as any).notes === 'string' ? { notes: String((patch as any).notes).slice(0, 2000) } : {}),
     ...(typeof patch.deviceLimit === 'number' ? { deviceLimit: patch.deviceLimit } : {}),
     ...(typeof (patch as any).offlineMode === 'boolean' ? { offlineMode: (patch as any).offlineMode } : {}),
     updatedAt: nowIso(),
@@ -815,6 +824,10 @@ app.get('/api/admin/licenses', authRequired, async (c) => {
       customerId: cust.id,
       customerName: cust.companyName,
       customerEmail: cust.contactEmail,
+      contactName: cust.contactName || '',
+      contactPhone: cust.contactPhone || '',
+      address: cust.address || '',
+      notes: cust.notes || '',
       licenseKey: cust.licenseKey,
       plan: PLAN_TO_UI[cust.plan] || 'starter',
       planRaw: cust.plan,

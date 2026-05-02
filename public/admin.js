@@ -90,10 +90,14 @@ function planBadge(plan) {
 
 function customerRow(c) {
   const tr = document.createElement('tr');
+  const phone = c.contactPhone
+    ? `<a href="tel:${esc(c.contactPhone)}" style="color:#2563eb;text-decoration:none;">${esc(c.contactPhone)}</a>`
+    : '<span style="color:#64748b">-</span>';
   tr.innerHTML = `
-    <td><strong>${esc(c.companyName)}</strong></td>
+    <td><strong>${esc(c.companyName)}</strong>${c.address ? `<br><small style="color:#64748b">${esc(c.address)}</small>` : ''}</td>
     <td>${esc(c.contactName || '-')}</td>
-    <td>${esc(c.contactEmail)}</td>
+    <td><a href="mailto:${esc(c.contactEmail)}" style="color:#2563eb;text-decoration:none;">${esc(c.contactEmail)}</a></td>
+    <td>${phone}</td>
     <td>${planBadge(c.plan)}</td>
     <td>${statusBadge(c.status)}</td>
     <td><code>${esc(c.licenseKey)}</code></td>
@@ -180,6 +184,9 @@ function openAddModal() {
   document.getElementById('mCompany').value = '';
   document.getElementById('mContact').value = '';
   document.getElementById('mEmail').value = '';
+  document.getElementById('mPhone').value = '';
+  document.getElementById('mAddress').value = '';
+  document.getElementById('mNotes').value = '';
   customerModal.classList.remove('hidden');
 }
 
@@ -191,6 +198,9 @@ function openEditModal(id) {
   document.getElementById('mCompany').value = c.companyName;
   document.getElementById('mContact').value = c.contactName || '';
   document.getElementById('mEmail').value = c.contactEmail;
+  document.getElementById('mPhone').value = c.contactPhone || '';
+  document.getElementById('mAddress').value = c.address || '';
+  document.getElementById('mNotes').value = c.notes || '';
   customerModal.classList.remove('hidden');
 }
 
@@ -206,6 +216,9 @@ customerForm.addEventListener('submit', async (e) => {
     companyName: document.getElementById('mCompany').value.trim(),
     contactName: document.getElementById('mContact').value.trim(),
     contactEmail: document.getElementById('mEmail').value.trim(),
+    contactPhone: document.getElementById('mPhone').value.trim(),
+    address: document.getElementById('mAddress').value.trim(),
+    notes: document.getElementById('mNotes').value.trim(),
   };
   try {
     if (editId) {
@@ -410,8 +423,14 @@ function licenseRow(l) {
     ? `<span class="badge badge-green" style="font-size:10px;">${l.activations.length} aktif</span>`
     : '<span style="color:#64748b;font-size:12px;">Yok</span>';
   const validDate = l.validUntil ? new Date(l.validUntil).toLocaleDateString('tr-TR') : '-';
+  const contactLines = [];
+  if (l.contactName) contactLines.push(`<strong>${esc(l.contactName)}</strong>`);
+  contactLines.push(`<a href="mailto:${esc(l.customerEmail)}" style="color:#2563eb;text-decoration:none;">${esc(l.customerEmail)}</a>`);
+  if (l.contactPhone) contactLines.push(`<a href="tel:${esc(l.contactPhone)}" style="color:#16a34a;text-decoration:none;">${esc(l.contactPhone)}</a>`);
+  const contactHtml = contactLines.join('<br>');
   tr.innerHTML = `
-    <td><strong>${esc(l.customerName)}</strong><br><small style="color:#64748b">${esc(l.customerEmail)}</small></td>
+    <td><strong>${esc(l.customerName)}</strong>${l.address ? `<br><small style="color:#64748b">${esc(l.address)}</small>` : ''}</td>
+    <td style="font-size:12px;line-height:1.6;">${contactHtml}</td>
     <td><code style="font-size:11px;">${esc(l.licenseKey)}</code></td>
     <td>${licPlanBadge(l.plan)}</td>
     <td>${modulesList(l.modules)}</td>
