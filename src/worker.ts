@@ -116,6 +116,13 @@ interface Customer {
   expiresAt: string;
   createdAt: string;
   updatedAt: string;
+  /** Air-gap / offline customer (BDDK, military, etc). 365-day grace. */
+  offlineMode?: boolean;
+  /**
+   * Monotonic license version (epoch ms) — bumped on every admin change.
+   * Clients poll GET /v1/license/version and only call /verify when version differs.
+   */
+  licenseVersion?: number;
 }
 
 interface Demo {
@@ -268,10 +275,43 @@ function activeActivations(list: Activation[]): Activation[] {
 function defaultModulesFor(env: Env, plan: string): string[] {
   try {
     const m = JSON.parse(env.LICENSE_PLAN_MODULES || '{}');
-    return m[plan] || m.BASIC || ['core'];
+    return m[plan] || m.BASIC || ['network_monitoring'];
   } catch {
-    return ['core'];
+    return ['network_monitoring'];
   }
+}
+
+/**
+ * Canonical 6-module taxonomy + legacy alias expansion.
+ * Mirrors apps/web/src/lib/modules.ts so portal-issued licenses use the
+ * same module IDs the customer's NMS expects.
+ */
+const ALL_MODULES = [
+  'network_monitoring',
+  'config_change',
+  'automation',
+  'security_compliance',
+  'infrastructure',
+  'tools_reports',
+] as const;
+
+const LEGACY_MODULE_ALIASES: Record<string, typeof ALL_MODULES[number]> = {
+  config_backup: 'config_change',
+  config_audit: 'security_compliance',
+  virtualization: 'infrastructure',
+  reports: 'tools_reports',
+  netflow: 'network_monitoring',
+  // Drop the historical 'core' marker — every license implicitly has core.
+};
+
+function expandModules(raw: readonly string[] | null | undefined): string[] {
+  if (!raw || raw.length === 0) return [];
+  const set = new Set<string>();
+  for (const id of raw) {
+    if ((ALL_MODULES as readonly string[]).includes(id)) set.add(id);
+    else if (LEGACY_MODULE_ALIASES[id]) set.add(LEGACY_MODULE_ALIASES[id]);
+  }
+  return ALL_MODULES.filter(m => set.has(m));
 }
 
 function latestForPlatform(m: Manifest, platform: string): Release | null {
@@ -725,6 +765,8 @@ app.post('/api/admin/customers', authRequired, async (c) => {
     expiresAt: expiresAt || '',
     createdAt: nowIso(),
     updatedAt: nowIso(),
+    offlineMode: Boolean((body as any).offlineMode) || false,
+    licenseVersion: Date.now(),
   };
   await saveCustomer(c.env.PORTAL_KV, item);
   return c.json(item, 201);
@@ -743,7 +785,9 @@ app.patch('/api/admin/customers/:id', authRequired, async (c) => {
     ...(patch.contactName ? { contactName: patch.contactName } : {}),
     ...(patch.contactEmail ? { contactEmail: patch.contactEmail } : {}),
     ...(typeof patch.deviceLimit === 'number' ? { deviceLimit: patch.deviceLimit } : {}),
+    ...(typeof (patch as any).offlineMode === 'boolean' ? { offlineMode: (patch as any).offlineMode } : {}),
     updatedAt: nowIso(),
+    licenseVersion: Date.now(),
   };
   await saveCustomer(c.env.PORTAL_KV, updated);
   return c.json(updated);
@@ -833,10 +877,13 @@ app.patch('/api/admin/licenses/:id', authRequired, async (c) => {
   }
   if (typeof patch.maxDevices === 'number') updated.deviceLimit = patch.maxDevices;
   if (typeof patch.validUntil === 'string') updated.expiresAt = patch.validUntil;
+  if (typeof (patch as any).offlineMode === 'boolean') updated.offlineMode = (patch as any).offlineMode;
+  // Bump license version so client polling picks up changes within minutes.
+  updated.licenseVersion = Date.now();
   await saveCustomer(c.env.PORTAL_KV, updated);
 
   const meta = await getLicenseMeta(c.env.PORTAL_KV, id);
-  if (Array.isArray(patch.modules)) meta.modules = patch.modules.slice(0, 50);
+  if (Array.isArray(patch.modules)) meta.modules = expandModules(patch.modules.slice(0, 50));
   if (typeof patch.maxUsers === 'number') meta.maxUsers = patch.maxUsers;
   await setLicenseMeta(c.env.PORTAL_KV, id, meta);
 
@@ -899,9 +946,11 @@ async function verifyLicenseCommon(
     return c.json({ valid: false, status: 'expired' });
   }
   const meta = await getLicenseMeta(c.env.PORTAL_KV, customer.id);
-  const modules = meta.modules && meta.modules.length
-    ? meta.modules
-    : defaultModulesFor(c.env, customer.plan);
+  const modules = expandModules(
+    meta.modules && meta.modules.length
+      ? meta.modules
+      : defaultModulesFor(c.env, customer.plan)
+  );
 
   if (activation && activation.fingerprint) {
     const ip = c.req.header('cf-connecting-ip') || c.req.header('x-forwarded-for') || '';
@@ -972,9 +1021,11 @@ async function v1LicenseResponse(
   const meta = await getLicenseMeta(c.env.PORTAL_KV, customer.id);
   const modules =
     !valid ? [] :
-    (meta.modules && meta.modules.length
-      ? meta.modules
-      : defaultModulesFor(c.env, customer.plan));
+    expandModules(
+      meta.modules && meta.modules.length
+        ? meta.modules
+        : defaultModulesFor(c.env, customer.plan)
+    );
 
   // Activation kaydı — instanceId'yi fingerprint olarak kullan
   const instanceId = instanceIdIn || crypto.randomUUID();
@@ -989,6 +1040,11 @@ async function v1LicenseResponse(
     ip: String(ip).slice(0, 64),
   });
 
+  // Online customers: 1-day grace (network glitch tolerance).
+  // Offline / air-gap customers: 365-day grace (no internet by design).
+  const offlineMode = Boolean(customer.offlineMode);
+  const gracePeriodDays = offlineMode ? 365 : 1;
+
   return c.json({
     valid,
     licenseId: customer.id,
@@ -998,11 +1054,35 @@ async function v1LicenseResponse(
     maxDevices: customer.deviceLimit || 0,
     maxUsers: meta.maxUsers || 0,
     expiresAt: customer.expiresAt || null,
-    gracePeriodDays: 30,
+    gracePeriodDays,
+    offlineMode,
+    licenseVersion: customer.licenseVersion || new Date(customer.updatedAt || customer.createdAt).getTime(),
     suspended,
     expired,
   });
 }
+
+/**
+ * Lightweight version probe \u2014 clients call every ~5 minutes.
+ * Returns ~80 bytes; only triggers full /verify when version changes.
+ */
+app.get('/v1/license/version', async (c) => {
+  const key = c.req.query('licenseKey') || c.req.query('key') || '';
+  if (!key) return c.json({ error: 'licenseKey required' }, 400);
+  const customer = await findCustomerByKey(c.env.PORTAL_KV, key);
+  if (!customer) return c.json({ error: 'license not found' }, 404);
+  const version = customer.licenseVersion || new Date(customer.updatedAt || customer.createdAt).getTime();
+  // Short cache so KV read pressure stays low even with many clients.
+  c.header('Cache-Control', 'public, max-age=30');
+  return c.json({
+    licenseVersion: version,
+    status: customer.status,
+    suspended: customer.status === 'suspended',
+    expired:
+      customer.status === 'expired' ||
+      (customer.expiresAt ? new Date(customer.expiresAt) < new Date() : false),
+  });
+});
 
 app.post('/v1/license/activate', async (c) => {
   const body = await parseJson<{

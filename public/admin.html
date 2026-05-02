@@ -313,13 +313,13 @@
 
     <!-- License Edit Modal -->
     <div id="licenseModal" class="modal-overlay hidden">
-      <div class="modal" style="max-width:520px;">
-        <h3>Lisans Duzenle</h3>
+      <div class="modal" style="max-width:560px;">
+        <h3>Lisans Düzenle</h3>
         <form id="licenseForm">
           <input type="hidden" id="licEditId" />
           <div class="form-inline">
             <div class="form-group">
-              <label>Musteri Adi</label>
+              <label>Müşteri Adı</label>
               <input type="text" id="licCustomerName" readonly style="opacity:.6" />
             </div>
             <div class="form-group">
@@ -340,7 +340,7 @@
               <label>Durum</label>
               <select id="licStatus">
                 <option value="active">Aktif</option>
-                <option value="suspended">Askida</option>
+                <option value="suspended">Askıda</option>
               </select>
             </div>
           </div>
@@ -350,39 +350,39 @@
               <input type="number" id="licMaxDevices" min="1" />
             </div>
             <div class="form-group">
-              <label>Maks Kullanici</label>
+              <label>Maks Kullanıcı</label>
               <input type="number" id="licMaxUsers" min="1" />
             </div>
           </div>
           <div class="form-group">
-            <label>Moduller</label>
-            <div id="licModules" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
-              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
-                <input type="checkbox" value="security_compliance" /> Security &amp; Compliance
+            <label>Müdül Paketi</label>
+            <div id="licModules" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px;margin-top:6px;">
+              <label class="lic-mod" title="Topoloji, NetFlow, Latency, Syslog, SNMP Traps, Live Monitoring">
+                <input type="checkbox" value="network_monitoring" /> Ağ Gözlemi
               </label>
-              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
-                <input type="checkbox" value="config_audit" /> Config Audit
+              <label class="lic-mod" title="Config yedekleme, builder, audit, change management">
+                <input type="checkbox" value="config_change" /> Konfigürasyon &amp; Değişiklik
               </label>
-              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
-                <input type="checkbox" value="config_backup" /> Config Backup
+              <label class="lic-mod" title="Ansible motoru, envanter, kimlik kasası, iş şablonları">
+                <input type="checkbox" value="automation" /> Otomasyon
               </label>
-              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
-                <input type="checkbox" value="automation" /> Automation
+              <label class="lic-mod" title="SSL/Domain, SCAP taramaları, uyumluluk denetimleri">
+                <input type="checkbox" value="security_compliance" /> Güvenlik &amp; Uyumluluk
               </label>
-              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
-                <input type="checkbox" value="netflow" /> NetFlow
+              <label class="lic-mod" title="vCenter, IPAM, Agent yönetimi, Firmware">
+                <input type="checkbox" value="infrastructure" /> Altyapı Yönetimi
               </label>
-              <label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;">
-                <input type="checkbox" value="reports" /> Reports
+              <label class="lic-mod" title="SSH konsolu, network araçları, API dokümanları, raporlar">
+                <input type="checkbox" value="tools_reports" /> Araçlar &amp; Raporlar
               </label>
             </div>
           </div>
           <div class="form-group">
-            <label>Gecerlilik Tarihi</label>
+            <label>Geçerlilik Tarihi</label>
             <input type="date" id="licValidUntil" />
           </div>
           <div class="modal-actions">
-            <button type="button" class="btn btn-outline" id="cancelLicenseModal">Iptal</button>
+            <button type="button" class="btn btn-outline" id="cancelLicenseModal">İptal</button>
             <button type="submit" class="btn">Kaydet</button>
           </div>
         </form>

@@ -40,11 +40,11 @@
 
   "vars": {
     "PUBLIC_R2_BASE": "https://updates.tiginer.com",
-    // Paket modülleri — Good/Better/Best modeli
-    //   BASIC : Küçük ekipler için temel ağ izleme
-    //   PRO   : IT operasyonları için tam gözlem + config + otomasyon
-    //   ENT   : Kurumsal uyumluluk + sanallaştırma + gelişmiş raporlama
-    "LICENSE_PLAN_MODULES": "{\"BASIC\":[\"core\"],\"PRO\":[\"core\",\"config_backup\",\"config_audit\",\"automation\",\"netflow\"],\"ENT\":[\"core\",\"config_backup\",\"config_audit\",\"automation\",\"netflow\",\"security_compliance\",\"virtualization\",\"reports\"]}"
+    // Paket modülleri — Good/Better/Best modeli (6 modul taksonomisi)
+    //   BASIC : Küçük ekipler için temel ağ gözlemi
+    //   PRO   : IT operasyonları için gözlem + config + otomasyon + güvenlik
+    //   ENT   : Kurumsal tüm modul paketi (altyapı + araçlar/raporlar dahil)
+    "LICENSE_PLAN_MODULES": "{\"BASIC\":[\"network_monitoring\"],\"PRO\":[\"network_monitoring\",\"config_change\",\"automation\",\"security_compliance\"],\"ENT\":[\"network_monitoring\",\"config_change\",\"automation\",\"security_compliance\",\"infrastructure\",\"tools_reports\"]}"
   },
 
   "routes": [

@@ -352,9 +352,9 @@ app.get('/api/license/verify', (req, res) => {
   }
 
   const planModules = {
-    BASIC: ['core'],
-    PRO: ['core', 'automation', 'config_backup', 'config_audit'],
-    ENT: ['core', 'automation', 'config_backup', 'config_audit', 'security_compliance', 'netflow', 'reports'],
+    BASIC: ['network_monitoring'],
+    PRO: ['network_monitoring', 'config_change', 'automation', 'security_compliance'],
+    ENT: ['network_monitoring', 'config_change', 'automation', 'security_compliance', 'infrastructure', 'tools_reports'],
   };
   return res.json({
     valid: true,

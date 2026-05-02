@@ -365,7 +365,25 @@ function licPlanBadge(plan) {
 
 function modulesList(modules) {
   if (!modules || !modules.length) return '<span style="color:#64748b">-</span>';
-  return modules.map(m => `<span class="badge badge-gray" style="font-size:10px;padding:2px 6px;">${esc(m)}</span>`).join(' ');
+  // Canonical 6-module taxonomy + legacy aliases → Turkish short labels.
+  const labels = {
+    network_monitoring: 'Ağ Gözlemi',
+    config_change: 'Konfig & Değişiklik',
+    automation: 'Otomasyon',
+    security_compliance: 'Güvenlik & Uyum',
+    infrastructure: 'Altyapı',
+    tools_reports: 'Araçlar & Raporlar',
+    // Legacy fallback labels (until DB migration runs)
+    config_backup: 'Konfig Yedek (eski)',
+    config_audit: 'Konfig Audit (eski)',
+    virtualization: 'Sanallaştırma (eski)',
+    netflow: 'NetFlow (eski)',
+    reports: 'Raporlar (eski)',
+    core: 'Çekirdek (eski)',
+  };
+  return modules
+    .map(m => `<span class="badge badge-gray" style="font-size:10px;padding:2px 6px;">${esc(labels[m] || m)}</span>`)
+    .join(' ');
 }
 
 function licenseRow(l) {
@@ -384,7 +402,7 @@ function licenseRow(l) {
     <td>${validDate}</td>
     <td>${activationInfo}</td>
     <td>
-      <button class="btn btn-sm btn-outline" data-lic-action="edit" data-id="${l.id}">Duzenle</button>
+      <button class="btn btn-sm btn-outline" data-lic-action="edit" data-id="${l.id}">Düzenle</button>
     </td>
   `;
   return tr;
@@ -474,7 +492,7 @@ licenseForm.addEventListener('submit', async (e) => {
     await api(`/api/admin/licenses/${id}`, { method: 'PATCH', body: JSON.stringify(payload) });
     licenseModal.classList.add('hidden');
     await loadLicenses();
-    alert('Lisans guncellendi! NMS anlik olarak yeni lisans bilgilerini aldi.');
+    alert('Lisans güncellendi! NMS anlık olarak yeni lisans bilgilerini aldı.');
   } catch (err) {
     alert('Hata: ' + err.message);
   }
