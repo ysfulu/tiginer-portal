@@ -83,8 +83,9 @@ function statusBadge(status) {
 }
 
 function planBadge(plan) {
-  const map = { BASIC: 'badge-gray', PRO: 'badge-blue', ENT: 'badge-blue' };
-  return `<span class="badge ${map[plan] || 'badge-gray'}">${plan}</span>`;
+  const map = { BASIC: ['BASIC', 'badge-gray'], PRO: ['PRO', 'badge-blue'], ENT: ['ENTERPRISE', 'badge-blue'] };
+  const [label, cls] = map[plan] || [plan, 'badge-gray'];
+  return `<span class="badge ${cls}">${label}</span>`;
 }
 
 function customerRow(c) {
@@ -179,9 +180,6 @@ function openAddModal() {
   document.getElementById('mCompany').value = '';
   document.getElementById('mContact').value = '';
   document.getElementById('mEmail').value = '';
-  document.getElementById('mPlan').value = 'BASIC';
-  document.getElementById('mExpires').value = '';
-  document.getElementById('mDeviceLimit').value = '0';
   customerModal.classList.remove('hidden');
 }
 
@@ -193,9 +191,6 @@ function openEditModal(id) {
   document.getElementById('mCompany').value = c.companyName;
   document.getElementById('mContact').value = c.contactName || '';
   document.getElementById('mEmail').value = c.contactEmail;
-  document.getElementById('mPlan').value = c.plan;
-  document.getElementById('mExpires').value = c.expiresAt ? c.expiresAt.split('T')[0] : '';
-  document.getElementById('mDeviceLimit').value = c.deviceLimit || 0;
   customerModal.classList.remove('hidden');
 }
 
@@ -211,9 +206,6 @@ customerForm.addEventListener('submit', async (e) => {
     companyName: document.getElementById('mCompany').value.trim(),
     contactName: document.getElementById('mContact').value.trim(),
     contactEmail: document.getElementById('mEmail').value.trim(),
-    plan: document.getElementById('mPlan').value,
-    expiresAt: document.getElementById('mExpires').value,
-    deviceLimit: Number(document.getElementById('mDeviceLimit').value) || 0,
   };
   try {
     if (editId) {
@@ -357,9 +349,35 @@ const cancelLicenseModal = document.getElementById('cancelLicenseModal');
 
 let allLicenses = [];
 
+// Canonical plan → modules. Mirrors LICENSE_PLAN_MODULES on the worker.
+const PLAN_MODULES = {
+  BASIC: ['network_monitoring'],
+  PRO: ['network_monitoring', 'config_change', 'automation'],
+  ENT: ['network_monitoring', 'config_change', 'automation', 'security_compliance', 'infrastructure', 'tools_reports'],
+};
+
+// Backend may return either canonical (BASIC/PRO/ENT) or legacy (starter/professional/enterprise) codes.
+function normalizePlanCode(p) {
+  const s = String(p || '').toUpperCase();
+  if (s === 'STARTER') return 'BASIC';
+  if (s === 'PROFESSIONAL') return 'PRO';
+  if (s === 'ENTERPRISE') return 'ENT';
+  if (['BASIC', 'PRO', 'ENT'].includes(s)) return s;
+  return 'BASIC';
+}
+
+function sameModuleSet(a, b) {
+  const sa = new Set(a || []);
+  const sb = new Set(b || []);
+  if (sa.size !== sb.size) return false;
+  for (const x of sa) if (!sb.has(x)) return false;
+  return true;
+}
+
 function licPlanBadge(plan) {
-  const map = { starter: ['STARTER', 'badge-gray'], professional: ['PRO', 'badge-blue'], enterprise: ['ENT', 'badge-blue'] };
-  const [label, cls] = map[plan] || [plan, 'badge-gray'];
+  const code = normalizePlanCode(plan);
+  const map = { BASIC: ['BASIC', 'badge-gray'], PRO: ['PRO', 'badge-blue'], ENT: ['ENTERPRISE', 'badge-blue'] };
+  const [label, cls] = map[code] || [code, 'badge-gray'];
   return `<span class="badge ${cls}">${label}</span>`;
 }
 
@@ -459,17 +477,54 @@ function openLicenseEditModal(id) {
   document.getElementById('licEditId').value = l.id;
   document.getElementById('licCustomerName').value = l.customerName || '';
   document.getElementById('licCustomerEmail').value = l.customerEmail || '';
-  document.getElementById('licPlan').value = l.plan || 'starter';
+  const planCode = normalizePlanCode(l.plan);
+  document.getElementById('licPlan').value = planCode;
   document.getElementById('licStatus').value = l.status || 'active';
   document.getElementById('licMaxDevices').value = l.maxDevices || 50;
   document.getElementById('licMaxUsers').value = l.maxUsers || 3;
   document.getElementById('licValidUntil').value = l.validUntil ? l.validUntil.split('T')[0] : '';
-  // Set module checkboxes
-  const mods = l.modules || [];
+  // Set module checkboxes from saved modules (or plan defaults if empty).
+  const saved = (l.modules && l.modules.length) ? l.modules : PLAN_MODULES[planCode];
   document.querySelectorAll('#licModules input[type="checkbox"]').forEach(cb => {
-    cb.checked = mods.includes(cb.value);
+    cb.checked = saved.includes(cb.value);
   });
+  refreshModeBadge();
   licenseModal.classList.remove('hidden');
+}
+
+// Auto-fill modules whenever plan changes.
+document.getElementById('licPlan').addEventListener('change', (e) => {
+  const planCode = normalizePlanCode(e.target.value);
+  const target = PLAN_MODULES[planCode] || [];
+  document.querySelectorAll('#licModules input[type="checkbox"]').forEach(cb => {
+    cb.checked = target.includes(cb.value);
+  });
+  refreshModeBadge();
+});
+
+// Mark badge as "Özel" if the user manually customizes modules off the plan default.
+document.querySelectorAll('#licModules input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', refreshModeBadge);
+});
+
+function currentSelectedModules() {
+  const out = [];
+  document.querySelectorAll('#licModules input[type="checkbox"]:checked').forEach(cb => out.push(cb.value));
+  return out;
+}
+
+function refreshModeBadge() {
+  const badge = document.getElementById('licModeBadge');
+  if (!badge) return;
+  const planCode = normalizePlanCode(document.getElementById('licPlan').value);
+  const selected = currentSelectedModules();
+  if (sameModuleSet(selected, PLAN_MODULES[planCode])) {
+    badge.textContent = '(plana göre otomatik)';
+    badge.style.color = '#64748b';
+  } else {
+    badge.textContent = '(Özel)';
+    badge.style.color = '#d97706';
+  }
 }
 
 cancelLicenseModal.addEventListener('click', () => licenseModal.classList.add('hidden'));
@@ -478,10 +533,9 @@ licenseModal.addEventListener('click', (e) => { if (e.target === licenseModal) l
 licenseForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const id = document.getElementById('licEditId').value;
-  const modules = [];
-  document.querySelectorAll('#licModules input[type="checkbox"]:checked').forEach(cb => modules.push(cb.value));
+  const modules = currentSelectedModules();
   const payload = {
-    plan: document.getElementById('licPlan').value,
+    plan: normalizePlanCode(document.getElementById('licPlan').value),
     status: document.getElementById('licStatus').value,
     maxDevices: Number(document.getElementById('licMaxDevices').value) || 50,
     maxUsers: Number(document.getElementById('licMaxUsers').value) || 3,

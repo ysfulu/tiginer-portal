@@ -44,7 +44,7 @@
     //   BASIC : Küçük ekipler için temel ağ gözlemi
     //   PRO   : IT operasyonları için gözlem + config + otomasyon + güvenlik
     //   ENT   : Kurumsal tüm modul paketi (altyapı + araçlar/raporlar dahil)
-    "LICENSE_PLAN_MODULES": "{\"BASIC\":[\"network_monitoring\"],\"PRO\":[\"network_monitoring\",\"config_change\",\"automation\",\"security_compliance\"],\"ENT\":[\"network_monitoring\",\"config_change\",\"automation\",\"security_compliance\",\"infrastructure\",\"tools_reports\"]}"
+    "LICENSE_PLAN_MODULES": "{\"BASIC\":[\"network_monitoring\"],\"PRO\":[\"network_monitoring\",\"config_change\",\"automation\"],\"ENT\":[\"network_monitoring\",\"config_change\",\"automation\",\"security_compliance\",\"infrastructure\",\"tools_reports\"]}"
   },
 
   "routes": [

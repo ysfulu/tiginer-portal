@@ -263,30 +263,14 @@
               <input type="text" id="mContact" maxlength="200" />
             </div>
           </div>
-          <div class="form-inline">
-            <div class="form-group">
-              <label>E-posta *</label>
-              <input type="email" id="mEmail" required maxlength="200" />
-            </div>
-            <div class="form-group">
-              <label>Paket</label>
-              <select id="mPlan">
-                <option value="BASIC">BASIC</option>
-                <option value="PRO">PRO</option>
-                <option value="ENT">ENTERPRISE</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label>E-posta *</label>
+            <input type="email" id="mEmail" required maxlength="200" />
           </div>
-          <div class="form-inline">
-            <div class="form-group">
-              <label>Bitis Tarihi</label>
-              <input type="date" id="mExpires" />
-            </div>
-            <div class="form-group">
-              <label>Cihaz Limiti</label>
-              <input type="number" id="mDeviceLimit" min="0" value="0" />
-            </div>
-          </div>
+          <p style="margin:4px 0 14px;font-size:12px;color:#64748b;line-height:1.5;">
+            <strong>Not:</strong> Paket, mod&uuml;ller, cihaz/kullan&#305;c&#305; limitleri ve ge&ccedil;erlilik tarihi
+            <em>Lisans Y&ouml;netimi</em> sekmesinden d&uuml;zenlenir. Burada yaln&#305;zca firma ileti&#351;im bilgilerini g&uuml;ncelleyebilirsiniz.
+          </p>
           <div class="modal-actions">
             <button type="button" class="btn btn-outline" id="cancelModal">Iptal</button>
             <button type="submit" class="btn">Kaydet</button>
@@ -331,9 +315,9 @@
             <div class="form-group">
               <label>Plan</label>
               <select id="licPlan">
-                <option value="starter">STARTER</option>
-                <option value="professional">PROFESSIONAL</option>
-                <option value="enterprise">ENTERPRISE</option>
+                <option value="BASIC">BASIC — Temel + Ağ Gözlemi</option>
+                <option value="PRO">PRO — + Konfigürasyon &amp; Otomasyon</option>
+                <option value="ENT">ENTERPRISE — Tüm Modüller</option>
               </select>
             </div>
             <div class="form-group">
@@ -355,7 +339,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Müdül Paketi</label>
+            <label>Modül Paketi <span id="licModeBadge" style="font-size:11px;color:#64748b;font-weight:normal;">(plana göre otomatik)</span></label>
+            <p style="margin:4px 0 8px;font-size:12px;color:#64748b;">Plan seçtiğinizde modüller otomatik ayarlanır. Manuel onay/iptal yapabilirsiniz; bu durumda paket <strong>Özel</strong> olarak kaydedilir.</p>
             <div id="licModules" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px;margin-top:6px;">
               <label class="lic-mod" title="Topoloji, NetFlow, Latency, Syslog, SNMP Traps, Live Monitoring">
                 <input type="checkbox" value="network_monitoring" /> Ağ Gözlemi

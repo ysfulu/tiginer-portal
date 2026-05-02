@@ -353,7 +353,7 @@ app.get('/api/license/verify', (req, res) => {
 
   const planModules = {
     BASIC: ['network_monitoring'],
-    PRO: ['network_monitoring', 'config_change', 'automation', 'security_compliance'],
+    PRO: ['network_monitoring', 'config_change', 'automation'],
     ENT: ['network_monitoring', 'config_change', 'automation', 'security_compliance', 'infrastructure', 'tools_reports'],
   };
   return res.json({

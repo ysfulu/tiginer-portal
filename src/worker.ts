@@ -782,6 +782,7 @@ app.patch('/api/admin/customers/:id', authRequired, async (c) => {
     ...(patch.plan ? { plan: patch.plan } : {}),
     ...(patch.status ? { status: patch.status } : {}),
     ...(typeof patch.expiresAt === 'string' ? { expiresAt: patch.expiresAt } : {}),
+    ...(patch.companyName ? { companyName: String(patch.companyName).slice(0, 200) } : {}),
     ...(patch.contactName ? { contactName: patch.contactName } : {}),
     ...(patch.contactEmail ? { contactEmail: patch.contactEmail } : {}),
     ...(typeof patch.deviceLimit === 'number' ? { deviceLimit: patch.deviceLimit } : {}),
