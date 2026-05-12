@@ -32,10 +32,12 @@
         </a>
         <div class="nav-links">
           <a href="/#ozellikler" data-i18n="nav_features">Özellikler</a>
+          <a href="/#cozumler" data-i18n="nav_solutions">Çözümler</a>
           <a href="/#paketler" data-i18n="nav_packages">Paketler</a>
+          <a href="/download" class="active" data-i18n="nav_download">İndir</a>
+          <a href="/#sistem" data-i18n="nav_requirements">Sistem</a>
           <a href="/demo" class="btn btn-sm" data-i18n="nav_demo">Demo Talep Et</a>
-          <a href="/download" class="btn btn-sm btn-outline" data-i18n="nav_download">İndir</a>
-          <div class="lang-switch">
+          <div class="lang-switch" aria-label="Language selector">
             <button class="lang-btn active" data-lang="tr">TR</button>
             <button class="lang-btn" data-lang="en">EN</button>
           </div>
@@ -57,71 +59,53 @@
     <section class="section" style="padding-top:0">
       <div class="container">
         <!-- ONE-LINER INSTALL -->
-        <div style="background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(59,130,246,.08));border:1px solid rgba(52,211,153,.25);border-radius:16px;padding:36px;margin-bottom:32px;backdrop-filter:blur(8px);">
-          <h2 style="text-align:center;color:#f1f5f9;margin-bottom:8px;">Tek Komutla Kurulum</h2>
-          <p style="text-align:center;color:#94a3b8;margin-bottom:24px;">
-            Sunucuda <strong>tek satır</strong> çalıştırın. Docker yoksa otomatik kurulur,
-            veritabanı başlatılır, admin hesabı oluşturulur.
-          </p>
+        <div class="install-block">
+          <h2>Tek Komutla Kurulum</h2>
+          <p>Sunucuda <strong>tek satır</strong> çalıştırın. Docker yoksa otomatik kurulur, veritabanı başlatılır, admin hesabı oluşturulur.</p>
 
-          <!-- OS Tabs -->
-          <div style="display:flex;justify-content:center;gap:8px;margin-bottom:16px;">
-            <button id="tabLinux" onclick="showOs('linux')" class="os-tab os-tab-active" style="background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.4);color:#34d399;padding:8px 20px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;position:relative;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.05-.214.064-.39.05-.524v-.083a1.135 1.135 0 00-.121-.4c-.1-.2-.222-.3-.382-.335-.16-.06-.32-.045-.5.001-.18.073-.32.16-.45.319l-.002.002a.34.34 0 01-.052.067l-.001.001a1.04 1.04 0 00-.146.193c-.041.065-.072.135-.108.198a.45.45 0 00-.05.075c-.022.05-.022.1-.045.135a.16.16 0 00-.012.046v.21l.005.155a8.5 8.5 0 00.05.605c.014.06.024.123.038.184.013.06.024.123.041.184a3.6 3.6 0 00.06.214l.027.078v.001c-.04.025-.118.05-.169.094a1.45 1.45 0 00-.12.116l-.003.001-.002.003c-.04.05-.082.1-.122.135-.04.029-.065.065-.103.094.04.029.082.052.121.094.04.045.082.073.115.135.04.045.082.094.122.135.04.045.077.094.115.135.04.045.082.073.122.094.04.045.077.073.115.094.04.024.082.045.122.066-.039.094-.157.181-.235.265-.082.066-.16.135-.235.198-.078.066-.156.135-.235.198a.456.456 0 00-.078.04c-.04.024-.078.066-.115.094a.475.475 0 00-.078.067 1.96 1.96 0 00-.156.198c-.04.045-.078.094-.115.135l-.003.001a1.31 1.31 0 00-.078.092 1.07 1.07 0 00-.098.135 1.39 1.39 0 00-.078.135 6.28 6.28 0 00-.235.401 5.59 5.59 0 00-.292.469c-.078.135-.156.265-.214.401-.078.135-.156.265-.214.401-.078.135-.115.265-.156.401-.04.135-.097.265-.115.401-.04.135-.078.265-.097.4-.04.135-.078.265-.097.4l-.003.001a3.04 3.04 0 00-.076.4 3.04 3.04 0 00-.057.4c-.04.135-.078.265-.097.4-.04.135-.078.265-.097.4-.022.135-.063.265-.097.4-.04.135-.057.265-.097.4-.04.135-.064.265-.097.4-.022.135-.064.265-.097.4-.04.135-.057.265-.097.4-.04.135-.057.265-.097.4-.04.135-.064.265-.097.4-.04.135-.057.265-.097.4-.04.135-.057.265-.097.4l1.166-.003c.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4.04-.135.064-.265.097-.4.04-.135.057-.265.097-.4z"/></svg>
+          <div class="os-tabs">
+            <button id="tabLinux" onclick="showOs('linux')" class="os-tab os-tab-active">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1a4 4 0 0 0-4 4c0 1.2.3 1.9.8 2.5C7.6 8.8 7 10 7 12c0 1.3.4 2.5 1 3.5L6.5 18c-.7.9-.5 2.2.5 2.8.6.4 1.4.3 2-.2L11 18.5c.3.1.6.2 1 .2s.7-.1 1-.2l2 2.1c.6.5 1.4.6 2 .2 1-.6 1.2-1.9.5-2.8L16 15.5c.6-1 1-2.2 1-3.5 0-2-.6-3.2-1.8-4.5.5-.6.8-1.3.8-2.5a4 4 0 0 0-4-4z"/></svg>
               Linux
-              <span style="font-size:10px;background:#34d399;color:#0b1120;padding:2px 7px;border-radius:99px;font-weight:800;margin-left:4px;letter-spacing:.3px;">ÖNERİLEN</span>
+              <span class="recommended">ÖNERİLEN</span>
             </button>
-            <button id="tabWindows" onclick="showOs('windows')" class="os-tab" style="background:rgba(51,65,85,.3);border:1px solid rgba(71,85,105,.4);color:#94a3b8;padding:8px 20px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            <button id="tabWindows" onclick="showOs('windows')" class="os-tab">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
               Windows
             </button>
           </div>
 
-          <!-- Linux Command -->
           <div id="osLinux">
-            <div style="background:#0b1120;border:1px solid rgba(71,85,105,.4);border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:14px;overflow-x:auto;">
-              <code id="installCmdLinux" style="color:#34d399;font-size:15px;white-space:nowrap;flex:1;font-family:'Menlo','Consolas',monospace;">sudo bash -c "$(curl -fsSL https://tiginer.com/install.sh)"</code>
-              <button onclick="copyInstall('installCmdLinux', this)" class="btn btn-sm" style="flex-shrink:0;">Kopyala</button>
+            <div class="code-block">
+              <code id="installCmdLinux">sudo bash -c "$(curl -fsSL https://tiginer.com/install.sh)"</code>
+              <button onclick="copyInstall('installCmdLinux', this)" class="btn btn-sm">Kopyala</button>
             </div>
-            <p style="text-align:center;color:#64748b;font-size:13px;margin-top:14px;">
-              Ubuntu 22.04+ · Debian 12+ · RHEL 9+ · Docker otomatik kurulur · Lisans/maliyet yok
-            </p>
+            <p class="install-hint">Ubuntu 22.04+ · Debian 12+ · RHEL 9+ · Docker otomatik kurulur · Ek lisans/maliyet yok</p>
           </div>
 
-          <!-- Windows Command -->
           <div id="osWindows" style="display:none;">
-            <div style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:14px 18px;margin-bottom:14px;color:#fbbf24;font-size:13px;line-height:1.55;">
-              <strong>⚠ Önemli:</strong> Windows Server'da çalışır, ancak <strong>Linux önerilir</strong>. Docker Desktop 250+ çalışan veya 10M$+ ciro olan şirketlerde ücretli lisans gerektirir, daha fazla RAM tüketir (2–4 GB ekstra) ve ilk kurulum genelde restart ister. Türkiye enerji sektöründe yaygın olan <strong>Ubuntu Server / RHEL</strong> ile tek komutla kurulumu tercih edin.
+            <div class="notice">
+              <strong>Önemli:</strong> Windows Server'da çalışır, ancak <strong>Linux önerilir</strong>. Docker Desktop 250+ çalışan veya 10M$+ ciro olan şirketlerde ücretli lisans gerektirir, daha fazla RAM tüketir (2–4 GB ekstra) ve ilk kurulum genelde restart ister. Production için <strong>Ubuntu Server / RHEL</strong> ile tek komutla kurulumu tercih edin.
             </div>
-            <div style="background:#0b1120;border:1px solid rgba(71,85,105,.4);border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:14px;overflow-x:auto;">
-              <code id="installCmdWindows" style="color:#34d399;font-size:14px;white-space:nowrap;flex:1;font-family:'Menlo','Consolas',monospace;">iex ((iwr 'https://tiginer.com/install.ps1').Content)</code>
-              <button onclick="copyInstall('installCmdWindows', this)" class="btn btn-sm" style="flex-shrink:0;">Kopyala</button>
+            <div class="code-block">
+              <code id="installCmdWindows">iex ((iwr 'https://tiginer.com/install.ps1').Content)</code>
+              <button onclick="copyInstall('installCmdWindows', this)" class="btn btn-sm">Kopyala</button>
             </div>
-            <p style="text-align:center;color:#64748b;font-size:13px;margin-top:14px;">
-              Windows Server 2019+ · PowerShell'i <strong>Yönetici olarak</strong> açın · Docker Desktop yoksa otomatik kurulur
-            </p>
+            <p class="install-hint">Windows Server 2019+ · PowerShell'i <strong>Yönetici olarak</strong> açın · Docker Desktop yoksa otomatik kurulur</p>
           </div>
 
-          <p style="text-align:center;color:#64748b;font-size:13px;margin-top:16px;">
-            Kurulumdan sonra servisleri yönetmek için:
-            <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer status</code>
-            ·
-            <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer logs</code>
-            ·
-            <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer update</code>
+          <p class="install-hint" style="margin-top:18px">
+            Kurulumdan sonra: <code class="inline">tiginer status</code> · <code class="inline">tiginer logs</code> · <code class="inline">tiginer update</code>
           </p>
         </div>
 
         <div class="dl-cards">
-          <!-- Docs -->
           <div class="dl-card">
-            <div style="font-size:48px;margin-bottom:12px;">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            </div>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             <h3 data-i18n="dl_docs_title">Kurulum Rehberi</h3>
             <p data-i18n="dl_docs_desc">Adım adım kurulum, SSL yapılandırması, yedekleme ve güncelleme talimatları.</p>
             <a href="/api/download/docs" class="btn btn-outline btn-block" download="Tiginer-Kurulum-Rehberi.md">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               <span data-i18n="dl_docs_btn">Kurulum Dokümanı İndir</span>
             </a>
           </div>
@@ -133,67 +117,58 @@
             <li>Kurulum sırasında girdiğiniz lisans anahtarı portal'da otomatik doğrulanır.</li>
             <li>Script size bir admin e-posta ve şifresi gösterir — ekran çıktısını kaydedin.</li>
             <li>Tarayıcıdan <strong>http://sunucu-ip:3002</strong> adresine gidin ve giriş yapın.</li>
-            <li>Servisi yönetmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">tiginer</code> komutunu kullanın — Linux'ta bash, Windows'ta PowerShell üzerinden aynı komutlar çalışır (<code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer info</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer logs</code>, <code style="background:rgba(51,65,85,.4);padding:2px 8px;border-radius:5px;">tiginer stop</code>).</li>
-            <li>Yeni sürüme geçmek için <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">sudo tiginer update</code> (Linux) veya <code style="background:rgba(51,65,85,.4);padding:3px 10px;border-radius:6px;font-size:13px;">tiginer update</code> (Windows, yönetici PS) yeterli.</li>
+            <li>Servisi yönetmek için <code class="inline">tiginer</code> komutunu kullanın — Linux'ta bash, Windows'ta PowerShell üzerinden aynı komutlar çalışır (<code class="inline">tiginer info</code>, <code class="inline">tiginer logs</code>, <code class="inline">tiginer stop</code>).</li>
+            <li>Yeni sürüme geçmek için <code class="inline">sudo tiginer update</code> (Linux) veya <code class="inline">tiginer update</code> (Windows, yönetici PS) yeterli.</li>
           </ol>
         </div>
 
-        <!-- Security Model -->
-        <div style="background:rgba(15,23,42,.6);border:1px solid rgba(51,65,85,.3);border-radius:16px;padding:36px;margin-top:48px;backdrop-filter:blur(8px);">
-          <h3 style="text-align:center;margin-bottom:20px;color:#f1f5f9;" data-i18n="dl_security_title">Güvenlik &amp; Dağıtım Modeli</h3>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center;">
+        <div class="dl-panel">
+          <h3 data-i18n="dl_security_title">Güvenlik &amp; Dağıtım Modeli</h3>
+          <div class="dl-panel-grid">
             <div>
-              <div style="width:48px;height:48px;margin:0 auto 10px;border-radius:12px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <strong style="display:block;font-size:15px;color:#34d399;" data-i18n="dl_sec_protected">Korunmuş</strong>
-              <span style="color:#94a3b8;font-size:13px;" data-i18n="dl_sec_protected_desc">Kaynak kod pakette yer almaz</span>
+              <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <strong class="title" data-i18n="dl_sec_protected">Korunmuş</strong>
+              <span class="sub" data-i18n="dl_sec_protected_desc">Kaynak kod pakette yer almaz</span>
             </div>
             <div>
-              <div style="width:48px;height:48px;margin:0 auto 10px;border-radius:12px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              </div>
-              <strong style="display:block;font-size:15px;color:#34d399;" data-i18n="dl_sec_encrypted">Şifrelenmiş</strong>
-              <span style="color:#94a3b8;font-size:13px;" data-i18n="dl_sec_encrypted_desc">Obfuscated runtime + native binary</span>
+              <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+              <strong class="title" data-i18n="dl_sec_encrypted">Şifrelenmiş</strong>
+              <span class="sub" data-i18n="dl_sec_encrypted_desc">Obfuscated runtime + native binary</span>
             </div>
             <div>
-              <div style="width:48px;height:48px;margin:0 auto 10px;border-radius:12px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-              </div>
-              <strong style="display:block;font-size:15px;color:#34d399;" data-i18n="dl_sec_licensed">Lisanslı</strong>
-              <span style="color:#94a3b8;font-size:13px;" data-i18n="dl_sec_licensed_desc">Periyodik lisans doğrulaması</span>
+              <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <strong class="title" data-i18n="dl_sec_licensed">Lisanslı</strong>
+              <span class="sub" data-i18n="dl_sec_licensed_desc">Periyodik lisans doğrulaması</span>
             </div>
           </div>
         </div>
 
-        <!-- System Requirements -->
-        <div style="background:rgba(15,23,42,.6);border:1px solid rgba(51,65,85,.3);border-radius:16px;padding:36px;margin-top:24px;backdrop-filter:blur(8px);">
-          <h3 style="text-align:center;margin-bottom:20px;color:#f1f5f9;" data-i18n="dl_req_title">Sistem Gereksinimleri</h3>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;">
+        <div class="dl-panel">
+          <h3 data-i18n="dl_req_title">Sistem Gereksinimleri</h3>
+          <div class="dl-panel-grid">
             <div>
-              <strong style="display:block;font-size:22px;color:#60a5fa;font-weight:800;">2+ Core</strong>
-              <span style="color:#64748b;font-size:13px;" data-i18n="dl_req_cpu">CPU (4+ önerilen)</span>
+              <span class="num">2+ Core</span>
+              <span class="lbl" data-i18n="dl_req_cpu">CPU (4+ önerilen)</span>
             </div>
             <div>
-              <strong style="display:block;font-size:22px;color:#60a5fa;font-weight:800;">4 GB+</strong>
-              <span style="color:#64748b;font-size:13px;" data-i18n="dl_req_ram">RAM (8 GB önerilen)</span>
+              <span class="num">4 GB+</span>
+              <span class="lbl" data-i18n="dl_req_ram">RAM (8 GB önerilen)</span>
             </div>
             <div>
-              <strong style="display:block;font-size:22px;color:#60a5fa;font-weight:800;">20 GB+</strong>
-              <span style="color:#64748b;font-size:13px;" data-i18n="dl_req_disk">Disk (SSD önerilen)</span>
+              <span class="num">20 GB+</span>
+              <span class="lbl" data-i18n="dl_req_disk">Disk (SSD önerilen)</span>
             </div>
             <div>
-              <strong style="display:block;font-size:22px;color:#60a5fa;font-weight:800;">Docker</strong>
-              <span style="color:#64748b;font-size:13px;" data-i18n="dl_req_docker">v24+ Compose v2+</span>
+              <span class="num">Docker</span>
+              <span class="lbl" data-i18n="dl_req_docker">v24+ Compose v2+</span>
             </div>
           </div>
         </div>
 
-        <!-- License CTA -->
-        <div style="text-align:center;margin-top:56px;">
-          <h3 style="color:#f1f5f9;" data-i18n="dl_license_title">Lisans Anahtarı Gerekiyor mu?</h3>
-          <p style="color:#94a3b8;margin:10px 0 24px;" data-i18n="dl_license_sub">Henüz lisansınız yoksa demo talep edin, size özel lisans anahtarı oluşturalım.</p>
-          <a href="/demo" class="btn btn-lg btn-glow" data-i18n="nav_demo">Demo Talep Et</a>
+        <div class="dl-license-cta">
+          <h3 data-i18n="dl_license_title">Lisans Anahtarı Gerekiyor mu?</h3>
+          <p data-i18n="dl_license_sub">Henüz lisansınız yoksa demo talep edin, size özel lisans anahtarı oluşturalım.</p>
+          <a href="/demo" class="btn btn-lg" data-i18n="nav_demo">Demo Talep Et</a>
         </div>
       </div>
     </section>
@@ -228,23 +203,16 @@
         const win   = document.getElementById('osWindows');
         const tabL  = document.getElementById('tabLinux');
         const tabW  = document.getElementById('tabWindows');
-        const activeStyle   = { bg: 'rgba(52,211,153,.15)', border: 'rgba(52,211,153,.4)', color: '#34d399' };
-        const inactiveStyle = { bg: 'rgba(51,65,85,.3)',     border: 'rgba(71,85,105,.4)', color: '#94a3b8' };
-        const apply = (btn, s) => {
-          btn.style.background = s.bg;
-          btn.style.borderColor = s.border;
-          btn.style.color = s.color;
-        };
         if (os === 'windows') {
           linux.style.display = 'none';
           win.style.display = 'block';
-          apply(tabW, activeStyle);
-          apply(tabL, inactiveStyle);
+          tabW.classList.add('os-tab-active');
+          tabL.classList.remove('os-tab-active');
         } else {
           linux.style.display = 'block';
           win.style.display = 'none';
-          apply(tabL, activeStyle);
-          apply(tabW, inactiveStyle);
+          tabL.classList.add('os-tab-active');
+          tabW.classList.remove('os-tab-active');
         }
       }
 
