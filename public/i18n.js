@@ -10,13 +10,20 @@ const TIGINER_I18N = {
     nav_download: 'İndir',
 
     // Hero
-    hero_badge: 'v2.0 — Yeni Nesil Ağ Yönetimi',
-    hero_title_1: 'Ağ Altyapınızı',
-    hero_title_2: 'Uçtan Uca',
-    hero_title_3: ' Kontrol Edin',
-    hero_sub: 'Keşif, izleme, alarm, yapılandırma yedekleme, uyumluluk denetimi ve otomasyon — kurumsal ağ yönetiminin tüm bileşenleri tek bir platformda.',
-    hero_cta_demo: 'Canlı Demo İzle',
-    hero_cta_download: 'Hemen Kur',
+    hero_badge: 'Kurumsal NMS · On-Premises · ISO 27001 Hazır',
+    hero_title_1: 'BT Operasyonlarınız İçin',
+    hero_title_2: 'Tek Kontrol Paneli,',
+    hero_title_3: ' Tam Bağımsızlık',
+    hero_sub: 'Ağ keşfi, gerçek zamanlı izleme, alarm yönetimi, konfigürasyon yedekleme, NetFlow, uyumluluk denetimi ve otomasyon — hepsi kendi veri merkezinizde çalışan tek bir platformda. Bulut bağımlılığı yok, vendor lock-in yok.',
+    hero_cta_demo: 'Pilot Kurulum Talep Edin',
+    hero_cta_download: 'Teknik Dokümantasyon',
+
+    // Hero compliance chips
+    hc_iso: 'ISO 27001 Hazır',
+    hc_kvkk: 'KVKK Uyumlu',
+    hc_onprem: 'On-Premises',
+    hc_airgap: 'Air-gap Destekli',
+    hc_tr: 'Türkiye\'de Geliştirildi',
 
     // Dashboard Mockup
     mock_devices: 'Aktif Cihaz',
@@ -27,12 +34,29 @@ const TIGINER_I18N = {
     mock_cpu: 'CPU Kullanımı',
 
     // Trust bar
-    trust_label: 'Kurumsal müşterilerimizin güvendiği platform',
-    trust_devices: 'Yönetilen Cihaz',
-    trust_uptime: 'Uptime Garantisi',
-    trust_monitoring: 'Kesintisiz İzleme',
-    trust_protocol: 'Güvenli Protokol',
-    trust_setup: 'Kurulum Süresi',
+    trust_label: 'Kurumsal BT ekiplerinin Tiginer\'ı tercih etme nedenleri',
+    trust_devices: 'On-Premises kurulum',
+    trust_uptime: 'Bulut bağımlılığı',
+    trust_monitoring: 'Entegre BT aracı tek panelde',
+    trust_protocol: 'Şifreli yönetim protokolü',
+    trust_setup: 'Yerel ekip · 7/24 destek',
+
+    // Industries
+    ind_badge: 'Sektörler',
+    ind_title: 'Düzenlemeye Tabi Kurumlar İçin Tasarlandı',
+    ind_sub: 'Veri egemenliği, denetlenebilirlik ve operasyonel süreklilik gerektiren sektörlerde kullanıma hazır.',
+    ind_finance: 'Bankacılık & Finans',
+    ind_finance_desc: 'BDDK, PCI-DSS uyumluluk denetimleri, audit log saklama, segregasyon ve sıkı erişim kontrolü.',
+    ind_telecom: 'Telekom & ISP',
+    ind_telecom_desc: 'Binlerce uç cihaz, NetFlow analizi, MPLS/SDH izleme, müşteri SLA raporlaması.',
+    ind_govdef: 'Kamu & Savunma',
+    ind_govdef_desc: 'Air-gap kurulum, KVKK uyumlu veri tutma, yerli & milli ürün uyumluluk gereksinimleri.',
+    ind_health: 'Sağlık',
+    ind_health_desc: 'HBYS/PACS altyapısı 7/24 izleme, hassas veri için on-prem zorunluluğu, hızlı arıza tespiti.',
+    ind_energy: 'Enerji & Endüstri',
+    ind_energy_desc: 'OT/IT yakınsama, SCADA çevresi izleme, segmentasyon doğrulama, kesintisiz operasyon.',
+    ind_edu: 'Eğitim & Araştırma',
+    ind_edu_desc: 'Kampüs ağları, eduroam altyapısı, kullanıcı kotaları ve geniş erişim noktası envanteri.',
 
     // Features
     feat_badge: 'Özellikler',
@@ -111,11 +135,11 @@ const TIGINER_I18N = {
     cta_contact_sales: 'Satış Ekibine Ulaşın',
 
     // CTA
-    cta_title_1: 'Ağ Operasyonlarınızı',
-    cta_title_2: 'Dönüştürmeye',
-    cta_title_3: ' Hazır mısınız?',
-    cta_sub: 'Ücretsiz demo ile Tiginer\'ı keşfedin. Kurulum ve teknik destek ekibimiz yanınızda.',
-    cta_contact: 'Bize Ulaşın',
+    cta_title_1: 'Pilot Ortamınızı',
+    cta_title_2: '30 Dakikada',
+    cta_title_3: ' Kuralım',
+    cta_sub: 'Satış mühendisimizle görüşün; ağınızın boyutuna göre referans mimari, POC planı ve özel teklif hazırlayalım. Bilgileriniz Türkiye\'de saklanır.',
+    cta_contact: 'Satış Mühendisiyle Görüşün',
 
     // Footer
     footer_desc: 'Kurumsal Ağ İzleme ve Yönetim Platformu',
@@ -220,13 +244,20 @@ const TIGINER_I18N = {
     nav_download: 'Download',
 
     // Hero
-    hero_badge: 'v2.0 — Next-Gen Network Management',
-    hero_title_1: 'Take Full Control',
-    hero_title_2: 'End-to-End',
-    hero_title_3: ' of Your Network',
-    hero_sub: 'Discovery, monitoring, alerting, configuration backup, compliance auditing and automation — all components of enterprise network management in one platform.',
-    hero_cta_demo: 'Watch Live Demo',
-    hero_cta_download: 'Install Now',
+    hero_badge: 'Enterprise NMS · On-Premises · ISO 27001 Ready',
+    hero_title_1: 'A Single Pane of Glass',
+    hero_title_2: 'For Your IT Operations,',
+    hero_title_3: ' Full Sovereignty',
+    hero_sub: 'Network discovery, real-time monitoring, alert management, configuration backup, NetFlow, compliance auditing and automation — all on a single platform running in your own data center. No cloud dependency, no vendor lock-in.',
+    hero_cta_demo: 'Request a Pilot Deployment',
+    hero_cta_download: 'Technical Documentation',
+
+    // Hero compliance chips
+    hc_iso: 'ISO 27001 Ready',
+    hc_kvkk: 'GDPR / KVKK Compliant',
+    hc_onprem: 'On-Premises',
+    hc_airgap: 'Air-gap Capable',
+    hc_tr: 'Built in Türkiye',
 
     // Dashboard Mockup
     mock_devices: 'Active Devices',
@@ -237,12 +268,29 @@ const TIGINER_I18N = {
     mock_cpu: 'CPU Usage',
 
     // Trust bar
-    trust_label: 'Trusted by enterprise customers worldwide',
-    trust_devices: 'Managed Devices',
-    trust_uptime: 'Uptime Guarantee',
-    trust_monitoring: 'Non-Stop Monitoring',
-    trust_protocol: 'Secure Protocol',
-    trust_setup: 'Setup Time',
+    trust_label: 'Why enterprise IT teams choose Tiginer',
+    trust_devices: 'On-premises deployment',
+    trust_uptime: 'Cloud dependency',
+    trust_monitoring: 'IT tools consolidated',
+    trust_protocol: 'Encrypted management protocol',
+    trust_setup: 'Local team · 24/7 support',
+
+    // Industries
+    ind_badge: 'Industries',
+    ind_title: 'Designed for Regulated Organizations',
+    ind_sub: 'Ready for industries that demand data sovereignty, auditability and operational continuity.',
+    ind_finance: 'Banking & Finance',
+    ind_finance_desc: 'PCI-DSS / regulatory audits, audit log retention, segregation of duties and strict access controls.',
+    ind_telecom: 'Telecom & ISP',
+    ind_telecom_desc: 'Thousands of edge devices, NetFlow analytics, MPLS/SDH monitoring and customer SLA reporting.',
+    ind_govdef: 'Government & Defense',
+    ind_govdef_desc: 'Air-gapped deployments, KVKK-compliant data retention, sovereign software requirements.',
+    ind_health: 'Healthcare',
+    ind_health_desc: '24/7 monitoring for HIS/PACS infrastructure, on-prem mandate for sensitive data, rapid fault detection.',
+    ind_energy: 'Energy & Industrial',
+    ind_energy_desc: 'OT/IT convergence, SCADA perimeter monitoring, segmentation validation and uninterrupted operations.',
+    ind_edu: 'Education & Research',
+    ind_edu_desc: 'Campus networks, eduroam infrastructure, user quotas and broad access-point inventory.',
 
     // Features
     feat_badge: 'Features',
@@ -321,11 +369,11 @@ const TIGINER_I18N = {
     cta_contact_sales: 'Contact Sales Team',
 
     // CTA
-    cta_title_1: 'Ready to Transform',
-    cta_title_2: 'Your Network',
-    cta_title_3: ' Operations?',
-    cta_sub: 'Explore Tiginer with a free demo. Our setup and technical support team is by your side.',
-    cta_contact: 'Contact Us',
+    cta_title_1: 'Let\'s Stand Up Your Pilot',
+    cta_title_2: 'in 30 Minutes,',
+    cta_title_3: ' Not 30 Days',
+    cta_sub: 'Talk to a sales engineer; we\'ll prepare a reference architecture, POC plan and tailored quote based on your network size. Your data stays in your region.',
+    cta_contact: 'Talk to a Sales Engineer',
 
     // Footer
     footer_desc: 'Enterprise Network Monitoring & Management Platform',

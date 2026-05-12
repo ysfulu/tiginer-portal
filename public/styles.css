@@ -801,3 +801,71 @@ img { max-width: 100%; }
   line-height: 1.55;
   margin: 0;
 }
+
+/* ── Enterprise upgrades (hero compliance chips + industries) ───────────── */
+.hero-compliance {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin: 36px auto 0; padding: 0; max-width: 920px;
+}
+.hero-compliance li {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11.5px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: #cbd5e1;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(15,23,42,.55);
+  border: 1px solid rgba(148,163,184,.18);
+  backdrop-filter: blur(8px);
+}
+.hero-compliance .hc-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent-emerald, #34d399);
+  box-shadow: 0 0 8px rgba(52,211,153,.6);
+}
+@media (max-width: 640px) {
+  .hero-compliance { gap: 6px; }
+  .hero-compliance li { font-size: 10.5px; padding: 6px 10px; letter-spacing: .06em; }
+}
+
+/* Industries grid */
+.industries-section .section-header { margin-bottom: 48px; }
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1180px; margin: 0 auto;
+}
+.industry-card {
+  position: relative;
+  padding: 26px 24px 24px;
+  border-radius: var(--radius-md, 14px);
+  background: rgba(12,18,32,.55);
+  border: 1px solid rgba(56,68,90,.35);
+  transition: all var(--transition);
+}
+.industry-card::before {
+  content: '';
+  position: absolute; left: 0; top: 22px; bottom: 22px; width: 2px;
+  background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+  border-radius: 2px; opacity: .55;
+}
+.industry-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59,130,246,.35);
+  background: rgba(15,23,42,.78);
+  box-shadow: 0 14px 40px rgba(2,8,23,.45);
+}
+.industry-card svg {
+  color: #93c5fd;
+  margin-bottom: 14px;
+  display: block;
+}
+.industry-card h4 {
+  font-size: 16px; font-weight: 700;
+  color: #f1f5f9; letter-spacing: -.01em;
+  margin: 0 0 8px;
+}
+.industry-card p {
+  font-size: 13.5px; line-height: 1.6;
+  color: var(--text-secondary, #94a3b8);
+  margin: 0;
+}
