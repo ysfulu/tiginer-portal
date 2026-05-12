@@ -10,7 +10,7 @@ const TIGINER_I18N = {
     nav_download: 'İndir',
 
     // Hero
-    hero_badge: 'Kurumsal NMS · On-Premises · ISO 27001 Hazır',
+    hero_badge: 'Kurumsal Ağ Operasyon Platformu · On-Premises',
     hero_title_1: 'BT Operasyonlarınız İçin',
     hero_title_2: 'Tek Kontrol Paneli,',
     hero_title_3: ' Tam Bağımsızlık',
@@ -18,12 +18,12 @@ const TIGINER_I18N = {
     hero_cta_demo: 'Pilot Kurulum Talep Edin',
     hero_cta_download: 'Teknik Dokümantasyon',
 
-    // Hero compliance chips
-    hc_iso: 'ISO 27001 Hazır',
-    hc_kvkk: 'KVKK Uyumlu',
-    hc_onprem: 'On-Premises',
-    hc_airgap: 'Air-gap Destekli',
-    hc_tr: 'Türkiye\'de Geliştirildi',
+    // Hero capability chips
+    hc_iso: 'RBAC & Audit Log',
+    hc_kvkk: 'KVKK Uyumlu Veri Saklama',
+    hc_onprem: 'On-Premises Dağıtım',
+    hc_airgap: 'Air-gap Kurulum Destekli',
+    hc_tr: 'Yerel Destek (TR/EN)',
 
     // Dashboard Mockup
     mock_devices: 'Aktif Cihaz',
@@ -126,7 +126,7 @@ const TIGINER_I18N = {
     plan_p7: 'NetFlow & SCAP',
     plan_p_api: 'REST API erişimi',
     plan_e2: 'Tüm Professional özellikleri',
-    plan_e3: 'Tam uyumluluk denetimi (SCAP)',
+    plan_e3: 'Uyumluluk denetim raporlaması (BDDK, PCI-DSS, ISO 27001)',
     plan_e4: 'NetFlow / sFlow analizi',
     plan_e_ansible: 'Ansible entegrasyonu',
     plan_e6: 'Öncelikli destek',
@@ -172,7 +172,7 @@ const TIGINER_I18N = {
     demo_success: 'Demo talebiniz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.',
 
     // Download page
-    dl_badge: 'Son Sürüm: v2.0',
+    dl_badge: 'Production-Ready Kurulum',
     dl_title_1: 'Tiginer\'i',
     dl_title_2: 'Kurun',
     dl_sub: 'Kurulum paketini indirin, Docker ile dakikalar içinde çalıştırın. Kaynak koda erişim gerektirmez.',
@@ -244,7 +244,7 @@ const TIGINER_I18N = {
     nav_download: 'Download',
 
     // Hero
-    hero_badge: 'Enterprise NMS · On-Premises · ISO 27001 Ready',
+    hero_badge: 'Enterprise Network Operations Platform · On-Premises',
     hero_title_1: 'A Single Pane of Glass',
     hero_title_2: 'For Your IT Operations,',
     hero_title_3: ' Full Sovereignty',
@@ -252,12 +252,12 @@ const TIGINER_I18N = {
     hero_cta_demo: 'Request a Pilot Deployment',
     hero_cta_download: 'Technical Documentation',
 
-    // Hero compliance chips
-    hc_iso: 'ISO 27001 Ready',
-    hc_kvkk: 'GDPR / KVKK Compliant',
-    hc_onprem: 'On-Premises',
+    // Hero capability chips
+    hc_iso: 'RBAC & Audit Log',
+    hc_kvkk: 'Regional Data Residency',
+    hc_onprem: 'On-Premises Deployment',
     hc_airgap: 'Air-gap Capable',
-    hc_tr: 'Built in Türkiye',
+    hc_tr: 'Local Support (TR / EN)',
 
     // Dashboard Mockup
     mock_devices: 'Active Devices',
@@ -360,7 +360,7 @@ const TIGINER_I18N = {
     plan_p7: 'NetFlow & SCAP',
     plan_p_api: 'REST API access',
     plan_e2: 'All Professional features',
-    plan_e3: 'Full compliance auditing (SCAP)',
+    plan_e3: 'Compliance audit reporting (BDDK, PCI-DSS, ISO 27001)',
     plan_e4: 'NetFlow / sFlow analysis',
     plan_e_ansible: 'Ansible integration',
     plan_e6: 'Priority support',
@@ -406,7 +406,7 @@ const TIGINER_I18N = {
     demo_success: 'Your demo request has been received! We will contact you soon.',
 
     // Download page
-    dl_badge: 'Latest Version: v2.0',
+    dl_badge: 'Production-Ready Install',
     dl_title_1: 'Install',
     dl_title_2: 'Tiginer',
     dl_sub: 'Download the setup package, run with Docker in minutes. No source code access required.',
