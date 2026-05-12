@@ -678,3 +678,177 @@ img, svg { max-width: 100%; }
 
 /* ── Particles legacy — hidden in light theme ─────── */
 .particle, .hero-particles { display: none; }
+
+/* ═══════════════════════════════════════════════════
+   Phase 25 — Enterprise design polish
+   ═══════════════════════════════════════════════════ */
+
+/* ── Hero kicker (eyebrow) ────────────────────────── */
+.hero-kicker {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--primary);
+  margin-bottom: 14px;
+}
+
+/* ── Asymmetric hero (desktop two-column) ─────────── */
+.hero { padding: 72px 0 80px; }
+.hero-split { display: block; }
+.hero-left { max-width: 720px; }
+.hero-left .hero-badge { margin-bottom: 18px; }
+.hero-right { margin-top: 56px; }
+.hero-right .hero-mockup { margin-top: 0; }
+
+.hero-content.hero-split { text-align: left; }
+.hero-content.hero-split .hero-compliance { justify-content: flex-start; margin-left: 0; }
+.hero-content.hero-split .hero-actions { justify-content: flex-start; }
+.hero-content.hero-split h1 { margin-left: 0; }
+.hero-content.hero-split .hero-sub { margin-left: 0; }
+
+@media (min-width: 1100px) {
+  .hero { padding: 96px 0 96px; }
+  .hero-split {
+    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 56px; align-items: center;
+  }
+  .hero-right { margin-top: 0; }
+  .hero-left { max-width: none; }
+  .hero h1 { font-size: clamp(36px, 3.6vw, 54px); }
+  .hero-mockup { margin: 0; max-width: none; }
+}
+
+@media (max-width: 1099px) {
+  .hero-content.hero-split { text-align: center; }
+  .hero-content.hero-split .hero-left { margin: 0 auto; }
+  .hero-content.hero-split .hero-compliance { justify-content: center; }
+  .hero-content.hero-split .hero-actions { justify-content: center; }
+}
+
+/* ── Customer logo strip ──────────────────────────── */
+.logo-strip {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 44px 0 40px;
+}
+.logo-strip-label {
+  text-align: center; font-size: 11.5px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 22px;
+}
+.logo-strip-row {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 14px; max-width: 1080px; margin: 0 auto;
+}
+@media (max-width: 900px) { .logo-strip-row { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .logo-strip-row { grid-template-columns: repeat(2, 1fr); } }
+.logo-strip-item {
+  text-align: center;
+  background: var(--bg-soft);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-md);
+  padding: 18px 12px;
+  transition: all var(--t);
+}
+.logo-strip-item:hover { border-color: var(--primary); background: var(--primary-soft); }
+.logo-strip-item span {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px; font-weight: 800; letter-spacing: .08em;
+  color: var(--text-2); margin-bottom: 4px;
+}
+.logo-strip-item small {
+  font-size: 11px; color: var(--text-muted); letter-spacing: .02em;
+}
+.logo-strip-note {
+  text-align: center; margin-top: 22px;
+  font-size: 12.5px; color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Capabilities matrix ──────────────────────────── */
+.capabilities-section { background: var(--bg); }
+.cap-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px; max-width: 1180px; margin: 0 auto;
+}
+.cap-group {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 22px 24px; transition: all var(--t);
+}
+.cap-group:hover { border-color: #c7d2fe; box-shadow: var(--shadow-1); }
+.cap-group h4 {
+  font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--primary);
+  padding-bottom: 12px; margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.cap-list { display: flex; flex-direction: column; }
+.cap-list li {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; padding: 9px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 13.5px;
+}
+.cap-list li:last-child { border-bottom: 0; }
+.cap-list li strong {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 700; color: var(--text);
+  letter-spacing: -.01em; font-size: 13px;
+  flex-shrink: 0;
+}
+.cap-list li span {
+  color: var(--text-3); text-align: right;
+  font-size: 12.5px; line-height: 1.45;
+}
+.cap-foot {
+  text-align: center; margin-top: 36px;
+  font-size: 13.5px; color: var(--text-3);
+}
+.cap-foot a { color: var(--primary); font-weight: 600; }
+.cap-foot a:hover { text-decoration: underline; }
+
+/* ── Engagement model ─────────────────────────────── */
+.engagement-section { background: var(--bg-soft); }
+.engagement-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px; max-width: 1180px; margin: 0 auto;
+  list-style: none; counter-reset: none;
+}
+@media (max-width: 960px) { .engagement-steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .engagement-steps { grid-template-columns: 1fr; } }
+.engagement-step {
+  position: relative;
+  background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 24px 22px; transition: all var(--t);
+}
+.engagement-step:hover { box-shadow: var(--shadow-2); border-color: #c7d2fe; transform: translateY(-2px); }
+.engagement-step::before {
+  content: ''; position: absolute; left: 0; top: 24px;
+  width: 3px; height: 32px; border-radius: 0 3px 3px 0;
+  background: var(--accent-gradient);
+}
+.es-num {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px; font-weight: 700; color: var(--primary);
+  letter-spacing: .06em; margin-bottom: 10px;
+}
+.es-tag {
+  display: inline-block;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--text-3);
+  background: var(--bg-alt); padding: 3px 9px; border-radius: 999px;
+  margin-bottom: 12px;
+}
+.engagement-step h3 {
+  font-size: 16px; font-weight: 700; color: var(--text);
+  letter-spacing: -.014em; margin-bottom: 8px;
+}
+.engagement-step p {
+  font-size: 13.5px; line-height: 1.6; color: var(--text-3);
+}
+
+/* ── Micro-typography refinement ──────────────────── */
+h1, h2, h3, h4 { font-feature-settings: 'cv11','ss01','case'; }
+.section-header h2 { letter-spacing: -.024em; }
+.hero h1 { letter-spacing: -.032em; }
+.feature-card h3, .why-card h3, .industry-card h4, .engagement-step h3,
+.sys-note-card h4, .pricing-card h3, .dl-card h3 { letter-spacing: -.014em; }

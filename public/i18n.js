@@ -3,6 +3,7 @@ const TIGINER_I18N = {
   tr: {
     // Navbar
     nav_features: 'Özellikler',
+    nav_capabilities: 'Yetenekler',
     nav_solutions: 'Çözümler',
     nav_packages: 'Paketler',
     nav_requirements: 'Sistem',
@@ -11,12 +12,13 @@ const TIGINER_I18N = {
 
     // Hero
     hero_badge: 'Kurumsal Ağ Operasyon Platformu · On-Premises',
+    hero_kicker: 'TÜRKİYE’DE GELİŞTİRİLEN KURUMSAL NMS',
     hero_title_1: 'BT Operasyonlarınız İçin',
     hero_title_2: 'Tek Kontrol Paneli,',
     hero_title_3: ' Tam Bağımsızlık',
     hero_sub: 'Ağ keşfi, gerçek zamanlı izleme, alarm yönetimi, konfigürasyon yedekleme, NetFlow, uyumluluk denetimi ve otomasyon — hepsi kendi veri merkezinizde çalışan tek bir platformda. Bulut bağımlılığı yok, vendor lock-in yok.',
     hero_cta_demo: 'Pilot Kurulum Talep Edin',
-    hero_cta_download: 'Teknik Dokümantasyon',
+    hero_cta_download: 'Teknik Yeterlilik',
 
     // Hero capability chips
     hc_iso: 'RBAC & Audit Log',
@@ -57,6 +59,45 @@ const TIGINER_I18N = {
     ind_energy_desc: 'OT/IT yakınsama, SCADA çevresi izleme, segmentasyon doğrulama, kesintisiz operasyon.',
     ind_edu: 'Eğitim & Araştırma',
     ind_edu_desc: 'Kampüs ağları, eduroam altyapısı, kullanıcı kotaları ve geniş erişim noktası envanteri.',
+
+    // Customer logo strip
+    logos_label: 'Türkiye’nin önde gelen kurumlarının BT ekipleriyle çalışıyoruz',
+    logos_l1: 'Tier-1 Bankacılık',
+    logos_l2: 'Servis Sağlayıcı',
+    logos_l3: 'Devlet Kurumu',
+    logos_l4: 'Üretim & Dağıtım',
+    logos_l5: 'Hastane Grubu',
+    logos_l6: 'Air-gap Ortam',
+    logos_note: 'Referans bilgileri gizlilik anlaşmaları nedeniyle yalnızca satış görüşmesinde paylaşılır.',
+
+    // Capabilities matrix
+    cap_badge: 'Teknik Yeterlilik',
+    cap_title: 'Protokol & Entegrasyon Kapsamı',
+    cap_sub: 'Kurumsal ağınızda kullandığınız standartların tamamını destekliyoruz. RFC uyumlu, vendor-agnostic.',
+    cap_g1: 'İzleme & Telemetri',
+    cap_g2: 'Akış & Trafik Analizi',
+    cap_g3: 'Kimlik & Erişim',
+    cap_g4: 'Otomasyon & Entegrasyon',
+    cap_g5: 'Sanallaştırma & Konteyner',
+    cap_g6: 'Uyumluluk & Raporlama',
+    cap_foot: 'Listede göremediğiniz bir protokol veya entegrasyon mu var? Bize iletin — geliştirme yol haritamızda yer alabilir.',
+
+    // Engagement model
+    eng_badge: 'Çalışma Modeli',
+    eng_title: 'Pilot’tan Üretime Net Bir Yol',
+    eng_sub: 'Kurumsal alıcılar için tahmin edilebilir bir kurulum ve operasyon süreci. Her adımda tek bir sorumlu mühendis.',
+    eng_s1_tag: '~1 hafta',
+    eng_s1_title: 'Keşif Görüşmesi',
+    eng_s1_desc: 'Ağ envanteri, ölçek ve uyumluluk gereksinimleriniz çıkarılır. Referans mimari ve POC kapsamı belgelenir.',
+    eng_s2_tag: '2-3 hafta',
+    eng_s2_title: 'Pilot Kurulum (POC)',
+    eng_s2_desc: 'Ortamınızda sınırlı kapsamlı kurulum. Başarı kriterleri önceden tanımlanır, sonunda yazılı POC raporu teslim edilir.',
+    eng_s3_tag: '4-6 hafta',
+    eng_s3_title: 'Üretim Devreye Alma',
+    eng_s3_desc: 'HA mimarisi, LDAP/AD entegrasyonu, alarm kuralları ve operatör eğitimleri ile canlıya geçiş.',
+    eng_s4_tag: 'Sürekli',
+    eng_s4_title: 'SLA’lı Destek',
+    eng_s4_desc: '7/24 vaka açma, tanımlı yanıt & çözüm sürelerine bağlı destek paketi. Çeyrekte bir mimari gözden geçirme.',
 
     // Features
     feat_badge: 'Özellikler',
@@ -237,6 +278,7 @@ const TIGINER_I18N = {
   en: {
     // Navbar
     nav_features: 'Features',
+    nav_capabilities: 'Capabilities',
     nav_solutions: 'Solutions',
     nav_packages: 'Pricing',
     nav_requirements: 'System',
@@ -245,12 +287,13 @@ const TIGINER_I18N = {
 
     // Hero
     hero_badge: 'Enterprise Network Operations Platform · On-Premises',
+    hero_kicker: 'ENTERPRISE NMS — BUILT IN TÜRKİYE',
     hero_title_1: 'A Single Pane of Glass',
     hero_title_2: 'For Your IT Operations,',
     hero_title_3: ' Full Sovereignty',
     hero_sub: 'Network discovery, real-time monitoring, alert management, configuration backup, NetFlow, compliance auditing and automation — all on a single platform running in your own data center. No cloud dependency, no vendor lock-in.',
     hero_cta_demo: 'Request a Pilot Deployment',
-    hero_cta_download: 'Technical Documentation',
+    hero_cta_download: 'Technical Capabilities',
 
     // Hero capability chips
     hc_iso: 'RBAC & Audit Log',
@@ -291,6 +334,45 @@ const TIGINER_I18N = {
     ind_energy_desc: 'OT/IT convergence, SCADA perimeter monitoring, segmentation validation and uninterrupted operations.',
     ind_edu: 'Education & Research',
     ind_edu_desc: 'Campus networks, eduroam infrastructure, user quotas and broad access-point inventory.',
+
+    // Customer logo strip
+    logos_label: 'We work with IT teams at leading Turkish enterprises',
+    logos_l1: 'Tier-1 Banking',
+    logos_l2: 'Service Provider',
+    logos_l3: 'Government Agency',
+    logos_l4: 'Generation & Distribution',
+    logos_l5: 'Hospital Group',
+    logos_l6: 'Air-gapped Environment',
+    logos_note: 'Reference details are shared only during the sales conversation, subject to NDA.',
+
+    // Capabilities matrix
+    cap_badge: 'Technical Capabilities',
+    cap_title: 'Protocol & Integration Coverage',
+    cap_sub: 'Full coverage of the standards your enterprise network already runs on. RFC-compliant, vendor-agnostic.',
+    cap_g1: 'Monitoring & Telemetry',
+    cap_g2: 'Flow & Traffic Analytics',
+    cap_g3: 'Identity & Access',
+    cap_g4: 'Automation & Integration',
+    cap_g5: 'Virtualization & Containers',
+    cap_g6: 'Compliance & Reporting',
+    cap_foot: 'A protocol or integration not listed? Tell us — it may be on our roadmap.',
+
+    // Engagement model
+    eng_badge: 'Engagement Model',
+    eng_title: 'A Clear Path from Pilot to Production',
+    eng_sub: 'A predictable rollout and operations process for enterprise buyers. A named engineer at every step.',
+    eng_s1_tag: '~1 week',
+    eng_s1_title: 'Discovery Call',
+    eng_s1_desc: 'Network inventory, scale and compliance requirements captured. Reference architecture and POC scope documented.',
+    eng_s2_tag: '2-3 weeks',
+    eng_s2_title: 'Pilot Deployment (POC)',
+    eng_s2_desc: 'Scoped deployment in your environment. Success criteria defined upfront, written POC report delivered at the end.',
+    eng_s3_tag: '4-6 weeks',
+    eng_s3_title: 'Production Rollout',
+    eng_s3_desc: 'HA architecture, LDAP/AD integration, alarm rules and operator training — production go-live.',
+    eng_s4_tag: 'Ongoing',
+    eng_s4_title: 'SLA-Backed Support',
+    eng_s4_desc: '24/7 incident channel, defined response & resolution SLAs. Quarterly architecture reviews.',
 
     // Features
     feat_badge: 'Features',
