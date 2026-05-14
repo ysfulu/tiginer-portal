@@ -273,6 +273,32 @@ const TIGINER_I18N = {
     sys_note_vm_desc: 'Proxmox, VMware ESXi, Hyper-V ve KVM üzerinde tam destek. Snapshot & canlı taşıma.',
     sys_note_offline_title: 'Offline / Air-gap',
     sys_note_offline_desc: 'İnternet erişimi olmayan kurumsal ağlar için lokal mirror desteği mevcuttur.',
+
+    // Hero network graph
+    graph_title: 'CANLI TOPOLOJİ',
+    graph_meta_nodes: 'Düğümler',
+    graph_meta_links: 'Bağlantılar',
+
+    // Live ticker
+    tk_uptime: 'UPTIME',
+    tk_polled: 'SNMP POLL',
+    tk_flows: 'NETFLOW',
+    tk_alarms: 'AÇIK ALARM',
+    tk_devices: 'CİHAZ',
+    tk_latency: 'P95 GECİKME',
+    tk_traffic: 'TRAFİK',
+    tk_compliance: 'UYUMLULUK',
+
+    // Command Center
+    cc_badge: 'Komuta Merkezi',
+    cc_title: 'Tek Panelden Ağınızın Nabzını Tutun',
+    cc_sub: 'SNMP, NetFlow, Syslog, ICMP ve SCAP verisi tek bir operasyon konsoluna akar. SOC ve NOC ekipleri aynı gerçek zamanlı resmi paylaşır.',
+    cc_panel_ops: 'CANLI OPERASYON',
+    cc_panel_feed: 'OLAY AKIŞI',
+    cc_kpi_polled: 'POLLED NESNE',
+    cc_kpi_flows: 'NETFLOW / DK',
+    cc_kpi_alarms: 'AÇIK ALARM',
+    cc_kpi_uptime: 'FİLO UPTIME',
   },
 
   en: {
@@ -548,6 +574,32 @@ const TIGINER_I18N = {
     sys_note_vm_desc: 'Full support on Proxmox, VMware ESXi, Hyper-V and KVM. Snapshot & live migration.',
     sys_note_offline_title: 'Offline / Air-gap',
     sys_note_offline_desc: 'Local mirror support available for enterprise networks without internet access.',
+
+    // Hero network graph
+    graph_title: 'LIVE TOPOLOGY',
+    graph_meta_nodes: 'Nodes',
+    graph_meta_links: 'Links',
+
+    // Live ticker
+    tk_uptime: 'UPTIME',
+    tk_polled: 'SNMP POLL',
+    tk_flows: 'NETFLOW',
+    tk_alarms: 'OPEN ALARMS',
+    tk_devices: 'DEVICES',
+    tk_latency: 'P95 LATENCY',
+    tk_traffic: 'TRAFFIC',
+    tk_compliance: 'COMPLIANCE',
+
+    // Command Center
+    cc_badge: 'Command Center',
+    cc_title: 'A Single Pane for Your Entire Network',
+    cc_sub: 'SNMP, NetFlow, Syslog, ICMP and SCAP telemetry stream into one operations console. SOC and NOC teams work from the same real-time picture.',
+    cc_panel_ops: 'LIVE OPERATIONS',
+    cc_panel_feed: 'EVENT STREAM',
+    cc_kpi_polled: 'POLLED OBJECTS',
+    cc_kpi_flows: 'NETFLOW / MIN',
+    cc_kpi_alarms: 'OPEN ALARMS',
+    cc_kpi_uptime: 'FLEET UPTIME',
   }
 };
 

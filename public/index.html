@@ -149,73 +149,113 @@
 
         <!-- Dashboard mockup (right column on desktop) -->
         <div class="hero-right">
-        <div class="hero-mockup">
-          <div class="mockup-browser">
-            <div class="mockup-bar">
-              <div class="mockup-dots"><span></span><span></span><span></span></div>
-              <div class="mockup-url">localhost:3002/tr/dashboard</div>
+          <div class="hero-graph" aria-label="Network topology visualization">
+            <div class="hero-graph-head">
+              <span class="hero-graph-title" data-i18n="graph_title">CANLI TOPOLOJİ</span>
+              <span class="hero-graph-meta">
+                <span><span data-i18n="graph_meta_nodes">Düğümler</span> <strong>247</strong></span>
+                <span><span data-i18n="graph_meta_links">Bağlantılar</span> <strong>418</strong></span>
+              </span>
             </div>
-            <div class="mockup-screen">
-              <div class="mock-sidebar">
-                <div class="mock-logo-area"></div>
-                <div class="mock-nav-item active"></div>
-                <div class="mock-nav-item"></div>
-                <div class="mock-nav-item"></div>
-                <div class="mock-nav-item"></div>
-                <div class="mock-nav-item"></div>
+
+            <svg class="network" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Edges -->
+              <g stroke-linecap="round">
+                <path class="edge" d="M 80 130 L 200 70" />
+                <path class="edge" d="M 80 130 L 200 130" />
+                <path class="edge" d="M 80 130 L 200 200" />
+                <path class="edge cyan" d="M 200 70  L 340 50" />
+                <path class="edge cyan" d="M 200 70  L 340 130" />
+                <path class="edge" d="M 200 130 L 340 130" />
+                <path class="edge" d="M 200 200 L 340 210" />
+                <path class="edge" d="M 200 200 L 340 130" />
+                <path class="edge cyan" d="M 340 50  L 460 90" />
+                <path class="edge cyan" d="M 340 130 L 460 90" />
+                <path class="edge" d="M 340 130 L 460 170" />
+                <path class="edge amber" d="M 340 210 L 460 170" />
+              </g>
+
+              <!-- Pulse rings -->
+              <g>
+                <circle class="node-ring r1" cx="80"  cy="130" r="8" />
+                <circle class="node-ring r2" cx="340" cy="50"  r="8" />
+                <circle class="node-ring r3" cx="340" cy="210" r="8" />
+                <circle class="node-ring r1" cx="460" cy="90"  r="8" />
+              </g>
+
+              <!-- Nodes -->
+              <g>
+                <circle class="node core" cx="80"  cy="130" r="9" />
+                <circle class="node" cx="200" cy="70"  r="6" />
+                <circle class="node" cx="200" cy="130" r="6" />
+                <circle class="node" cx="200" cy="200" r="6" />
+                <circle class="node core" cx="340" cy="50"  r="7" />
+                <circle class="node" cx="340" cy="130" r="6" />
+                <circle class="node warn" cx="340" cy="210" r="7" />
+                <circle class="node core" cx="460" cy="90"  r="7" />
+                <circle class="node" cx="460" cy="170" r="6" />
+              </g>
+
+              <!-- Labels -->
+              <g>
+                <text class="label" x="50" y="155">CORE-01</text>
+                <text class="label" x="178" y="58">DC-A</text>
+                <text class="label" x="178" y="118">DC-B</text>
+                <text class="label" x="178" y="222">DC-C</text>
+                <text class="label" x="322" y="40">EDGE-1</text>
+                <text class="label" x="322" y="120">EDGE-2</text>
+                <text class="label" x="322" y="234">EDGE-3</text>
+                <text class="label" x="448" y="80">BRANCH</text>
+                <text class="label" x="448" y="192">REMOTE</text>
+              </g>
+            </svg>
+
+            <div class="hero-graph-foot">
+              <div class="hg-kpi">
+                <div class="hg-kpi-lbl" data-i18n="mock_uptime">Uptime</div>
+                <div class="hg-kpi-val up counter" data-counter="99.8" data-suffix="%">99.8%</div>
               </div>
-              <div class="mock-main">
-                <div class="mock-topbar"></div>
-                <div class="mock-kpi-row">
-                  <div class="mock-kpi green">
-                    <div class="mock-kpi-val">247</div>
-                    <div class="mock-kpi-lbl" data-i18n="mock_devices">Aktif Cihaz</div>
-                  </div>
-                  <div class="mock-kpi blue">
-                    <div class="mock-kpi-val">99.8%</div>
-                    <div class="mock-kpi-lbl" data-i18n="mock_uptime">Uptime</div>
-                  </div>
-                  <div class="mock-kpi orange">
-                    <div class="mock-kpi-val">3</div>
-                    <div class="mock-kpi-lbl" data-i18n="mock_alarms">Aktif Alarm</div>
-                  </div>
-                  <div class="mock-kpi purple">
-                    <div class="mock-kpi-val">1.2 Gbps</div>
-                    <div class="mock-kpi-lbl" data-i18n="mock_traffic">Toplam Trafik</div>
-                  </div>
-                </div>
-                <div class="mock-charts">
-                  <div class="mock-chart-lg">
-                    <div class="mock-chart-title" data-i18n="mock_bandwidth">Bant Genişliği</div>
-                    <svg class="mock-line-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
-                      <defs>
-                        <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
-                          <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
-                        </linearGradient>
-                      </defs>
-                      <path d="M0,80 C30,70 60,40 100,50 C140,60 170,20 200,30 C230,40 260,15 300,25 C340,35 370,10 400,20 L400,100 L0,100 Z" fill="url(#chartFill)"/>
-                      <path d="M0,80 C30,70 60,40 100,50 C140,60 170,20 200,30 C230,40 260,15 300,25 C340,35 370,10 400,20" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                    </svg>
-                  </div>
-                  <div class="mock-chart-sm">
-                    <div class="mock-chart-title" data-i18n="mock_cpu">CPU Kullanımı</div>
-                    <div class="mock-donut">
-                      <svg viewBox="0 0 80 80">
-                        <circle cx="40" cy="40" r="32" stroke="#1e293b" stroke-width="6" fill="none"/>
-                        <circle cx="40" cy="40" r="32" stroke="#34d399" stroke-width="6" fill="none" stroke-dasharray="145 56" stroke-linecap="round" transform="rotate(-90 40 40)"/>
-                        <text x="40" y="44" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="700">72%</text>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+              <div class="hg-kpi">
+                <div class="hg-kpi-lbl" data-i18n="mock_devices">Aktif Cihaz</div>
+                <div class="hg-kpi-val cyan counter" data-counter="247">247</div>
+              </div>
+              <div class="hg-kpi">
+                <div class="hg-kpi-lbl" data-i18n="mock_alarms">Aktif Alarm</div>
+                <div class="hg-kpi-val warn counter" data-counter="3">3</div>
+              </div>
+              <div class="hg-kpi">
+                <div class="hg-kpi-lbl" data-i18n="mock_traffic">Toplam Trafik</div>
+                <div class="hg-kpi-val">1.2 <small>Gbps</small></div>
               </div>
             </div>
           </div>
-        </div>
         </div><!-- /.hero-right -->
       </div>
     </header>
+
+    <!-- Live metrics ticker -->
+    <section class="live-ticker" aria-label="Live platform metrics">
+      <div class="ticker-track">
+        <!-- Set 1 -->
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_uptime">UPTIME</span> <span class="tk-val up">99.98%</span></span>
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_polled">SNMP POLL</span> <span class="tk-val cyan">8.4k/s</span></span>
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_flows">NETFLOW</span> <span class="tk-val">412k flows/min</span></span>
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_alarms">AÇIK ALARM</span> <span class="tk-val warn">3</span></span>
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_devices">CİHAZ</span> <span class="tk-val">247</span></span>
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_latency">P95 LATENCY</span> <span class="tk-val cyan">14ms</span></span>
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_traffic">TRAFİK</span> <span class="tk-val">1.24 Gbps</span></span>
+        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_compliance">UYUMLULUK</span> <span class="tk-val up">PASS</span></span>
+        <!-- Set 2 (duplicate for seamless marquee) -->
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">UPTIME</span> <span class="tk-val up">99.98%</span></span>
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">SNMP POLL</span> <span class="tk-val cyan">8.4k/s</span></span>
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">NETFLOW</span> <span class="tk-val">412k flows/min</span></span>
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">AÇIK ALARM</span> <span class="tk-val warn">3</span></span>
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">CİHAZ</span> <span class="tk-val">247</span></span>
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">P95 LATENCY</span> <span class="tk-val cyan">14ms</span></span>
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">TRAFİK</span> <span class="tk-val">1.24 Gbps</span></span>
+        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">UYUMLULUK</span> <span class="tk-val up">PASS</span></span>
+      </div>
+    </section>
 
     <!-- Customer logo strip (placeholder) -->
     <section class="logo-strip" aria-label="Trusted by">
@@ -274,7 +314,7 @@
           <h2 data-i18n="features_title">Ağ Yönetiminde İhtiyacınız Olan Her Şey</h2>
           <p data-i18n="features_sub">Tek platform, sınırsız kontrol. SNMP keşiften uyumluluk denetimine kadar.</p>
         </div>
-        <div class="features-grid">
+        <div class="features-bento">
           <div class="feature-card">
             <div class="feature-icon icon-blue">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -584,6 +624,101 @@
       </div>
     </section>
 
+    <!-- Command Center — dark interstitial showcasing operations -->
+    <section id="komuta" class="command-center">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge" data-i18n="cc_badge">Komuta Merkezi</div>
+          <h2 data-i18n="cc_title">Tek Panelden Ağınızın Nabzını Tutun</h2>
+          <p data-i18n="cc_sub">SNMP, NetFlow, Syslog, ICMP ve SCAP verisi tek bir operasyon konsoluna akar. SOC ve NOC ekipleri aynı gerçek zamanlı resmi paylaşır.</p>
+        </div>
+
+        <div class="cc-grid">
+          <!-- Left: KPI dashboard + chart -->
+          <div class="cc-panel reveal" data-reveal="left">
+            <div class="cc-panel-head">
+              <span class="cc-panel-title" data-i18n="cc_panel_ops">CANLI OPERASYON</span>
+              <span class="cc-panel-meta">last 24h · auto-refresh 5s</span>
+            </div>
+            <div class="cc-kpis">
+              <div class="cc-kpi">
+                <div class="cc-kpi-lbl" data-i18n="cc_kpi_polled">POLLED OBJECTS</div>
+                <div class="cc-kpi-val counter" data-counter="8421">0</div>
+                <div class="cc-kpi-bar"><i style="--bar:.86"></i></div>
+              </div>
+              <div class="cc-kpi">
+                <div class="cc-kpi-lbl" data-i18n="cc_kpi_flows">NETFLOW / MIN</div>
+                <div class="cc-kpi-val counter" data-counter="412800">0</div>
+                <div class="cc-kpi-bar"><i style="--bar:.72"></i></div>
+              </div>
+              <div class="cc-kpi">
+                <div class="cc-kpi-lbl" data-i18n="cc_kpi_alarms">OPEN ALARMS</div>
+                <div class="cc-kpi-val counter" data-counter="3">0</div>
+                <div class="cc-kpi-bar"><i style="--bar:.18"></i></div>
+              </div>
+              <div class="cc-kpi">
+                <div class="cc-kpi-lbl" data-i18n="cc_kpi_uptime">FLEET UPTIME</div>
+                <div class="cc-kpi-val">99.98<small>%</small></div>
+                <div class="cc-kpi-bar"><i style="--bar:.999"></i></div>
+              </div>
+            </div>
+
+            <div class="cc-chart" style="margin-top:20px">
+              <svg viewBox="0 0 600 130" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ccArea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%"  stop-color="#06B6D4" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <line class="gridline" x1="0" y1="33"  x2="600" y2="33"/>
+                <line class="gridline" x1="0" y1="65"  x2="600" y2="65"/>
+                <line class="gridline" x1="0" y1="97"  x2="600" y2="97"/>
+                <path class="area" d="M0,90 C40,78 80,86 120,68 C160,52 200,72 240,58 C280,46 320,62 360,40 C400,22 440,48 480,30 C520,16 560,38 600,24 L600,130 L0,130 Z"/>
+                <path class="line" d="M0,90 C40,78 80,86 120,68 C160,52 200,72 240,58 C280,46 320,62 360,40 C400,22 440,48 480,30 C520,16 560,38 600,24"/>
+              </svg>
+              <div class="cc-chart-foot">
+                <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>now</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Live activity feed (terminal-style) -->
+          <div class="cc-panel reveal" data-reveal="right">
+            <div class="cc-panel-head">
+              <span class="cc-panel-title" data-i18n="cc_panel_feed">EVENT STREAM</span>
+              <span class="cc-panel-meta">syslog · trap · audit</span>
+            </div>
+            <div class="cc-feed">
+              <div class="cc-feed-list">
+                <div><span class="t">14:32:18</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">core-rtr-01 ifInOctets +1.24Gb/s</span></div>
+                <div><span class="t">14:32:14</span> <span class="ok">OK</span>  <span class="k">netflow.in</span>   <span class="m">edge-fw-03 412 flows · top: 10.42.1.7</span></div>
+                <div><span class="t">14:32:09</span> <span class="wn">WARN</span> <span class="k">latency.p95</span> <span class="m">br-istanbul → dc-ankara 38ms (sla 40ms)</span></div>
+                <div><span class="t">14:31:58</span> <span class="ok">OK</span>  <span class="k">discovery</span>   <span class="m">new device 10.42.7.118 (cisco c9300)</span></div>
+                <div><span class="t">14:31:42</span> <span class="ok">OK</span>  <span class="k">scap.scan</span>    <span class="m">profile CIS-Cisco-IOS-XE pass 247/247</span></div>
+                <div><span class="t">14:31:30</span> <span class="er">ERR</span>  <span class="k">syslog.auth</span>  <span class="m">core-sw-12 invalid login admin from 192.0.2.4</span></div>
+                <div><span class="t">14:31:24</span> <span class="ok">OK</span>  <span class="k">backup.cfg</span>   <span class="m">snapshot 18/19 ok · sha256 verified</span></div>
+                <div><span class="t">14:31:11</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">edge-rtr-05 cpu 23% mem 41%</span></div>
+                <div><span class="t">14:30:58</span> <span class="wn">WARN</span> <span class="k">netflow.ddos</span> <span class="m">br-izmir burst 18kpps → rate-limit applied</span></div>
+                <div><span class="t">14:30:42</span> <span class="ok">OK</span>  <span class="k">topology</span>    <span class="m">lldp neighbor update 12 nodes</span></div>
+                <!-- duplicate for seamless loop -->
+                <div><span class="t">14:32:18</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">core-rtr-01 ifInOctets +1.24Gb/s</span></div>
+                <div><span class="t">14:32:14</span> <span class="ok">OK</span>  <span class="k">netflow.in</span>   <span class="m">edge-fw-03 412 flows · top: 10.42.1.7</span></div>
+                <div><span class="t">14:32:09</span> <span class="wn">WARN</span> <span class="k">latency.p95</span> <span class="m">br-istanbul → dc-ankara 38ms (sla 40ms)</span></div>
+                <div><span class="t">14:31:58</span> <span class="ok">OK</span>  <span class="k">discovery</span>   <span class="m">new device 10.42.7.118 (cisco c9300)</span></div>
+                <div><span class="t">14:31:42</span> <span class="ok">OK</span>  <span class="k">scap.scan</span>    <span class="m">profile CIS-Cisco-IOS-XE pass 247/247</span></div>
+                <div><span class="t">14:31:30</span> <span class="er">ERR</span>  <span class="k">syslog.auth</span>  <span class="m">core-sw-12 invalid login admin from 192.0.2.4</span></div>
+                <div><span class="t">14:31:24</span> <span class="ok">OK</span>  <span class="k">backup.cfg</span>   <span class="m">snapshot 18/19 ok · sha256 verified</span></div>
+                <div><span class="t">14:31:11</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">edge-rtr-05 cpu 23% mem 41%</span></div>
+                <div><span class="t">14:30:58</span> <span class="wn">WARN</span> <span class="k">netflow.ddos</span> <span class="m">br-izmir burst 18kpps → rate-limit applied</span></div>
+                <div><span class="t">14:30:42</span> <span class="ok">OK</span>  <span class="k">topology</span>    <span class="m">lldp neighbor update 12 nodes</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Engagement Model — how we work with enterprise customers -->
     <section class="section engagement-section">
       <div class="container">
@@ -783,13 +918,17 @@
         a.addEventListener('click', () => navLinks.classList.remove('open'));
       });
 
-      // Smooth navbar on scroll
+      // Smooth navbar on scroll + scroll-progress bar
       const navbar = document.querySelector('.navbar');
+      const docEl = document.documentElement;
       let ticking = false;
       window.addEventListener('scroll', () => {
         if (!ticking) {
           requestAnimationFrame(() => {
             navbar.classList.toggle('scrolled', window.scrollY > 40);
+            const max = docEl.scrollHeight - window.innerHeight;
+            const pct = max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0;
+            docEl.style.setProperty('--scroll-progress', pct.toFixed(2) + '%');
             ticking = false;
           });
           ticking = true;
@@ -805,10 +944,49 @@
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
-      document.querySelectorAll('.feature-card, .pricing-card, .why-card, .trust-item, .section-header, .hero-mockup').forEach(el => {
+      document.querySelectorAll('.feature-card, .pricing-card, .why-card, .trust-item, .section-header, .hero-graph').forEach(el => {
         el.classList.add('animate-on-scroll');
         observer.observe(el);
       });
+
+      // Reveal-on-scroll for elements with .reveal class
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      // Generic counter animation for any .counter[data-counter]
+      const genericCountObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting || entry.target.dataset.counted) return;
+          entry.target.dataset.counted = '1';
+          const el = entry.target;
+          const target = parseFloat(el.dataset.counter);
+          const suffix = el.dataset.suffix || '';
+          const isFloat = String(target).includes('.');
+          const duration = 1400;
+          const start = performance.now();
+          const format = (n) => {
+            if (isFloat) return n.toFixed(1);
+            if (target >= 10000) return Math.round(n).toLocaleString('tr-TR');
+            return Math.round(n).toString();
+          };
+          const step = (now) => {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = format(target * eased) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          genericCountObserver.unobserve(el);
+        });
+      }, { threshold: 0.4 });
+      document.querySelectorAll('.counter[data-counter]').forEach(el => genericCountObserver.observe(el));
 
       // Mouse-tracking glow on feature cards
       document.querySelectorAll('.feature-card').forEach(card => {
@@ -828,7 +1006,7 @@
           }
         });
       }, { threshold: 0.2 });
-      const mockup = document.querySelector('.hero-mockup');
+      const mockup = document.querySelector('.hero-graph');
       if (mockup) mockObserver.observe(mockup);
 
       // Animate trust bar numbers on scroll
