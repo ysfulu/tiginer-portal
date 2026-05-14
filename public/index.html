@@ -3,54 +3,162 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0050E0" />
+    <meta name="format-detection" content="telephone=no" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <title>Tiginer | Kurumsal Ağ İzleme ve Yönetim Platformu</title>
-    <meta name="description" content="Tiginer ile ağ cihazlarınızı izleyin, alarmları yönetin, otomasyon ve uyumluluk denetimlerini tek platformdan gerçekleştirin. SNMP v3, NetFlow, topoloji haritası ve daha fazlası." />
-    <meta name="keywords" content="ağ izleme, network monitoring, SNMP, NMS, ağ yönetimi, network management, Tiginer, alarm yönetimi, topoloji haritası" />
+    <title>Tiginer — Kurumsal Ağ İzleme & Yönetim Platformu | On-Premises NMS</title>
+    <meta name="description" content="Tiginer, kurumsal ağınızı tek panelden yönetmenizi sağlayan on-premises NMS platformudur. SNMP v3, NetFlow, syslog, otomatik keşif, konfigürasyon yedekleme, alarm yönetimi ve SCAP uyumluluk denetimi — bulut bağımlılığı olmadan." />
+    <meta name="keywords" content="ağ izleme, network monitoring, NMS, SNMP v3, NetFlow, syslog, ağ yönetimi, konfigürasyon yedekleme, SCAP uyumluluk, KVKK, on-premises, air-gap, Tiginer" />
     <meta name="author" content="Tiginer" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://tiginer.com/" />
+    <link rel="alternate" hreflang="tr" href="https://tiginer.com/" />
+    <link rel="alternate" hreflang="en" href="https://tiginer.com/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://tiginer.com/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Tiginer — Kurumsal Ağ İzleme Platformu" />
-    <meta property="og:description" content="Cihaz envanteri, canlı izleme, alarm yönetimi, yapılandırma yedekleme ve otomasyon — hepsi tek platformda." />
+    <meta property="og:title" content="Tiginer — Kurumsal Ağ İzleme & Yönetim Platformu" />
+    <meta property="og:description" content="Türkiye'de geliştirilen on-premises NMS. SNMP, NetFlow, syslog, alarm, konfigürasyon yedekleme ve uyumluluk denetimi tek platformda." />
     <meta property="og:url" content="https://tiginer.com/" />
     <meta property="og:site_name" content="Tiginer" />
     <meta property="og:locale" content="tr_TR" />
     <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:image" content="https://tiginer.com/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tiginer — Enterprise Network Monitoring Platform" />
-    <meta name="twitter:description" content="Device inventory, real-time monitoring, alarm management, configuration backup and automation — all in one platform." />
+    <meta name="twitter:title" content="Tiginer — Enterprise Network Operations Platform" />
+    <meta name="twitter:description" content="On-premises NMS with SNMP, NetFlow, alarms, config backup and compliance scanning. Built for regulated enterprises." />
+    <meta name="twitter:image" content="https://tiginer.com/og.png" />
 
     <!-- Preconnect fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="styles.css" />
 
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD: SoftwareApplication -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Tiginer",
+      "name": "Tiginer NMS",
       "applicationCategory": "NetworkApplication",
-      "operatingSystem": "Linux, Windows Server",
-      "description": "Enterprise network monitoring and management platform with SNMP, NetFlow, topology mapping and automation.",
+      "applicationSubCategory": "Network Monitoring System",
+      "operatingSystem": "Linux (Ubuntu 22.04+, Debian 12, RHEL 9)",
+      "description": "Enterprise on-premises network monitoring and management platform. SNMP v3, NetFlow, syslog, automated discovery, configuration backup, alarm management and SCAP compliance scanning in one product.",
+      "softwareVersion": "1.4.31",
+      "url": "https://tiginer.com",
+      "image": "https://tiginer.com/og.png",
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
+        "lowPrice": "0",
+        "highPrice": "9999",
         "offerCount": "3"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "27",
+        "bestRating": "5"
       },
       "author": {
         "@type": "Organization",
         "name": "Tiginer",
         "url": "https://tiginer.com"
       }
+    }
+    </script>
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Tiginer",
+      "url": "https://tiginer.com",
+      "logo": "https://tiginer.com/favicon.svg",
+      "description": "Tiginer, kurumsal ağ operasyon platformu üreten Türkiye merkezli bir yazılım şirketidir.",
+      "foundingLocation": {
+        "@type": "Place",
+        "address": { "@type": "PostalAddress", "addressCountry": "TR" }
+      },
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "availableLanguage": ["Turkish", "English"],
+        "url": "https://tiginer.com/demo"
+      }],
+      "sameAs": ["https://github.com/tiginer"]
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Tiginer bulut tabanlı mı yoksa on-premises mi çalışır?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Tiginer tamamen on-premises çalışır. Tüm veri ve telemetri kendi veri merkezinizde kalır; bulut bağımlılığı veya dış API erişimi gerektirmez. Air-gap ortamlarda da kurulabilir." }
+        },
+        {
+          "@type": "Question",
+          "name": "Mevcut ağ izleme aracımızdan (PRTG, SolarWinds, Zabbix) geçiş ne kadar sürer?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Tipik bir 250 cihazlı ortam için POC 2-3 hafta, üretim devreye alma 4-6 hafta sürer. Otomatik SNMP keşfi mevcut envanteri dakikalar içinde çıkarır; alarm kuralları ve raporlar şablon olarak taşınır." }
+        },
+        {
+          "@type": "Question",
+          "name": "Tiginer hangi cihaz markalarını destekler?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SNMP v1/v2c/v3 konuşan tüm üreticiler desteklenir: Cisco, Juniper, HP/Aruba, Huawei, Fortinet, Palo Alto, Mikrotik, F5, Arista, Dell, Ubiquiti ve daha fazlası. Vendor MIB import desteği vardır." }
+        },
+        {
+          "@type": "Question",
+          "name": "Lisanslama nasıl çalışır? Cihaz başına mı, kullanıcı başına mı?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Lisanslama izlenen cihaz (node) sayısına göredir. Operatör/kullanıcı sayısı sınırsızdır. Lisans yıllık abonelik olarak verilir ve destek + güncellemeleri içerir." }
+        },
+        {
+          "@type": "Question",
+          "name": "KVKK ve veri güvenliği açısından durumumuz ne olur?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Tiginer on-premises çalıştığı için telemetri ve loglar yurt dışına çıkmaz. RBAC, audit log, SSO/LDAP/AD ve şifreli yedekleme dahildir. KVKK ve ISO 27001 denetimlerinde kullanılan tipik kontrol setleri ürün içinde mevcuttur." }
+        },
+        {
+          "@type": "Question",
+          "name": "HA (yüksek erişilebilirlik) destekleniyor mu?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Enterprise paketi aktif-pasif HA kümeleme, PostgreSQL replikasyon ve otomatik failover destekler. Çoklu site dağıtımı (federated polling) opsiyoneldir." }
+        },
+        {
+          "@type": "Question",
+          "name": "Destek nasıl sağlanıyor?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Türkçe ve İngilizce yerel destek ekibi sağlanır. Pro paketinde 8x5 e-posta + ticket, Enterprise paketinde 7/24 telefon + dedicated mühendis. SLA'lı yanıt ve çözüm süreleri sözleşmede tanımlanır." }
+        },
+        {
+          "@type": "Question",
+          "name": "Ücretsiz deneme veya POC mümkün mü?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Evet. Ortamınızda sınırlı kapsamlı, başarı kriterleri önceden tanımlı 2-3 haftalık bir Proof-of-Concept kurulumu sağlıyoruz. POC sonunda yazılı bir teknik rapor teslim edilir." }
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://tiginer.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Ürün", "item": "https://tiginer.com/#ozellikler" },
+        { "@type": "ListItem", "position": 3, "name": "Paketler", "item": "https://tiginer.com/#paketler" }
+      ]
     }
     </script>
   </head>
@@ -120,13 +228,12 @@
           </div>
           <div class="hero-kicker" data-i18n="hero_kicker">TÜRKİYE'DE GELİŞTİRİLEN KURUMSAL NMS</div>
           <h1>
-            <span data-i18n="hero_title_1">BT Operasyonlarınız İçin</span><br/>
-            <span class="text-gradient" data-i18n="hero_title_2">Tek Kontrol Paneli,</span>
-            <span data-i18n="hero_title_3"> Tam Bağımsızlık</span>
+            <span data-i18n="hero_title_1">Ağ operasyonlarınızı</span><br/>
+            <span class="text-gradient" data-i18n="hero_title_2">tek panelden yönetin —</span><br/>
+            <span data-i18n="hero_title_3">veriniz sizde kalsın.</span>
           </h1>
           <p class="hero-sub" data-i18n="hero_sub">
-            Ağ keşfi, gerçek zamanlı izleme, alarm yönetimi, konfigürasyon yedekleme, NetFlow, uyumluluk denetimi ve otomasyon — 
-            hepsi kendi veri merkezinizde çalışan tek bir platformda. Bulut bağımlılığı yok, vendor lock-in yok.
+            Tiginer, kurumsal ağınız için on-premises NMS'dir. Otomatik keşif, SNMP v3 ile izleme, NetFlow analizi, alarm yönetimi, konfigürasyon yedekleme ve SCAP uyumluluk denetimi — hepsi kendi veri merkezinizde, bulut bağımlılığı olmadan.
           </p>
           <div class="hero-actions">
             <a href="/demo" class="btn btn-lg btn-glow">
@@ -233,30 +340,6 @@
       </div>
     </header>
 
-    <!-- Live metrics ticker -->
-    <section class="live-ticker" aria-label="Live platform metrics">
-      <div class="ticker-track">
-        <!-- Set 1 -->
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_uptime">UPTIME</span> <span class="tk-val up">99.98%</span></span>
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_polled">SNMP POLL</span> <span class="tk-val cyan">8.4k/s</span></span>
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_flows">NETFLOW</span> <span class="tk-val">412k flows/min</span></span>
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_alarms">AÇIK ALARM</span> <span class="tk-val warn">3</span></span>
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_devices">CİHAZ</span> <span class="tk-val">247</span></span>
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_latency">P95 LATENCY</span> <span class="tk-val cyan">14ms</span></span>
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_traffic">TRAFİK</span> <span class="tk-val">1.24 Gbps</span></span>
-        <span class="ticker-item"><span class="tk-lbl" data-i18n="tk_compliance">UYUMLULUK</span> <span class="tk-val up">PASS</span></span>
-        <!-- Set 2 (duplicate for seamless marquee) -->
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">UPTIME</span> <span class="tk-val up">99.98%</span></span>
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">SNMP POLL</span> <span class="tk-val cyan">8.4k/s</span></span>
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">NETFLOW</span> <span class="tk-val">412k flows/min</span></span>
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">AÇIK ALARM</span> <span class="tk-val warn">3</span></span>
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">CİHAZ</span> <span class="tk-val">247</span></span>
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">P95 LATENCY</span> <span class="tk-val cyan">14ms</span></span>
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">TRAFİK</span> <span class="tk-val">1.24 Gbps</span></span>
-        <span class="ticker-item" aria-hidden="true"><span class="tk-lbl">UYUMLULUK</span> <span class="tk-val up">PASS</span></span>
-      </div>
-    </section>
-
     <!-- Customer logo strip (placeholder) -->
     <section class="logo-strip" aria-label="Trusted by">
       <div class="container">
@@ -302,6 +385,113 @@
             <strong data-no-count>TR</strong>
             <span data-i18n="trust_setup">Yerel ekip · 7/24 destek</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Outcomes — business-language value props -->
+    <section id="sonuc" class="section outcomes-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge" data-i18n="out_badge">İş Sonuçları</div>
+          <h2 data-i18n="out_title">Ekibinizin günlük operasyonunda ölçülebilir fark</h2>
+          <p data-i18n="out_sub">BT yöneticileri Tiginer'a geçtikten sonra raporladığı somut değişimler. Sayılar 250 cihaz ölçeğinde tipik POC çıktılarıdır; ortamınıza göre değişir.</p>
+        </div>
+
+        <div class="outcomes-grid">
+          <article class="outcome-card reveal" data-reveal-delay="1">
+            <div class="outcome-stat"><span class="counter" data-counter="68" data-suffix="%">0</span></div>
+            <h3 data-i18n="out_1_title">MTTR'ı yarıdan fazla düşürün</h3>
+            <p data-i18n="out_1_desc">Otomatik kök neden korelasyonu ve topoloji bağlamı sayesinde olay tespitten kapanışa kadar geçen süre kısalır. Aynı arıza için 4 farklı paneli açmak zorunda kalmazsınız.</p>
+            <div class="outcome-foot" data-i18n="out_1_tag">Ortalama olay süresi</div>
+          </article>
+          <article class="outcome-card reveal" data-reveal-delay="2">
+            <div class="outcome-stat"><span class="counter" data-counter="3" data-suffix="x">0</span></div>
+            <h3 data-i18n="out_2_title">Konsolide edilmiş araç maliyeti</h3>
+            <p data-i18n="out_2_desc">Ayrı SNMP, NetFlow, syslog, konfig yedekleme ve uyumluluk araçları için ödediğiniz lisanslar tek platformda toplanır. Tipik müşteride 3 ila 5 farklı aracın yerini alır.</p>
+            <div class="outcome-foot" data-i18n="out_2_tag">Lisans konsolidasyonu</div>
+          </article>
+          <article class="outcome-card reveal" data-reveal-delay="3">
+            <div class="outcome-stat"><span class="counter" data-counter="94" data-suffix="%">0</span></div>
+            <h3 data-i18n="out_3_title">Uyumluluk raporları otomatikleşir</h3>
+            <p data-i18n="out_3_desc">KVKK, ISO 27001 ve sektör denetimlerinde istenen kanıt setlerinin büyük çoğunluğu (yapılandırma değişiklik geçmişi, erişim logu, SCAP tarama çıktısı) tek tuşla raporlanır.</p>
+            <div class="outcome-foot" data-i18n="out_3_tag">Manuel iş yükü azalması</div>
+          </article>
+          <article class="outcome-card reveal" data-reveal-delay="4">
+            <div class="outcome-stat"><span class="counter" data-counter="0" data-suffix="">0</span></div>
+            <h3 data-i18n="out_4_title">Bulut çıkış maliyeti, sıfır</h3>
+            <p data-i18n="out_4_desc">Telemetri verisi sizin veri merkezinizden çıkmaz. Aylık egress ücreti, dış API çağrı limiti veya vendor lock-in yoktur. Veri sahipliği %100 sizdedir.</p>
+            <div class="outcome-foot" data-i18n="out_4_tag">Aylık veri çıkış ücreti</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use cases by role — who benefits, how -->
+    <section id="roller" class="section section-alt roles-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge" data-i18n="role_badge">Kullanım Senaryoları</div>
+          <h2 data-i18n="role_title">Her ekip kendi sorularına Tiginer'da yanıt bulur</h2>
+          <p data-i18n="role_sub">Aynı platform, farklı görüş açıları. Operasyon, güvenlik, mimari ve finans paydaşları aynı veriden farklı kararlar üretir.</p>
+        </div>
+
+        <div class="roles-grid">
+          <article class="role-card reveal" data-reveal="left">
+            <div class="role-icon" style="--icon-bg: var(--primary-soft); --icon-fg: var(--primary)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/></svg>
+            </div>
+            <div class="role-tag" data-i18n="role_1_tag">NOC Mühendisi</div>
+            <h3 data-i18n="role_1_title">Tek panelden ağın canlı durumu</h3>
+            <p data-i18n="role_1_desc">Sabah açılışında "her şey yeşil mi?" sorusu 5 saniyede yanıtlanır. Topoloji haritası, alarm sırası ve eşik ihlali heatmap'i aynı ekranda.</p>
+            <ul class="role-list">
+              <li data-i18n="role_1_p1">Akıllı alarm gruplama (storm suppression)</li>
+              <li data-i18n="role_1_p2">Otomatik runbook tetikleme</li>
+              <li data-i18n="role_1_p3">Mobil bildirim · vardiya devri notları</li>
+            </ul>
+          </article>
+
+          <article class="role-card reveal" data-reveal-delay="1">
+            <div class="role-icon" style="--icon-bg: rgba(245,158,11,.10); --icon-fg: var(--amber)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="role-tag" data-i18n="role_2_tag">CISO / SOC</div>
+            <h3 data-i18n="role_2_title">Denetlenebilir, audit-ready ağ</h3>
+            <p data-i18n="role_2_desc">Cihazlardaki her yapılandırma değişikliği imzalı olarak saklanır. Kim, ne zaman, neyi değiştirdi sorusu denetçiye 1 ekranda gösterilir.</p>
+            <ul class="role-list">
+              <li data-i18n="role_2_p1">SCAP / CIS Benchmark taraması</li>
+              <li data-i18n="role_2_p2">Konfigürasyon drift uyarısı</li>
+              <li data-i18n="role_2_p3">RBAC + SSO/LDAP + audit log</li>
+            </ul>
+          </article>
+
+          <article class="role-card reveal" data-reveal-delay="2">
+            <div class="role-icon" style="--icon-bg: rgba(6,182,212,.10); --icon-fg: var(--cyan)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6v18H2z"/><path d="M16 8h6v13h-6z"/><path d="M9 12h7"/></svg>
+            </div>
+            <div class="role-tag" data-i18n="role_3_tag">Ağ Mimarı</div>
+            <h3 data-i18n="role_3_title">Kapasite planlaması için gerçek veri</h3>
+            <p data-i18n="role_3_desc">12 aylık trafik, latency ve kullanım trendleri ile bant genişliği yatırım kararını "tahmin" yerine veriyle alın. NetFlow + topology birlikte analiz edilir.</p>
+            <ul class="role-list">
+              <li data-i18n="role_3_p1">12 ay geriye trend & forecast</li>
+              <li data-i18n="role_3_p2">Site-to-site latency haritası</li>
+              <li data-i18n="role_3_p3">"What-if" kapasite simülasyonu</li>
+            </ul>
+          </article>
+
+          <article class="role-card reveal" data-reveal-delay="3">
+            <div class="role-icon" style="--icon-bg: rgba(5,150,105,.10); --icon-fg: var(--success)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="role-tag" data-i18n="role_4_tag">CIO / CFO</div>
+            <h3 data-i18n="role_4_title">Tahmin edilebilir TCO</h3>
+            <p data-i18n="role_4_desc">Bulut faturalarındaki sürpriz çıkış ücretleri yok. Yıllık abonelik tek kalem; ölçek arttıkça lisansta volume indirimi netleşir. CapEx/OpEx modeli sizin tercihiniz.</p>
+            <ul class="role-list">
+              <li data-i18n="role_4_p1">Cihaz başına şeffaf lisans</li>
+              <li data-i18n="role_4_p2">Yıllık + çok yıllık sözleşme seçenekleri</li>
+              <li data-i18n="role_4_p3">İade & garanti koşulları yazılı</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -683,37 +873,68 @@
             </div>
           </div>
 
-          <!-- Right: Live activity feed (terminal-style) -->
+          <!-- Right: Operational capabilities — what runs in the platform -->
           <div class="cc-panel reveal" data-reveal="right">
             <div class="cc-panel-head">
-              <span class="cc-panel-title" data-i18n="cc_panel_feed">EVENT STREAM</span>
-              <span class="cc-panel-meta">syslog · trap · audit</span>
+              <span class="cc-panel-title" data-i18n="cc_panel_caps">PLATFORM YETENEKLERİ</span>
+              <span class="cc-panel-meta">v1.4.31 production</span>
             </div>
-            <div class="cc-feed">
-              <div class="cc-feed-list">
-                <div><span class="t">14:32:18</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">core-rtr-01 ifInOctets +1.24Gb/s</span></div>
-                <div><span class="t">14:32:14</span> <span class="ok">OK</span>  <span class="k">netflow.in</span>   <span class="m">edge-fw-03 412 flows · top: 10.42.1.7</span></div>
-                <div><span class="t">14:32:09</span> <span class="wn">WARN</span> <span class="k">latency.p95</span> <span class="m">br-istanbul → dc-ankara 38ms (sla 40ms)</span></div>
-                <div><span class="t">14:31:58</span> <span class="ok">OK</span>  <span class="k">discovery</span>   <span class="m">new device 10.42.7.118 (cisco c9300)</span></div>
-                <div><span class="t">14:31:42</span> <span class="ok">OK</span>  <span class="k">scap.scan</span>    <span class="m">profile CIS-Cisco-IOS-XE pass 247/247</span></div>
-                <div><span class="t">14:31:30</span> <span class="er">ERR</span>  <span class="k">syslog.auth</span>  <span class="m">core-sw-12 invalid login admin from 192.0.2.4</span></div>
-                <div><span class="t">14:31:24</span> <span class="ok">OK</span>  <span class="k">backup.cfg</span>   <span class="m">snapshot 18/19 ok · sha256 verified</span></div>
-                <div><span class="t">14:31:11</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">edge-rtr-05 cpu 23% mem 41%</span></div>
-                <div><span class="t">14:30:58</span> <span class="wn">WARN</span> <span class="k">netflow.ddos</span> <span class="m">br-izmir burst 18kpps → rate-limit applied</span></div>
-                <div><span class="t">14:30:42</span> <span class="ok">OK</span>  <span class="k">topology</span>    <span class="m">lldp neighbor update 12 nodes</span></div>
-                <!-- duplicate for seamless loop -->
-                <div><span class="t">14:32:18</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">core-rtr-01 ifInOctets +1.24Gb/s</span></div>
-                <div><span class="t">14:32:14</span> <span class="ok">OK</span>  <span class="k">netflow.in</span>   <span class="m">edge-fw-03 412 flows · top: 10.42.1.7</span></div>
-                <div><span class="t">14:32:09</span> <span class="wn">WARN</span> <span class="k">latency.p95</span> <span class="m">br-istanbul → dc-ankara 38ms (sla 40ms)</span></div>
-                <div><span class="t">14:31:58</span> <span class="ok">OK</span>  <span class="k">discovery</span>   <span class="m">new device 10.42.7.118 (cisco c9300)</span></div>
-                <div><span class="t">14:31:42</span> <span class="ok">OK</span>  <span class="k">scap.scan</span>    <span class="m">profile CIS-Cisco-IOS-XE pass 247/247</span></div>
-                <div><span class="t">14:31:30</span> <span class="er">ERR</span>  <span class="k">syslog.auth</span>  <span class="m">core-sw-12 invalid login admin from 192.0.2.4</span></div>
-                <div><span class="t">14:31:24</span> <span class="ok">OK</span>  <span class="k">backup.cfg</span>   <span class="m">snapshot 18/19 ok · sha256 verified</span></div>
-                <div><span class="t">14:31:11</span> <span class="ok">OK</span>  <span class="k">snmp.poll</span>     <span class="m">edge-rtr-05 cpu 23% mem 41%</span></div>
-                <div><span class="t">14:30:58</span> <span class="wn">WARN</span> <span class="k">netflow.ddos</span> <span class="m">br-izmir burst 18kpps → rate-limit applied</span></div>
-                <div><span class="t">14:30:42</span> <span class="ok">OK</span>  <span class="k">topology</span>    <span class="m">lldp neighbor update 12 nodes</span></div>
-              </div>
-            </div>
+            <ul class="cc-caplist">
+              <li>
+                <span class="cc-caplist-ic" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <strong data-i18n="cc_cap_1_t">Otomatik keşif & topoloji</strong>
+                  <small data-i18n="cc_cap_1_d">SNMP / LLDP / CDP tabanlı; yeni cihaz dakikalar içinde envantere düşer.</small>
+                </div>
+              </li>
+              <li>
+                <span class="cc-caplist-ic" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <strong data-i18n="cc_cap_2_t">NetFlow / sFlow / IPFIX</strong>
+                  <small data-i18n="cc_cap_2_d">Top-talker, application breakdown, DDoS volumetrik alarm.</small>
+                </div>
+              </li>
+              <li>
+                <span class="cc-caplist-ic" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <strong data-i18n="cc_cap_3_t">Konfigürasyon yedekleme & diff</strong>
+                  <small data-i18n="cc_cap_3_d">Versiyonlu, imzalı snapshot. Drift uyarısı + tek tık geri al.</small>
+                </div>
+              </li>
+              <li>
+                <span class="cc-caplist-ic" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <strong data-i18n="cc_cap_4_t">Alarm korelasyonu & runbook</strong>
+                  <small data-i18n="cc_cap_4_d">Storm suppression, parent-child korelasyon, otomatik aksiyon.</small>
+                </div>
+              </li>
+              <li>
+                <span class="cc-caplist-ic" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <strong data-i18n="cc_cap_5_t">SCAP / CIS uyumluluk taraması</strong>
+                  <small data-i18n="cc_cap_5_d">Cihaz başına geçer/kalır raporu; KVKK & ISO denetim kanıtı.</small>
+                </div>
+              </li>
+              <li>
+                <span class="cc-caplist-ic" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <strong data-i18n="cc_cap_6_t">RBAC · SSO · Audit log</strong>
+                  <small data-i18n="cc_cap_6_d">LDAP/AD entegrasyonu; tüm operatör eylemleri imzalı kayıtlı.</small>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -838,6 +1059,73 @@
             <h4 data-i18n="sys_note_offline_title">Offline / Air-gap</h4>
             <p data-i18n="sys_note_offline_desc">İnternet erişimi olmayan kurumsal ağlar için lokal mirror desteği mevcuttur.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial / social proof -->
+    <section class="section testimonial-section">
+      <div class="container">
+        <figure class="testimonial reveal">
+          <svg class="testimonial-mark" aria-hidden="true" viewBox="0 0 32 24" fill="none">
+            <path d="M0 24V12C0 5.4 5.4 0 12 0v6c-3.3 0-6 2.7-6 6h6v12H0zm20 0V12c0-6.6 5.4-12 12-12v6c-3.3 0-6 2.7-6 6h6v12H20z" fill="currentColor"/>
+          </svg>
+          <blockquote data-i18n="quote_text">
+            "Daha önce ağ izleme için 3 farklı araç kullanıyorduk; alarmlar arasında bağlam kaybı yaşıyorduk. Tiginer ile tek panelden topoloji, alarm ve konfig diff'i görünce ortalama olay çözüm süremiz hafta bazında düştü. KVKK denetimine girerken raporları tek tuşla aldık."
+          </blockquote>
+          <figcaption class="testimonial-cite">
+            <div class="testimonial-avatar" aria-hidden="true">M.K.</div>
+            <div>
+              <strong data-i18n="quote_name">BT Operasyon Müdürü</strong>
+              <span data-i18n="quote_role">Tier-1 Bankacılık · 320 cihaz ölçeği</span>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FAQ — SEO + customer education -->
+    <section id="sss" class="section section-alt faq-section">
+      <div class="container faq-container">
+        <div class="section-header reveal">
+          <div class="section-badge" data-i18n="faq_badge">Sıkça Sorulan Sorular</div>
+          <h2 data-i18n="faq_title">Satış görüşmesinden önce merak ettikleriniz</h2>
+          <p data-i18n="faq_sub">BT yöneticilerinin Tiginer hakkında en sık sorduğu sorular. Listede yanıtını bulamadığınız bir konu varsa <a href="mailto:satis@tiginer.com">satis@tiginer.com</a> adresinden bize yazın.</p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary><span data-i18n="faq_q1">Tiginer bulut tabanlı mı yoksa on-premises mi çalışır?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a1">Tiginer tamamen on-premises çalışır. Tüm telemetri ve konfigürasyon verisi kendi veri merkezinizde kalır. Bulut hizmeti, dış API çağrısı veya internet erişimi zorunluluğu yoktur. Air-gap (internetten tamamen ayrı) ortamlarda da kurulabilir; offline mirror desteği sağlanır.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq_q2">Mevcut ağ izleme aracımızdan (PRTG, SolarWinds, Zabbix) geçiş ne kadar sürer?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a2">Tipik bir 250 cihazlı ortam için Proof-of-Concept (POC) 2-3 hafta, üretim devreye alma 4-6 hafta sürer. Otomatik SNMP keşfi mevcut envanteri dakikalar içinde çıkarır; alarm kuralları ve raporlar şablon olarak taşınır. Geçiş sürecinde her iki sistem paralel çalıştırılabilir.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq_q3">Hangi cihaz markalarını destekliyor?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a3">SNMP v1/v2c/v3 konuşan tüm üreticiler desteklenir: Cisco, Juniper, HP/Aruba, Huawei, Fortinet, Palo Alto, Mikrotik, F5, Arista, Dell, Ubiquiti ve daha fazlası. Vendor-specific MIB import edebilir, özel OID'ler için custom poller tanımlayabilirsiniz. SSH ve REST API tabanlı entegrasyon da mevcuttur.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq_q4">Lisanslama nasıl çalışır?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a4">Lisanslama izlenen cihaz (node) sayısına göredir. Operatör veya panel kullanıcısı sayısı sınırsızdır. Lisans yıllık abonelik olarak verilir; destek, sürüm güncellemeleri ve güvenlik yamaları dahildir. Çok yıllık sözleşmelerde indirim uygulanır.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq_q5">KVKK ve veri güvenliği açısından durumumuz ne olur?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a5">Tiginer on-premises çalıştığı için telemetri ve loglar yurt dışına çıkmaz; veri ikametgâhı sorunu doğmaz. RBAC, audit log, SSO/LDAP/AD entegrasyonu, şifreli yedekleme ve SCAP/CIS uyumluluk denetimi yerleşiktir. KVKK & ISO 27001 denetimlerinde istenen tipik kontrol setleri ürün içinden raporlanır.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq_q6">HA (yüksek erişilebilirlik) ve ölçeklenebilirlik desteği var mı?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a6">Enterprise paketi aktif-pasif HA kümeleme, PostgreSQL replikasyon ve otomatik failover destekler. Çok siteli organizasyonlar için federated polling (uzak siteden lokal toplama, merkeze rapor) opsiyoneldir. 1000+ cihaza kadar tek instance, üzerinde shard mimari önerilir.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq_q7">Destek nasıl sağlanıyor?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a7">Türkçe ve İngilizce yerel destek ekibi sağlanır. Pro paketinde 8x5 e-posta/ticket, Enterprise paketinde 7/24 telefon + dedicated mühendis. SLA'lı yanıt ve çözüm süreleri sözleşmede yazılı olarak tanımlanır. Çeyreklik mimari gözden geçirme toplantısı dahildir.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq_q8">Ücretsiz deneme veya POC mümkün mü?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p data-i18n="faq_a8">Evet. Ortamınızda sınırlı kapsamlı, başarı kriterleri önceden tanımlı 2-3 haftalık bir Proof-of-Concept kurulumu sağlıyoruz. POC sonunda performans ölçümleri ve öneriler içeren yazılı teknik rapor teslim edilir; sözleşme yükümlülüğü doğmaz.</p></div>
+          </details>
         </div>
       </div>
     </section>
